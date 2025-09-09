@@ -18,7 +18,7 @@ export default function WelcomeOnboardingModal() {
           </p>
         </div>
         <div className="space-y-2">
-          <p className="text-sm">• Tu día, simplificado. En "Hoy" verás lo más importante.</p>
+          <p className="text-sm">• Tu día, simplificado. En &ldquo;Hoy&rdquo; verás lo más importante.</p>
           <p className="text-sm">• Accede a tu horario, mapa y más desde la barra inferior.</p>
         </div>
         <button
