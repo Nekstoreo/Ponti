@@ -19,7 +19,7 @@ export async function login({ studentId, password }: LoginInput): Promise<{
 
   const error = new Error("ID o contraseña incorrectos. Por favor, verifica tus datos.");
   // Attach a code for potential UI-level handling
-  (error as any).code = "INVALID_CREDENTIALS";
+  (error as Error & { code: string }).code = "INVALID_CREDENTIALS";
   throw error;
 }
 
