@@ -32,8 +32,8 @@ export default function ClassDetailSheet({
             className="h-10 rounded-md border"
             onClick={() => {
               onOpenChange(false);
-              // en el futuro podría centrar el mapa en el salón
-              router.push("/mapa");
+              // Simular flujo integrado: navegar a mapa con un poi genérico (en un futuro mapear clase->poi)
+              router.push("/mapa?poi=poi_lib");
             }}
           >
             Ubicar en el mapa
