@@ -4,6 +4,10 @@ import { useScheduleStore } from "@/store/scheduleStore";
 import { DayKey } from "@/data/types";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import WeekHeader from "@/components/schedule/WeekHeader";
+import ScheduleTimeline from "@/components/schedule/ScheduleTimeline";
+import { useState } from "react";
+import ClassDetailSheet from "@/components/schedule/ClassDetailSheet";
 
 const dayLabels: Record<DayKey, string> = {
   L: "L",
@@ -19,6 +23,18 @@ export default function SchedulePage() {
   const selectedDay = useScheduleStore((s) => s.selectedDay);
   const setSelectedDay = useScheduleStore((s) => s.setSelectedDay);
   const searchParams = useSearchParams();
+  const [referenceMonday, setReferenceMonday] = useState(() => {
+    // Obtener lunes de esta semana (asumiendo semana L-S)
+    const now = new Date();
+    const day = now.getDay(); // 0-6 (domingo=0)
+    const deltaToMonday = day === 0 ? -6 : 1 - day; // si es domingo, ir 6 días atrás
+    const monday = new Date(now);
+    monday.setHours(0, 0, 0, 0);
+    monday.setDate(now.getDate() + deltaToMonday);
+    return monday;
+  });
+  const [detailOpen, setDetailOpen] = useState(false);
+  const [detailBlock, setDetailBlock] = useState<import("@/data/types").ClassBlock | null>(null);
 
   // Sincroniza el día seleccionado desde la query (?day=L|M|X|J|V|S)
   useEffect(() => {
@@ -44,43 +60,37 @@ export default function SchedulePage() {
     <div className="space-y-4">
       <h1 className="text-xl font-semibold">Horario</h1>
 
-      <div className="grid grid-cols-6 gap-2">
-        {(Object.keys(dayLabels) as DayKey[]).map((d) => (
-          <button
-            key={d}
-            onClick={() => setSelectedDay(d)}
-            className={`h-10 rounded-md border text-sm ${
-              selectedDay === d ? "bg-foreground text-background" : ""
-            }`}
-          >
-            {dayLabels[d]}
-          </button>
-        ))}
-      </div>
+      <WeekHeader
+        selectedDay={selectedDay}
+        setSelectedDay={setSelectedDay}
+        referenceMonday={referenceMonday}
+        setReferenceMonday={setReferenceMonday}
+      />
 
-      <div className="space-y-2">
-        {schedule[selectedDay].length === 0 && (
-          <p className="text-sm text-muted-foreground">No hay clases este día.</p>
-        )}
-        {schedule[selectedDay].map((b) => {
-          const highlighted = searchParams.get("class") === b.id;
-          return (
-            <div
-              key={b.id}
-              id={`class-${b.id}`}
-              className={`rounded-md border p-3 ${
-                highlighted ? "border-foreground ring-1 ring-foreground" : ""
-              }`}
-            >
-            <p className="font-medium">{b.courseName}</p>
-            <p className="text-sm">{b.professor} • {b.room}</p>
-            <p className="text-sm text-muted-foreground">{b.startTime} - {b.endTime}</p>
-            </div>
-          );
-        })}
-      </div>
+      {schedule[selectedDay].length === 0 ? (
+        <div className="rounded-md border p-8 text-center text-sm text-muted-foreground">
+          No tienes clases este día. ¡Tiempo para recargar energías!
+        </div>
+      ) : (
+        <ScheduleTimeline
+          blocks={schedule[selectedDay]}
+          onBlockClick={(b) => {
+            setDetailBlock(b);
+            setDetailOpen(true);
+          }}
+          showNowLine={selectedDay === dayKeyFromToday()}
+        />
+      )}
+
+      <ClassDetailSheet open={detailOpen} onOpenChange={setDetailOpen} block={detailBlock} />
     </div>
   );
+}
+
+function dayKeyFromToday(): DayKey {
+  const map: Record<number, DayKey> = { 1: "L", 2: "M", 3: "X", 4: "J", 5: "V", 6: "S" };
+  const jsDay = new Date().getDay();
+  return map[jsDay as 1 | 2 | 3 | 4 | 5 | 6] ?? "L";
 }
 
 
