@@ -1,0 +1,44 @@
+# Dependencias
+node_modules/
+
+# Logs
+logs
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+
+# Entornos
+.env
+.env.local
+.env.*.local
+
+# Builds y artefactos
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Next.js
+.next/
+out/
+.next/cache/
+
+# Almacenamiento pnpm
+.pnpm-store/
+
+# SO / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
