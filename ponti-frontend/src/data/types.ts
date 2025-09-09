@@ -26,3 +26,27 @@ export interface AnnouncementItem {
 }
 
 
+export type PoiCategory =
+  | "todo"
+  | "academico"
+  | "comida"
+  | "servicios"
+  | "bienestar"
+  | "cultura";
+
+export interface PoiItem {
+  id: string;
+  title: string;
+  subtitle?: string;
+  category: Exclude<PoiCategory, "todo">;
+  // Posición relativa en el lienzo del mapa (0-100)
+  x: number;
+  y: number;
+  // Datos opcionales
+  isOpenNow?: boolean;
+  hours?: string;
+  description?: string;
+  imageUrl?: string;
+}
+
+
