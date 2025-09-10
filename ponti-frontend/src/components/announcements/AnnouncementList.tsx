@@ -9,9 +9,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Search, Filter, CheckCheck, Eye, Star } from "lucide-react";
 import { useRouter } from "next/navigation";
+import PullToRefresh from "@/components/animations/PullToRefresh";
+import LoadingSkeleton from "@/components/animations/LoadingSkeleton";
+import { StaggeredAnimation } from "@/components/animations/PageTransition";
 
 const categories: { value: AnnouncementCategory | "all"; label: string }[] = [
   { value: "all", label: "Todas" },
@@ -39,14 +41,33 @@ export function AnnouncementList() {
   } = useAnnouncementStore();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     // Inicializar con datos mock si no hay anuncios
     if (announcements.length === 0) {
-      setAnnouncements(mockAnnouncements);
+      // Simular carga inicial
+      setTimeout(() => {
+        setAnnouncements(mockAnnouncements);
+        setIsInitialLoading(false);
+      }, 1000);
+    } else {
+      setIsInitialLoading(false);
     }
   }, [announcements.length, setAnnouncements]);
+
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    // Simular refresh - en una app real aquí harías fetch de datos nuevos
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    // Simular nuevos anuncios (prepend algunos items mock)
+    const newAnnouncements = [...mockAnnouncements];
+    setAnnouncements(newAnnouncements);
+    setIsRefreshing(false);
+  };
 
   const handleCardClick = (announcementId: string) => {
     router.push(`/noticias/${announcementId}`);
@@ -67,6 +88,23 @@ export function AnnouncementList() {
 
   const unreadCount = announcements.filter(a => !a.isRead).length;
   const importantCount = announcements.filter(a => a.isImportant).length;
+
+  // Show loading skeleton on initial load
+  if (isInitialLoading) {
+    return (
+      <div className="space-y-4">
+        <LoadingSkeleton className="h-8 w-64" />
+        <LoadingSkeleton className="h-4 w-48" />
+        <LoadingSkeleton className="h-12 w-full" />
+        <div className="flex gap-2">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <LoadingSkeleton key={i} className="h-8 w-20" />
+          ))}
+        </div>
+        <LoadingSkeleton variant="list" count={5} />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4">
@@ -143,7 +181,11 @@ export function AnnouncementList() {
         </TabsList>
 
         <TabsContent value={selectedCategory} className="mt-4">
-          <ScrollArea className="h-[60vh]">
+          <PullToRefresh
+            onRefresh={handleRefresh}
+            disabled={isRefreshing}
+            className="h-[60vh] overflow-auto"
+          >
             <div className="space-y-4 pr-4">
               {filteredAnnouncements.length === 0 ? (
                 <div className="text-center py-8">
@@ -154,7 +196,7 @@ export function AnnouncementList() {
                   </p>
                 </div>
               ) : (
-                <>
+                <StaggeredAnimation staggerDelay={100}>
                   {filteredAnnouncements.map((announcement) => (
                     <AnnouncementCard
                       key={announcement.id}
@@ -163,22 +205,22 @@ export function AnnouncementList() {
                       showActions={true}
                     />
                   ))}
+                </StaggeredAnimation>
+              )}
 
-                  {hasMore && (
-                    <div className="text-center py-4">
-                      <Button
-                        variant="outline"
-                        onClick={loadMore}
-                        disabled={isLoading}
-                      >
-                        {isLoading ? "Cargando..." : "Cargar más"}
-                      </Button>
-                    </div>
-                  )}
-                </>
+              {hasMore && (
+                <div className="text-center py-4">
+                  <Button
+                    variant="outline"
+                    onClick={loadMore}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Cargando..." : "Cargar más"}
+                  </Button>
+                </div>
               )}
             </div>
-          </ScrollArea>
+          </PullToRefresh>
         </TabsContent>
       </Tabs>
     </div>

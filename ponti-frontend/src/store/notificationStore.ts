@@ -9,6 +9,8 @@ interface NotificationState {
   addNotification: (notification: NotificationItem) => void;
   markAsRead: (id: string) => void;
   markAllAsRead: () => void;
+  markAsImportant: (id: string, isImportant: boolean) => void;
+  snoozeNotification: (id: string, snoozeUntil: string) => void;
   deleteNotification: (id: string) => void;
   clearExpiredNotifications: () => void;
   updateSettings: (settings: Partial<NotificationSettings>) => void;
@@ -60,6 +62,33 @@ export const useNotificationStore = create<NotificationState>((set, get) => ({
         isRead: true,
       }));
       return { notifications: newNotifications, unreadCount: 0 };
+    });
+  },
+
+  markAsImportant: (id, isImportant) => {
+    set((state) => {
+      const newNotifications = state.notifications.map(notification =>
+        notification.id === id
+          ? { ...notification, isImportant }
+          : notification
+      );
+      return { notifications: newNotifications };
+    });
+  },
+
+  snoozeNotification: (id, snoozeUntil) => {
+    set((state) => {
+      const newNotifications = state.notifications.map(notification =>
+        notification.id === id
+          ? { 
+              ...notification, 
+              isRead: true, // Mark as read when snoozed
+              expiresAt: snoozeUntil // Use expiresAt to handle snoozing logic
+            }
+          : notification
+      );
+      const unreadCount = newNotifications.filter(n => !n.isRead).length;
+      return { notifications: newNotifications, unreadCount };
     });
   },
 
