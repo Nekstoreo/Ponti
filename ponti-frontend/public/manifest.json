@@ -1,0 +1,86 @@
+{
+  "name": "Ponti - Tu Compañero de Carrera Digital",
+  "short_name": "Ponti",
+  "description": "Aplicación universitaria integral para estudiantes",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "es",
+  "dir": "ltr",
+  "categories": ["education", "productivity", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ver Horario",
+      "short_name": "Horario",
+      "description": "Acceso rápido a tu horario de clases",
+      "url": "/horario",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Mapa Campus",
+      "short_name": "Mapa",
+      "description": "Navegar por el campus universitario",
+      "url": "/mapa",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Calificaciones",
+      "short_name": "Notas",
+      "description": "Consultar calificaciones y rendimiento",
+      "url": "/calificaciones",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Centro de Bienestar",
+      "short_name": "Bienestar",
+      "description": "Registro de estado de ánimo y bienestar",
+      "url": "/bienestar",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "features": [
+    "offline-support",
+    "background-sync",
+    "push-notifications"
+  ],
+  "offline_enabled": true,
+  "cache_strategy": "stale-while-revalidate",
+  "prefer_related_applications": false
+}
