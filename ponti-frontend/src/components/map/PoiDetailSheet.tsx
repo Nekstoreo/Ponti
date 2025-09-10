@@ -2,6 +2,7 @@
 
 import { PoiItem } from "@/data/types";
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 
 export default function POIDetailModal({
   open,
@@ -154,10 +155,11 @@ export default function POIDetailModal({
         {/* Hero image for cultural POIs */}
         {poi.category === 'cultura' && poi.image && !imageError && (
           <div className="relative h-48 w-full overflow-hidden">
-            <img 
-              src={poi.image} 
+            <Image
+              src={poi.image}
               alt={poi.title}
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
               onError={() => setImageError(true)}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />

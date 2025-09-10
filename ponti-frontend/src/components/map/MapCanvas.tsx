@@ -2,6 +2,7 @@
 
 import { useMapStore } from "@/store/mapStore";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function MapCanvas({
   onPoiClick,
@@ -131,7 +132,7 @@ export default function MapCanvas({
       el.removeEventListener("touchmove", touchMoveHandler as EventListener);
       el.removeEventListener("touchend", touchEndHandler as EventListener);
     };
-  }, [scale, offset.x, offset.y, start.x, start.y, panning, pinching]);
+  }, [scale, offset, start.x, start.y, panning, pinching]);
 
   useEffect(() => {
     // centrar/zoom a POI seleccionado
@@ -155,10 +156,11 @@ export default function MapCanvas({
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
-      <img
+      <Image
         src="/map.jpg"
         alt="Mapa de la universidad"
-        className="absolute top-0 left-0 w-full h-full object-cover"
+        fill
+        className="object-cover"
         style={{
           transform: `translate(${offset.x}px, ${offset.y}px) scale(${scale})`,
           transformOrigin: "center",
