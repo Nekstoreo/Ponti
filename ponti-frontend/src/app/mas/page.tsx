@@ -4,7 +4,7 @@ import MainLayout from "@/components/MainLayout";
 import { useAuthStore } from "@/store/authStore";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, User, Building2, Bell, Newspaper, HelpCircle, LogOut, BookOpen } from "lucide-react";
+import { ChevronRight, User, Building2, Bell, Newspaper, HelpCircle, LogOut, BookOpen, Heart, Wifi } from "lucide-react";
 
 export default function MasRoute() {
   const logout = useAuthStore((s) => s.logout);
@@ -17,6 +17,13 @@ export default function MasRoute() {
       icon: BookOpen,
       description: "Consulta tus notas y rendimiento académico",
       action: () => router.push("/calificaciones"),
+    },
+    {
+      id: "bienestar",
+      label: "Centro de Bienestar",
+      icon: Heart,
+      description: "Cuida tu bienestar mental y físico",
+      action: () => router.push("/bienestar"),
     },
     {
       id: "noticias",
@@ -45,6 +52,13 @@ export default function MasRoute() {
       icon: Bell,
       description: "Personaliza tus preferencias de notificación",
       action: () => router.push("/notificaciones"),
+    },
+    {
+      id: "configuracion-offline",
+      label: "Configuración Offline",
+      icon: Wifi,
+      description: "Gestiona el modo offline y caché de datos",
+      action: () => router.push("/configuracion-offline"),
     },
     {
       id: "ayuda",
