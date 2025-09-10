@@ -1,6 +1,7 @@
 "use client";
 
 import { BottomNavBar } from "@/components/BottomNavBar";
+import AppHeader from "@/components/AppHeader";
 import { ReactNode, useEffect } from "react";
 import { useAuthStore } from "@/store/authStore";
 import { useRouter } from "next/navigation";
@@ -22,7 +23,8 @@ export default function MainLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="max-w-md mx-auto min-h-dvh pb-16">
-      <div className="px-4 pt-4 pb-20">
+      <AppHeader />
+      <div className="px-4 pt-16 pb-20">
         <PageTransition>
           {children}
         </PageTransition>
