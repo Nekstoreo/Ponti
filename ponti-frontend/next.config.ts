@@ -19,11 +19,7 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  
-  // Optimizaciones para PWA
-  // experimental: {
-  //   optimizeCss: true,
-  // },
+
   
   // Configuración de compilación para el Service Worker
   webpack: (config, { isServer }) => {
