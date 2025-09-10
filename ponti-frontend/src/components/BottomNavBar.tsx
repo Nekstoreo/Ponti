@@ -17,18 +17,38 @@ function Tab({
   showNotificationIndicator?: boolean;
 }) {
   const pathname = usePathname();
-  const isActive = pathname === href;
+  const isActive = href === "/" 
+    ? pathname === "/" 
+    : pathname.startsWith(href);
 
   const content = (
     <Link
       href={href}
-      className={`flex flex-col items-center justify-center gap-1 flex-1 py-2 ${
-        isActive ? "text-foreground" : "text-muted-foreground"
-      }`}
+      className={`
+        flex flex-col items-center justify-center gap-1 flex-1 py-3 relative
+        transition-all duration-200 ease-out
+        ${isActive ? "text-primary" : "text-muted-foreground"}
+        hover:text-foreground active:scale-95
+      `}
       aria-current={isActive ? "page" : undefined}
     >
-      {icon}
-      <span className="text-xs">{label}</span>
+      {/* Icon */}
+      <div 
+        className={`
+          transition-transform duration-200 ease-out
+          ${isActive ? "scale-110" : "scale-100"}
+        `}
+      >
+        {icon}
+      </div>
+      
+      {/* Label */}
+      <span className="text-xs font-medium">{label}</span>
+      
+      {/* Active indicator */}
+      {isActive && (
+        <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-1 w-8 bg-primary rounded-full" />
+      )}
     </Link>
   );
 

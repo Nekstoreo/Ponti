@@ -3,9 +3,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { fetchPois } from "@/services/mapService";
 import { useMapStore } from "@/store/mapStore";
-import MapHeader from "@/components/map/MapHeader";
+import MapFilterCarousel from "@/components/map/MapHeader";
 import MapCanvas from "@/components/map/MapCanvas";
-import PoiDetailSheet from "@/components/map/PoiDetailSheet";
+import POIDetailModal from "@/components/map/PoiDetailSheet";
 import { useSearchParams } from "next/navigation";
 
 export default function MapPage() {
@@ -47,7 +47,7 @@ export default function MapPage() {
 
   return (
     <div className="space-y-3">
-      <MapHeader />
+      <MapFilterCarousel />
 
       {loading ? (
         <div className="rounded-md border h-[420px] animate-pulse bg-muted/50" />
@@ -63,7 +63,7 @@ export default function MapPage() {
         <MapCanvas onPoiClick={(id) => selectPoi(id)} />
       )}
 
-      <PoiDetailSheet open={Boolean(selectedPoi)} onOpenChange={(v) => !v && selectPoi(null)} poi={selectedPoi} />
+      <POIDetailModal open={Boolean(selectedPoi)} onOpenChange={(v) => !v && selectPoi(null)} poi={selectedPoi} />
     </div>
   );
 }

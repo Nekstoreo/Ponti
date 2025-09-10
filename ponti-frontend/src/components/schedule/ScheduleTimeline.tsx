@@ -29,14 +29,22 @@ export default function ScheduleTimeline({
   blocks,
   onBlockClick,
   showNowLine,
+  onSwipeDay,
 }: {
   blocks: ClassBlock[];
   onBlockClick: (block: ClassBlock) => void;
   showNowLine: boolean;
+  onSwipeDay?: (direction: 'left' | 'right') => void;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const nowLineRef = useRef<HTMLDivElement | null>(null);
   const [nowOffset, setNowOffset] = useState<number | null>(null);
+  
+  // Swipe gesture state
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchStartY, setTouchStartY] = useState<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [swipeThreshold] = useState(50); // Minimum swipe distance
 
   const hours = useMemo(() => {
     return Array.from({ length: END_HOUR - START_HOUR + 1 }).map((_, i) => START_HOUR + i);
@@ -69,8 +77,122 @@ export default function ScheduleTimeline({
     }
   }, [nowOffset]);
 
+  // Swipe gesture handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    setTouchStartX(touch.clientX);
+    setTouchStartY(touch.clientY);
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || touchStartX === null || touchStartY === null) return;
+    
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
+    
+    // Check if it's more horizontal than vertical swipe
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
+      e.preventDefault(); // Prevent scrolling when swiping horizontally
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!isDragging || touchStartX === null || touchStartY === null) {
+      setIsDragging(false);
+      setTouchStartX(null);
+      setTouchStartY(null);
+      return;
+    }
+
+    const touch = e.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
+
+    // Check if it's a horizontal swipe (more horizontal than vertical)
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
+      if (deltaX > 0) {
+        // Swipe right - go to previous day
+        onSwipeDay?.('right');
+      } else {
+        // Swipe left - go to next day
+        onSwipeDay?.('left');
+      }
+    }
+
+    setIsDragging(false);
+    setTouchStartX(null);
+    setTouchStartY(null);
+  };
+
+  // Mouse events for desktop support
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setTouchStartX(e.clientX);
+    setTouchStartY(e.clientY);
+    setIsDragging(true);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || touchStartX === null || touchStartY === null) return;
+    
+    const deltaX = e.clientX - touchStartX;
+    const deltaY = e.clientY - touchStartY;
+    
+    // Visual feedback could be added here
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold / 2) {
+      document.body.style.cursor = deltaX > 0 ? 'w-resize' : 'e-resize';
+    }
+  };
+
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (!isDragging || touchStartX === null || touchStartY === null) {
+      setIsDragging(false);
+      setTouchStartX(null);
+      setTouchStartY(null);
+      document.body.style.cursor = '';
+      return;
+    }
+
+    const deltaX = e.clientX - touchStartX;
+    const deltaY = e.clientY - touchStartY;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
+      if (deltaX > 0) {
+        onSwipeDay?.('right');
+      } else {
+        onSwipeDay?.('left');
+      }
+    }
+
+    setIsDragging(false);
+    setTouchStartX(null);
+    setTouchStartY(null);
+    document.body.style.cursor = '';
+  };
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      setIsDragging(false);
+      setTouchStartX(null);
+      setTouchStartY(null);
+      document.body.style.cursor = '';
+    }
+  };
+
   return (
-    <div className="relative border rounded-md overflow-auto" ref={containerRef} style={{ maxHeight: 520 }}>
+    <div 
+      className="relative border rounded-md overflow-auto select-none" 
+      ref={containerRef} 
+      style={{ maxHeight: 520 }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onMouseDown={handleMouseDown}
+      onMouseMove={isDragging ? handleMouseMove : undefined}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseLeave}
+    >
       {/* columnas */}
       <div className="relative" style={{ height: (END_HOUR - START_HOUR) * HOUR_HEIGHT }}>
         {/* líneas y etiquetas de horas */}
