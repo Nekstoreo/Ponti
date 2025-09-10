@@ -4,7 +4,7 @@ import MainLayout from "@/components/MainLayout";
 import { useAuthStore } from "@/store/authStore";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, User, Building2, Bell, Newspaper, HelpCircle, LogOut, BookOpen, Heart, Wifi } from "lucide-react";
+import { ChevronRight, User, Building2, Bell, Newspaper, HelpCircle, LogOut, BookOpen, Heart, Wifi, Search } from "lucide-react";
 
 export default function MasRoute() {
   const logout = useAuthStore((s) => s.logout);
@@ -24,6 +24,13 @@ export default function MasRoute() {
       icon: Heart,
       description: "Cuida tu bienestar mental y físico",
       action: () => router.push("/bienestar"),
+    },
+    {
+      id: "buscar",
+      label: "Búsqueda Avanzada",
+      icon: Search,
+      description: "Buscar cualquier cosa en Ponti",
+      action: () => router.push("/buscar"),
     },
     {
       id: "noticias",
