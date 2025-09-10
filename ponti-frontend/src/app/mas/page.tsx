@@ -4,13 +4,20 @@ import MainLayout from "@/components/MainLayout";
 import { useAuthStore } from "@/store/authStore";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, User, Building2, Bell, Newspaper, HelpCircle, LogOut } from "lucide-react";
+import { ChevronRight, User, Building2, Bell, Newspaper, HelpCircle, LogOut, BookOpen } from "lucide-react";
 
 export default function MasRoute() {
   const logout = useAuthStore((s) => s.logout);
   const router = useRouter();
 
   const menuItems = [
+    {
+      id: "calificaciones",
+      label: "Calificaciones",
+      icon: BookOpen,
+      description: "Consulta tus notas y rendimiento académico",
+      action: () => router.push("/calificaciones"),
+    },
     {
       id: "noticias",
       label: "Noticias y Anuncios",

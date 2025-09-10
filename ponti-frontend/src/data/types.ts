@@ -115,6 +115,56 @@ export interface AnnouncementItem {
   tags?: string[];
 }
 
+// Tipos para el sistema de calificaciones
+export type GradeStatus = 'approved' | 'failed' | 'pending' | 'withdrawn';
+export type AssessmentType = 'exam' | 'quiz' | 'assignment' | 'project' | 'participation' | 'final';
+
+export interface AssessmentItem {
+  id: string;
+  name: string;
+  type: AssessmentType;
+  date: string; // ISO date
+  maxScore: number;
+  earnedScore: number | null;
+  weight: number; // Porcentaje del total (0-100)
+  feedback?: string;
+  isPublished: boolean;
+}
+
+export interface CourseGrade {
+  id: string;
+  courseId: string;
+  courseName: string;
+  courseCode: string;
+  professor: string;
+  semester: string; // e.g., "2024-1"
+  credits: number;
+  assessments: AssessmentItem[];
+  currentAverage: number | null; // Promedio actual (0-100)
+  finalGrade: number | null; // Calificación final (0-100)
+  letterGrade?: string; // A, B, C, D, F
+  status: GradeStatus;
+  lastUpdated: string; // ISO date
+}
+
+export interface GradeSummary {
+  semesterGPA: number | null; // GPA del semestre actual
+  cumulativeGPA: number | null; // GPA acumulado
+  totalCredits: number;
+  completedCredits: number;
+  inProgressCredits: number;
+  approvedCourses: number;
+  failedCourses: number;
+  pendingCourses: number;
+}
+
+export interface GradeSettings {
+  showDetailedGrades: boolean;
+  gradeNotifications: boolean;
+  averageCalculationMethod: 'weighted' | 'simple';
+  showProjections: boolean;
+}
+
 
 export type PoiCategory =
   | "todo"
@@ -137,6 +187,18 @@ export interface PoiItem {
   hours?: string;
   description?: string;
   imageUrl?: string;
+  // Nuevos campos para modal enriquecido
+  image?: string; // Hero image for cultural POIs
+  contact?: {
+    phone?: string;
+    email?: string;
+    website?: string;
+  };
+  // Información adicional por categoría
+  buildingInfo?: {
+    levels: number;
+    facilities: string[];
+  };
 }
 
 export type ServiceCategory = "academico" | "administrativo" | "bienestar" | "tecnologia" | "biblioteca" | "deportes";
