@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { NotificationManager } from "@/components/notifications/NotificationManager";
@@ -13,6 +13,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: "#3b82f6",
+  colorScheme: "light",
+};
+
 export const metadata: Metadata = {
   title: "Ponti - Tu Compañero de Carrera Digital",
   description: "Aplicación universitaria integral para estudiantes - Horarios, Calificaciones, Mapa Campus, Bienestar y más",
@@ -22,14 +31,6 @@ export const metadata: Metadata = {
   publisher: "Ponti",
   robots: "index, follow",
   manifest: "/manifest.json",
-  themeColor: "#3b82f6",
-  colorScheme: "light",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
