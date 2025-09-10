@@ -165,6 +165,106 @@ export interface GradeSettings {
   showProjections: boolean;
 }
 
+// Tipos para el sistema de bienestar
+export type MoodLevel = 1 | 2 | 3 | 4 | 5; // 1 = muy mal, 5 = excelente
+export type StressLevel = 'low' | 'medium' | 'high';
+export type WellnessCategory = 'mental' | 'physical' | 'academic' | 'social' | 'financial';
+
+export interface MoodEntry {
+  id: string;
+  date: string; // ISO date
+  mood: MoodLevel;
+  stressLevel: StressLevel;
+  sleepHours?: number;
+  notes?: string;
+  activities?: string[]; // ejercicio, estudio, socializar, etc.
+  energy?: MoodLevel;
+  focus?: MoodLevel;
+}
+
+export interface WellnessRecommendation {
+  id: string;
+  category: WellnessCategory;
+  title: string;
+  description: string;
+  actionText: string;
+  priority: 'low' | 'medium' | 'high';
+  icon: string;
+  estimatedTime?: string; // "5 min", "1 hora", etc.
+  isCompleted?: boolean;
+  tags?: string[];
+}
+
+export interface WellnessInsight {
+  id: string;
+  type: 'trend' | 'achievement' | 'suggestion' | 'alert';
+  title: string;
+  description: string;
+  value?: string; // "75%", "+2 puntos", etc.
+  trend?: 'up' | 'down' | 'stable';
+  period: string; // "Esta semana", "Último mes", etc.
+  icon: string;
+}
+
+export interface WellnessMetrics {
+  averageMood: number;
+  averageStress: StressLevel;
+  averageSleep: number;
+  averageEnergy: number;
+  averageFocus: number;
+  streakDays: number;
+  completedRecommendations: number;
+  weeklyTrend: 'improving' | 'declining' | 'stable';
+}
+
+// Tipos para el sistema de búsqueda global
+export type SearchCategory = 
+  | 'horarios' 
+  | 'calificaciones' 
+  | 'mapa' 
+  | 'anuncios' 
+  | 'bienestar' 
+  | 'configuracion'
+  | 'todo';
+
+export interface SearchResult {
+  id: string;
+  title: string;
+  description: string;
+  category: SearchCategory;
+  subcategory?: string;
+  route: string;
+  icon?: string;
+  relevanceScore: number;
+  metadata?: {
+    date?: string;
+    time?: string;
+    location?: string;
+    status?: string;
+    tags?: string[];
+    [key: string]: unknown;
+  };
+}
+
+export interface SearchFilters {
+  categories: SearchCategory[];
+  dateRange?: {
+    start: Date;
+    end: Date;
+  };
+  sortBy: 'relevance' | 'date' | 'alphabetical';
+  maxResults: number;
+}
+
+export interface SearchState {
+  query: string;
+  results: SearchResult[];
+  filters: SearchFilters;
+  isSearching: boolean;
+  recentSearches: string[];
+  searchHistory: SearchResult[];
+}
+
 
 export type PoiCategory =
   | "todo"
