@@ -24,8 +24,7 @@ export default function GradeChart({ course }: GradeChartProps) {
   
   // Calculate statistics
   const scores = publishedAssessments.map(a => a.earnedScore!);
-  const weights = publishedAssessments.map(a => a.weight);
-  
+
   const averageScore = scores.length > 0 ? scores.reduce((a, b) => a + b, 0) / scores.length : 0;
   const highestScore = scores.length > 0 ? Math.max(...scores) : 0;
   const lowestScore = scores.length > 0 ? Math.min(...scores) : 0;

@@ -28,7 +28,7 @@ export default function MapPage() {
       if (fromQuery && pois.some((p) => p.id === fromQuery)) {
         selectPoi(fromQuery);
       }
-    } catch (e) {
+    } catch {
       setError("No se pudieron cargar los puntos de interés.");
     } finally {
       setLoading(false);

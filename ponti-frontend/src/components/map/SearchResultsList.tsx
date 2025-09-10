@@ -194,7 +194,7 @@ export default function SearchResultsList({
       <div className="max-h-64 overflow-y-auto">
         {searchResults.length > 0 ? (
           <div className="p-1">
-            {searchResults.map((poi, index) => (
+            {searchResults.map((poi) => (
               <button
                 key={poi.id}
                 onClick={() => handleResultClick(poi)}

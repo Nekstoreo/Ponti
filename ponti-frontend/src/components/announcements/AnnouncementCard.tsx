@@ -7,7 +7,7 @@ import { es } from "date-fns/locale";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Eye, EyeOff, Star, Pin } from "lucide-react";
+import { Eye, EyeOff, Star } from "lucide-react";
 
 interface AnnouncementCardProps {
   announcement: AnnouncementItem;

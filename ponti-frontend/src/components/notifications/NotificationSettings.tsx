@@ -8,7 +8,6 @@ import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { Bell, Clock, BookOpen, Calendar, Settings, Moon, Save } from "lucide-react";
 import { NotificationSettings as NotificationSettingsType } from "@/data/types";
 

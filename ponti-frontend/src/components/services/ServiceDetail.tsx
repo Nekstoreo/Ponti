@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, Clock, MapPin, Phone, Mail, Globe, Calendar, Tag, Eye } from "lucide-react";
+import { ArrowLeft, MapPin, Phone, Mail, Globe, Calendar, Tag, Eye } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface ServiceDetailProps {

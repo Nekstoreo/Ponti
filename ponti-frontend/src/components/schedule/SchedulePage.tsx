@@ -12,14 +12,6 @@ import ScheduleExportModal from "@/components/schedule/ScheduleExportModal";
 import { Button } from "@/components/ui/button";
 import { Share2 } from "lucide-react";
 
-const dayLabels: Record<DayKey, string> = {
-  L: "L",
-  M: "M",
-  X: "X",
-  J: "J",
-  V: "V",
-  S: "S",
-};
 
 export default function SchedulePage() {
   const schedule = useScheduleStore((s) => s.schedule);
