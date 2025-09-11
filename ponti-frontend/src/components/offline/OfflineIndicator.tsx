@@ -1,241 +1,120 @@
 "use client";
 
-import { useOffline, formatLastSync } from "@/hooks/useOffline";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { 
-  Wifi, 
-  WifiOff, 
-  RefreshCw, 
-  Download,
-  Cloud,
-  AlertTriangle 
-} from "lucide-react";
 import { useState, useEffect } from "react";
+import { useOffline, formatLastSync } from "@/hooks/useOffline";
+import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { Wifi, WifiOff, Clock, CheckCircle } from "lucide-react";
 
 interface OfflineIndicatorProps {
-  variant?: 'minimal' | 'full' | 'toast';
+  variant?: 'minimal' | 'detailed' | 'toast';
   className?: string;
-  showSyncButton?: boolean;
+  showSyncButton?: boolean; // Mantenido para compatibilidad pero no se usa
 }
 
 export default function OfflineIndicator({ 
   variant = 'minimal', 
-  className,
-  showSyncButton = true 
+  className 
 }: OfflineIndicatorProps) {
   const { 
     isOnline, 
     isOfflineCapable, 
-    lastSync, 
-    forceSync 
+    lastSync
   } = useOffline();
-  
-  const [isSyncing, setIsSyncing] = useState(false);
-  const [syncSuccess, setSyncSuccess] = useState<boolean | null>(null);
 
-  const handleSync = async () => {
-    if (!isOnline || isSyncing) return;
-    
-    setIsSyncing(true);
-    setSyncSuccess(null);
-    
-    try {
-      await forceSync();
-      setSyncSuccess(true);
-      setTimeout(() => setSyncSuccess(null), 3000);
-    } catch (error) {
-      console.error('Sync failed:', error);
-      setSyncSuccess(false);
-      setTimeout(() => setSyncSuccess(null), 3000);
-    } finally {
-      setIsSyncing(false);
-    }
-  };
+  if (!isOfflineCapable) {
+    return null; // No mostrar nada si no tiene capacidades offline
+  }
 
   if (variant === 'minimal') {
     return (
       <div className={cn("flex items-center gap-2", className)}>
         {isOnline ? (
-          <div className="flex items-center gap-1 text-green-600">
-            <Wifi className="w-4 h-4" />
-            {isOfflineCapable && (
-              <Download className="w-3 h-3" />
-            )}
-          </div>
+          <>
+            <div className="w-2 h-2 bg-green-500 rounded-full" />
+            <Wifi className="w-4 h-4 text-green-600" />
+          </>
         ) : (
-          <div className="flex items-center gap-1 text-red-600">
-            <WifiOff className="w-4 h-4" />
-            {isOfflineCapable && (
-              <Badge variant="secondary" className="text-xs px-1 py-0">
-                Offline
-              </Badge>
-            )}
-          </div>
-        )}
-        
-        {showSyncButton && isOnline && !isSyncing && (
-          <Button
-            size="sm"
-            variant="ghost"
-            onClick={handleSync}
-            className="p-1 h-6 w-6"
-          >
-            <RefreshCw className="w-3 h-3" />
-          </Button>
-        )}
-        
-        {isSyncing && (
-          <RefreshCw className="w-3 h-3 animate-spin text-blue-600" />
+          <>
+            <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
+            <WifiOff className="w-4 h-4 text-orange-600" />
+          </>
         )}
       </div>
+    );
+  }
+
+  if (variant === 'detailed') {
+    return (
+      <Card className={className}>
+        <CardContent className="p-4">
+          <div className="flex items-center gap-3">
+            {isOnline ? (
+              <>
+                <div className="w-3 h-3 bg-green-500 rounded-full" />
+                <Wifi className="w-5 h-5 text-green-600" />
+                <div>
+                  <p className="font-medium text-green-800">Conectado</p>
+                  <p className="text-sm text-green-600">Datos actualizados</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse" />
+                <WifiOff className="w-5 h-5 text-orange-600" />
+                <div>
+                  <p className="font-medium text-orange-800">Sin conexión</p>
+                  <p className="text-sm text-orange-600">Usando datos guardados</p>
+                </div>
+              </>
+            )}
+          </div>
+          
+          {lastSync && (
+            <div className="mt-3 pt-3 border-t flex items-center gap-2 text-sm text-gray-600">
+              <Clock className="w-4 h-4" />
+              <span>Última actualización: {formatLastSync(lastSync)}</span>
+            </div>
+          )}
+        </CardContent>
+      </Card>
     );
   }
 
   if (variant === 'toast') {
-    if (isOnline) return null;
+    if (isOnline) return null; // Solo mostrar cuando está offline
     
     return (
       <div className={cn(
-        "fixed top-4 left-4 right-4 z-50 mx-auto max-w-md",
+        "fixed bottom-4 left-4 right-4 mx-auto max-w-sm z-50",
+        "bg-orange-100 border border-orange-200 rounded-lg p-3",
+        "shadow-lg animate-in slide-in-from-bottom-2",
         className
       )}>
-        <Card className="border-orange-200 bg-orange-50">
-          <CardContent className="p-3">
-            <div className="flex items-center gap-3">
-              <WifiOff className="w-5 h-5 text-orange-600 shrink-0" />
-              <div className="flex-1">
-                <p className="text-sm font-medium text-orange-800">
-                  Sin conexión a internet
-                </p>
-                <p className="text-xs text-orange-600">
-                  {isOfflineCapable 
-                    ? "Funcionalidad limitada disponible"
-                    : "Algunas funciones no están disponibles"
-                  }
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <div className="flex items-center gap-3">
+          <WifiOff className="w-5 h-5 text-orange-600" />
+          <div>
+            <p className="font-medium text-orange-800">Sin conexión</p>
+            <p className="text-sm text-orange-600">
+              Tus datos siguen disponibles
+            </p>
+          </div>
+        </div>
       </div>
     );
   }
 
-  // Variant 'full'
-  return (
-    <Card className={cn("w-full", className)}>
-      <CardContent className="p-4">
-        <div className="space-y-4">
-          {/* Estado de conexión */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              {isOnline ? (
-                <>
-                  <div className="flex items-center gap-2 text-green-600">
-                    <Wifi className="w-5 h-5" />
-                    <span className="font-medium">Conectado</span>
-                  </div>
-                  <Badge variant="outline" className="text-green-600 border-green-200">
-                    Online
-                  </Badge>
-                </>
-              ) : (
-                <>
-                  <div className="flex items-center gap-2 text-red-600">
-                    <WifiOff className="w-5 h-5" />
-                    <span className="font-medium">Sin conexión</span>
-                  </div>
-                  <Badge variant="outline" className="text-red-600 border-red-200">
-                    Offline
-                  </Badge>
-                </>
-              )}
-            </div>
-            
-            {isOfflineCapable && (
-              <div className="flex items-center gap-1 text-blue-600">
-                <Download className="w-4 h-4" />
-                <span className="text-sm">PWA</span>
-              </div>
-            )}
-          </div>
-
-          {/* Capacidad offline */}
-          {isOfflineCapable && (
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Cloud className="w-4 h-4" />
-                <span>Modo offline habilitado</span>
-              </div>
-              
-              {lastSync && (
-                <div className="text-xs text-muted-foreground">
-                  Última sincronización: {formatLastSync(lastSync)}
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Botones de acción */}
-          {isOnline && (
-            <div className="flex gap-2">
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={handleSync}
-                disabled={isSyncing}
-                className="flex items-center gap-2"
-              >
-                <RefreshCw className={cn(
-                  "w-4 h-4",
-                  isSyncing && "animate-spin"
-                )} />
-                {isSyncing ? 'Sincronizando...' : 'Sincronizar'}
-              </Button>
-              
-              {syncSuccess === true && (
-                <Badge variant="outline" className="text-green-600 border-green-200">
-                  ✓ Sincronizado
-                </Badge>
-              )}
-              
-              {syncSuccess === false && (
-                <Badge variant="outline" className="text-red-600 border-red-200">
-                  ✗ Error
-                </Badge>
-              )}
-            </div>
-          )}
-
-          {/* Advertencias offline */}
-          {!isOnline && !isOfflineCapable && (
-            <div className="flex items-start gap-2 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-              <AlertTriangle className="w-4 h-4 text-yellow-600 shrink-0 mt-0.5" />
-              <div className="text-sm">
-                <p className="font-medium text-yellow-800">
-                  Funcionalidad limitada
-                </p>
-                <p className="text-yellow-700">
-                  Sin conexión, algunas funciones no están disponibles.
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
-      </CardContent>
-    </Card>
-  );
+  return null;
 }
 
-// Hook para mostrar toast de conexión automáticamente
+// Hook simplificado para mostrar toast offline
 export function useOfflineToast() {
-  const { isOnline } = useOffline();
+  const { isOnline, isOfflineCapable } = useOffline();
   const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
+    if (!isOfflineCapable) return;
+    
     if (!isOnline) {
       setShowToast(true);
       const timer = setTimeout(() => setShowToast(false), 5000);
@@ -243,62 +122,28 @@ export function useOfflineToast() {
     } else {
       setShowToast(false);
     }
-  }, [isOnline]);
+  }, [isOnline, isOfflineCapable]);
 
   return showToast;
 }
 
-// Componente de estado para cachés de datos específicos
-interface DataCacheStatusProps {
-  cacheKey: string;
-  label: string;
-  lastFetch?: Date;
-  className?: string;
-}
-
+// Componente para mostrar estado de datos específicos (usado en configuración)
 export function DataCacheStatus({ 
   label, 
-  lastFetch, 
-  className 
-}: DataCacheStatusProps) {
-  const { isOnline } = useOffline();
-  const [cacheStatus, setCacheStatus] = useState<'fresh' | 'stale' | 'missing'>('missing');
-
-  useEffect(() => {
-    // Verificar estado del caché específico
-    if (lastFetch) {
-      const now = new Date();
-      const diff = now.getTime() - lastFetch.getTime();
-      const isStale = diff > 3600000; // 1 hora
-      setCacheStatus(isStale ? 'stale' : 'fresh');
-    }
-  }, [lastFetch]);
-
-  const getStatusColor = () => {
-    if (!isOnline) {
-      return cacheStatus === 'missing' ? 'text-red-600' : 'text-orange-600';
-    }
-    return cacheStatus === 'fresh' ? 'text-green-600' : 'text-yellow-600';
-  };
-
-  const getStatusText = () => {
-    if (!isOnline) {
-      return cacheStatus === 'missing' ? 'No disponible' : 'Datos en caché';
-    }
-    return cacheStatus === 'fresh' ? 'Actualizado' : 'Necesita sync';
-  };
-
+  lastFetch 
+}: { 
+  cacheKey: string; 
+  label: string; 
+  lastFetch?: Date; 
+}) {
   return (
-    <div className={cn("flex items-center justify-between text-sm", className)}>
-      <span className="text-muted-foreground">{label}</span>
-      <div className="flex items-center gap-2">
-        <span className={getStatusColor()}>
-          {getStatusText()}
-        </span>
-        <div className={cn(
-          "w-2 h-2 rounded-full",
-          getStatusColor().replace('text-', 'bg-')
-        )} />
+    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+      <div className="flex items-center gap-3">
+        <CheckCircle className="w-4 h-4 text-green-500" />
+        <span className="font-medium">{label}</span>
+      </div>
+      <div className="text-sm text-gray-500">
+        {lastFetch ? formatLastSync(lastFetch) : 'No sincronizado'}
       </div>
     </div>
   );

@@ -2,8 +2,7 @@
 
 import { PoiCategory } from "@/data/types";
 import { useMapStore } from "@/store/mapStore";
-import { useRef, useState } from "react";
-import SearchResultsList from "./SearchResultsList";
+import { useRef } from "react";
 
 const categories: { 
   key: PoiCategory; 
@@ -76,13 +75,7 @@ const categories: {
 export default function MapFilterCarousel() {
   const filter = useMapStore((s) => s.filter);
   const setFilter = useMapStore((s) => s.setFilter);
-  const query = useMapStore((s) => s.query);
-  const setQuery = useMapStore((s) => s.setQuery);
-  const pois = useMapStore((s) => s.pois);
-  const selectPoi = useMapStore((s) => s.selectPoi);
   const carouselRef = useRef<HTMLDivElement>(null);
-  const [showSearchResults, setShowSearchResults] = useState(false);
-  const [searchFocused, setSearchFocused] = useState(false);
 
   const handleFilterClick = (categoryKey: PoiCategory) => {
     // Animate filter selection
@@ -101,23 +94,6 @@ export default function MapFilterCarousel() {
     }
   };
 
-  const handleSearchChange = (value: string) => {
-    setQuery(value);
-    setShowSearchResults(value.length > 0);
-  };
-
-  const handleSearchFocus = () => {
-    setSearchFocused(true);
-    if (query.length > 0) {
-      setShowSearchResults(true);
-    }
-  };
-
-  const handleSearchBlur = () => {
-    setSearchFocused(false);
-    // Delay hiding results to allow for clicks
-    setTimeout(() => setShowSearchResults(false), 150);
-  };
 
   const getFilterButtonClasses = (categoryKey: PoiCategory) => {
     const category = categories.find(c => c.key === categoryKey);
@@ -132,50 +108,6 @@ export default function MapFilterCarousel() {
 
   return (
     <div className="space-y-3 relative">
-      {/* Search Bar */}
-      <div className="relative">
-        <div className="relative">
-          <svg 
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-          <input
-            value={query}
-            onChange={(e) => handleSearchChange(e.target.value)}
-            onFocus={handleSearchFocus}
-            onBlur={handleSearchBlur}
-            placeholder="Buscar salones, cafeterías, oficinas..."
-            className={`w-full h-12 pl-10 pr-4 rounded-lg border bg-background transition-all duration-200 ${
-              searchFocused ? 'border-primary ring-2 ring-primary/20' : 'border-input'
-            }`}
-          />
-          {query && (
-            <button
-              onClick={() => handleSearchChange('')}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          )}
-        </div>
-
-        {/* Search Results */}
-        <SearchResultsList
-          query={query}
-          pois={pois}
-          activeFilter={filter}
-          isVisible={showSearchResults && query.length > 0}
-          onResultClick={(poi) => selectPoi(poi.id)}
-          onClose={() => setShowSearchResults(false)}
-        />
-      </div>
-
       {/* Filter Carousel */}
       <div className="relative">
         <div 

@@ -65,16 +65,8 @@ export default function TimeNavigator({
     }
   }, [selectedIndex, isScrolling]);
 
-  const handleDayClick = (dayKey: DayKey, index: number) => {
+  const handleDayClick = (dayKey: DayKey) => {
     setSelectedDay(dayKey);
-    
-    // If clicking on the last day (Saturday), auto-advance to next week
-    if (index === 5 && dayKey === 'S') {
-      setTimeout(() => {
-        setReferenceMonday(addDays(referenceMonday, 7));
-        setSelectedDay('L'); // Auto-select Monday of next week
-      }, 300);
-    }
   };
 
   const navigateWeek = (direction: 'prev' | 'next') => {
@@ -177,7 +169,7 @@ export default function TimeNavigator({
           return (
             <button
               key={idx}
-              onClick={() => handleDayClick(dayKey, idx)}
+              onClick={() => handleDayClick(dayKey)}
               className={`
                 flex flex-col items-center justify-center h-16 min-w-[60px] px-3 rounded-lg border text-sm
                 snap-center transition-all duration-200 ease-out

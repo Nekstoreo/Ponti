@@ -17,9 +17,12 @@ function Tab({
   showNotificationIndicator?: boolean;
 }) {
   const pathname = usePathname();
-  const isActive = href === "/" 
-    ? pathname === "/" 
+  const isActive = href === "/"
+    ? pathname === "/"
     : pathname.startsWith(href);
+
+  // Ya no existe pestaña de búsqueda
+  const isSearchTab = false;
 
   const content = (
     <Link
@@ -29,25 +32,34 @@ function Tab({
         transition-all duration-200 ease-out
         ${isActive ? "text-primary" : "text-muted-foreground"}
         hover:text-foreground active:scale-95
+        ${isSearchTab ? "bg-primary/5 hover:bg-primary/10" : ""}
       `}
       aria-current={isActive ? "page" : undefined}
     >
       {/* Icon */}
-      <div 
+      <div
         className={`
           transition-transform duration-200 ease-out
           ${isActive ? "scale-110" : "scale-100"}
+          ${isSearchTab ? "drop-shadow-sm" : ""}
         `}
       >
         {icon}
       </div>
-      
+
       {/* Label */}
-      <span className="text-xs font-medium">{label}</span>
-      
+      <span className={`text-xs font-medium ${isSearchTab ? "font-semibold" : ""}`}>{label}</span>
+
       {/* Active indicator */}
       {isActive && (
-        <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-1 w-8 bg-primary rounded-full" />
+        <div className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-1 rounded-full animate-in slide-in-from-bottom-1 duration-200 ${
+          isSearchTab ? "w-12 bg-gradient-to-r from-blue-500 to-purple-500 shadow-sm" : "w-8 bg-primary"
+        }`} />
+      )}
+
+      {/* Pulsing effect for search tab when not active */}
+      {isSearchTab && !isActive && (
+        <div className="absolute inset-0 rounded-lg bg-primary/5 animate-pulse opacity-50" />
       )}
     </Link>
   );

@@ -5,12 +5,11 @@ import { useServiceStore } from "@/store/serviceStore";
 import { ServiceCard } from "./ServiceCard";
 import { mockServices } from "@/data/services";
 import { ServiceCategory } from "@/data/types";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Search, Filter, Eye, MapPin } from "lucide-react";
+import { Eye, MapPin, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const categories: { value: ServiceCategory | "all"; label: string }[] = [
@@ -28,11 +27,9 @@ export function ServiceDirectory() {
   const {
     services,
     filteredServices,
-    searchQuery,
     selectedCategory,
     showOnlyOpenNow,
     setServices,
-    setSearchQuery,
     setSelectedCategory,
     toggleOpenNowFilter,
   } = useServiceStore();
@@ -61,37 +58,26 @@ export function ServiceDirectory() {
         </p>
       </div>
 
-      {/* Barra de búsqueda y filtros */}
-      <div className="flex flex-col sm:flex-row gap-4">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-          <Input
-            placeholder="Buscar servicios por nombre, descripción o ubicación..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10"
-          />
-        </div>
-        <div className="flex gap-2">
-          <Button
-            variant={showOnlyOpenNow ? "default" : "outline"}
-            size="sm"
-            onClick={toggleOpenNowFilter}
-            className="flex items-center gap-2"
-          >
-            <Eye className="h-4 w-4" />
-            Solo abiertos
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => router.push("/mapa")}
-            className="flex items-center gap-2"
-          >
-            <MapPin className="h-4 w-4" />
-            Ver en mapa
-          </Button>
-        </div>
+      {/* Acciones rápidas */}
+      <div className="flex gap-2">
+        <Button
+          variant={showOnlyOpenNow ? "default" : "outline"}
+          size="sm"
+          onClick={toggleOpenNowFilter}
+          className="flex items-center gap-2"
+        >
+          <Eye className="h-4 w-4" />
+          Solo abiertos
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => router.push("/mapa")}
+          className="flex items-center gap-2"
+        >
+          <MapPin className="h-4 w-4" />
+          Ver en mapa
+        </Button>
       </div>
 
       {/* Estadísticas rápidas */}
@@ -101,7 +87,7 @@ export function ServiceDirectory() {
           {openServicesCount} abiertos ahora
         </Badge>
         <Badge variant="secondary" className="flex items-center gap-1">
-          <Filter className="h-3 w-3" />
+          <Settings className="h-3 w-3" />
           {totalServicesCount} servicios totales
         </Badge>
       </div>
@@ -121,7 +107,7 @@ export function ServiceDirectory() {
             <div className="space-y-4 pr-4">
               {filteredServices.length === 0 ? (
                 <div className="text-center py-8">
-                  <Filter className="mx-auto h-12 w-12 text-muted-foreground" />
+                  <Settings className="mx-auto h-12 w-12 text-muted-foreground" />
                   <h3 className="mt-2 text-lg font-semibold">No se encontraron servicios</h3>
                   <p className="text-muted-foreground">
                     Intenta ajustar tus filtros de búsqueda

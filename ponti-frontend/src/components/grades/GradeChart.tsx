@@ -31,11 +31,11 @@ export default function GradeChart({ course }: GradeChartProps) {
   
   // Score distribution
   const scoreRanges = [
-    { range: '90-100', label: 'A', count: 0, color: 'bg-green-500' },
-    { range: '80-89', label: 'B', count: 0, color: 'bg-blue-500' },
-    { range: '70-79', label: 'C', count: 0, color: 'bg-yellow-500' },
-    { range: '60-69', label: 'D', count: 0, color: 'bg-orange-500' },
-    { range: '0-59', label: 'F', count: 0, color: 'bg-red-500' },
+    { range: '≥4.5', label: 'Alta', count: 0, color: 'bg-green-500' },
+    { range: '4.0-4.49', label: 'Buena', count: 0, color: 'bg-blue-500' },
+    { range: '3.0-3.99', label: 'Aprobada', count: 0, color: 'bg-yellow-500' },
+    { range: '2.5-2.99', label: 'Riesgo', count: 0, color: 'bg-orange-500' },
+    { range: '<2.5', label: 'Baja', count: 0, color: 'bg-gray-500' },
   ];
 
   scores.forEach(score => {
@@ -129,7 +129,7 @@ export default function GradeChart({ course }: GradeChartProps) {
           <div className="flex items-center gap-2">
             <div className={`w-3 h-3 rounded ${color}`} />
             <span className="font-medium">{label}</span>
-            <span className="text-muted-foreground">({range}%)</span>
+            <span className="text-muted-foreground">({range})</span>
           </div>
           <span className="font-medium">{count}</span>
         </div>
@@ -149,7 +149,7 @@ export default function GradeChart({ course }: GradeChartProps) {
       <div className="grid grid-cols-2 gap-4">
         <StatCard
           title="Promedio General"
-          value={`${averageScore.toFixed(1)}%`}
+          value={averageScore.toFixed(2)}
           subtitle={getLetterGrade(averageScore)}
           icon={BarChart3}
           color={getGradeColor(averageScore)}
@@ -157,7 +157,7 @@ export default function GradeChart({ course }: GradeChartProps) {
         
         <StatCard
           title="Tendencia"
-          value={trend !== null ? `${trend > 0 ? '+' : ''}${trend.toFixed(1)}%` : 'N/A'}
+          value={trend !== null ? `${trend > 0 ? '+' : ''}${trend.toFixed(2)}` : 'N/A'}
           subtitle={trend !== null ? (trend > 0 ? 'Mejorando' : trend < 0 ? 'Declinando' : 'Estable') : 'Insuficientes datos'}
           icon={trend !== null && trend > 0 ? TrendingUp : TrendingDown}
           color={trend !== null ? (trend > 0 ? 'text-green-600' : trend < 0 ? 'text-red-600' : 'text-gray-600') : 'text-gray-600'}
@@ -165,7 +165,7 @@ export default function GradeChart({ course }: GradeChartProps) {
         
         <StatCard
           title="Calificación Más Alta"
-          value={`${highestScore.toFixed(1)}%`}
+          value={highestScore.toFixed(2)}
           subtitle={getLetterGrade(highestScore)}
           icon={Award}
           color={getGradeColor(highestScore)}
@@ -173,7 +173,7 @@ export default function GradeChart({ course }: GradeChartProps) {
         
         <StatCard
           title="Calificación Más Baja"
-          value={`${lowestScore.toFixed(1)}%`}
+          value={lowestScore.toFixed(2)}
           subtitle={getLetterGrade(lowestScore)}
           icon={Target}
           color={getGradeColor(lowestScore)}
@@ -240,7 +240,7 @@ export default function GradeChart({ course }: GradeChartProps) {
                       </span>
                     </div>
                     <span className={`font-medium ${getGradeColor(type.average)}`}>
-                      {type.average.toFixed(1)}%
+                      {type.average.toFixed(2)}
                     </span>
                   </div>
                   <Progress value={type.average} className="h-2" />
@@ -283,7 +283,7 @@ export default function GradeChart({ course }: GradeChartProps) {
                   </div>
                   <div className="text-right">
                     <div className={`font-bold ${getGradeColor(assessment.earnedScore!)}`}>
-                      {assessment.earnedScore!.toFixed(1)}%
+                      {assessment.earnedScore!.toFixed(2)}
                     </div>
                     <div className="text-xs text-muted-foreground">
                       {getLetterGrade(assessment.earnedScore!)}

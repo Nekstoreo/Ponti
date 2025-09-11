@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useGradeStore, getLetterGrade, getGradeColor, getStatusColor } from "@/store/gradeStore";
 import { CourseGrade } from "@/data/types";
@@ -9,7 +9,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Progress } from "@/components/ui/progress";
 import { 
   BookOpen, 
   Calendar, 
@@ -100,6 +99,14 @@ export default function GradesList({ compact = false, showSummary = true }: Grad
     }
   };
 
+  const toFive = (percent: number) => (percent / 100) * 5;
+  const gradeColor5 = (g: number) => {
+    if (g >= 4) return 'text-green-600';
+    if (g >= 3) return 'text-blue-600';
+    if (g >= 2.5) return 'text-yellow-600';
+    return 'text-gray-600';
+  };
+
   const CourseCard = ({ course }: { course: CourseGrade }) => (
     <Card 
       className="cursor-pointer hover:shadow-md transition-all duration-200 hover:scale-[1.02]"
@@ -138,31 +145,14 @@ export default function GradesList({ compact = false, showSummary = true }: Grad
             </div>
 
             {/* Progress bar for current courses */}
-            {course.status === 'pending' && course.currentAverage !== null && (
-              <div className="space-y-1">
-                <div className="flex justify-between text-xs">
-                  <span className="text-muted-foreground">Progreso actual</span>
-                  <span className={getGradeColor(course.currentAverage)}>
-                    {course.currentAverage.toFixed(1)}%
-                  </span>
-                </div>
-                <Progress 
-                  value={course.currentAverage} 
-                  className="h-1.5"
-                />
-              </div>
-            )}
+            {/* Barra de progreso removida según solicitud */}
           </div>
 
           <div className="flex flex-col items-end gap-1 ml-3">
             {course.currentAverage !== null && (
               <div className="text-right">
-                <div className={`text-lg font-bold ${getGradeColor(course.currentAverage)}`}>
-                  {course.letterGrade || getLetterGrade(course.currentAverage)}
-                </div>
-                <div className={`text-xs ${getGradeColor(course.currentAverage)}`}>
-                  {course.currentAverage.toFixed(1)}%
-                </div>
+                <div className={`text-lg font-bold ${gradeColor5(toFive(course.currentAverage))}`}> {toFive(course.currentAverage).toFixed(2)}</div>
+                <div className="text-[10px] text-muted-foreground"></div>
               </div>
             )}
             <ChevronRight className="w-4 h-4 text-muted-foreground" />
@@ -258,7 +248,7 @@ export default function GradesList({ compact = false, showSummary = true }: Grad
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="current" className="space-y-3 mt-4">
+          <TabsContent value="current" className="mt-4">
             {currentGrades.length === 0 ? (
               <Card>
                 <CardContent className="p-8 text-center">
@@ -270,15 +260,17 @@ export default function GradesList({ compact = false, showSummary = true }: Grad
                 </CardContent>
               </Card>
             ) : (
-              <StaggeredAnimation staggerDelay={100}>
-                {currentGrades.map(course => (
-                  <CourseCard key={course.id} course={course} />
-                ))}
-              </StaggeredAnimation>
+              <div className="flex flex-col gap-5">
+                <StaggeredAnimation staggerDelay={100}>
+                  {currentGrades.map(course => (
+                    <CourseCard key={course.id} course={course} />
+                  ))}
+                </StaggeredAnimation>
+              </div>
             )}
           </TabsContent>
 
-          <TabsContent value="completed" className="space-y-3 mt-4">
+          <TabsContent value="completed" className="mt-4">
             {completedGrades.length === 0 ? (
               <Card>
                 <CardContent className="p-8 text-center">
@@ -290,11 +282,13 @@ export default function GradesList({ compact = false, showSummary = true }: Grad
                 </CardContent>
               </Card>
             ) : (
-              <StaggeredAnimation staggerDelay={100}>
-                {completedGrades.map(course => (
-                  <CourseCard key={course.id} course={course} />
-                ))}
-              </StaggeredAnimation>
+              <div className="flex flex-col gap-5">
+                <StaggeredAnimation staggerDelay={100}>
+                  {completedGrades.map(course => (
+                    <CourseCard key={course.id} course={course} />
+                  ))}
+                </StaggeredAnimation>
+              </div>
             )}
           </TabsContent>
         </Tabs>

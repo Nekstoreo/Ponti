@@ -5,11 +5,10 @@ import { useAnnouncementStore } from "@/store/announcementStore";
 import { AnnouncementCard } from "./AnnouncementCard";
 import { mockAnnouncements } from "@/data/mockAnnouncements";
 import { AnnouncementCategory } from "@/data/types";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Search, Filter, CheckCheck, Eye, Star } from "lucide-react";
+import { CheckCheck, Eye, Star, FileText } from "lucide-react";
 import { useRouter } from "next/navigation";
 import PullToRefresh from "@/components/animations/PullToRefresh";
 import LoadingSkeleton from "@/components/animations/LoadingSkeleton";
@@ -28,12 +27,10 @@ export function AnnouncementList() {
   const {
     announcements,
     filteredAnnouncements,
-    searchQuery,
     selectedCategory,
     showOnlyUnread,
     showOnlyImportant,
     setAnnouncements,
-    setSearchQuery,
     setSelectedCategory,
     toggleUnreadFilter,
     toggleImportantFilter,
@@ -128,46 +125,35 @@ export function AnnouncementList() {
         </div>
       </div>
 
-      {/* Barra de búsqueda y filtros */}
-      <div className="flex flex-col sm:flex-row gap-4">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-          <Input
-            placeholder="Buscar por título, contenido o etiquetas..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10"
-          />
-        </div>
-        <div className="flex gap-2">
-          <Button
-            variant={showOnlyUnread ? "default" : "outline"}
-            size="sm"
-            onClick={toggleUnreadFilter}
-            className="flex items-center gap-2"
-          >
-            <Eye className="h-4 w-4" />
-            Solo no leídas
-          </Button>
-          <Button
-            variant={showOnlyImportant ? "default" : "outline"}
-            size="sm"
-            onClick={toggleImportantFilter}
-            className="flex items-center gap-2"
-          >
-            <Star className="h-4 w-4" />
-            Importantes
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={markAllAsRead}
-            className="flex items-center gap-2"
-          >
-            <CheckCheck className="h-4 w-4" />
-            Marcar todas como leídas
-          </Button>
-        </div>
+      {/* Filtros y acciones rápidas */}
+      <div className="flex gap-2">
+        <Button
+          variant={showOnlyUnread ? "default" : "outline"}
+          size="sm"
+          onClick={toggleUnreadFilter}
+          className="flex items-center gap-2"
+        >
+          <Eye className="h-4 w-4" />
+          Solo no leídas
+        </Button>
+        <Button
+          variant={showOnlyImportant ? "default" : "outline"}
+          size="sm"
+          onClick={toggleImportantFilter}
+          className="flex items-center gap-2"
+        >
+          <Star className="h-4 w-4" />
+          Importantes
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={markAllAsRead}
+          className="flex items-center gap-2"
+        >
+          <CheckCheck className="h-4 w-4" />
+          Marcar todas como leídas
+        </Button>
       </div>
 
       {/* Filtros por categoría */}
@@ -189,7 +175,7 @@ export function AnnouncementList() {
             <div className="space-y-4 pr-4">
               {filteredAnnouncements.length === 0 ? (
                 <div className="text-center py-8">
-                  <Filter className="mx-auto h-12 w-12 text-muted-foreground" />
+                  <FileText className="mx-auto h-12 w-12 text-muted-foreground" />
                   <h3 className="mt-2 text-lg font-semibold">No se encontraron anuncios</h3>
                   <p className="text-muted-foreground">
                     Intenta ajustar tus filtros de búsqueda
