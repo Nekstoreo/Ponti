@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { login } from "@/services/authService";
 import { useAuthStore } from "@/store/authStore";
 
@@ -15,10 +14,11 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Redirigir si ya está autenticado
+  // Redirigir si ya está autenticado, respetando si falta completar onboarding
   useEffect(() => {
     if (isAuthenticated) {
-      router.replace("/");
+      const hasCompleted = useAuthStore.getState().hasCompletedOnboarding();
+      router.replace(hasCompleted ? "/" : "/onboarding");
     }
   }, [isAuthenticated, router]);
 
@@ -27,9 +27,9 @@ export default function LoginPage() {
     setError(null);
     setLoading(true);
     try {
-      const { profile, isFirstLogin } = await login({ studentId, password });
-      loginSuccess(profile, isFirstLogin);
-      router.replace("/");
+      const { profile } = await login({ studentId, password });
+      loginSuccess(profile);
+      // La navegación será manejada por el useEffect según si completó onboarding
     } catch (err) {
       const message = (err as Error).message ?? "Ocurrió un error";
       setError(message);
@@ -49,8 +49,10 @@ export default function LoginPage() {
     <div className="min-h-dvh flex items-center justify-center p-6">
       <div className="w-full max-w-sm space-y-6">
         <div className="flex flex-col items-center gap-2">
-          <Image src="/next.svg" alt="Ponti" width={120} height={28} />
-          <h1 className="text-xl font-semibold">Bienvenido de nuevo</h1>
+          <div className="w-32 h-12 flex items-center justify-center">
+            <span className="text-3xl font-bold text-primary">Ponti</span>
+          </div>
+          <h1 className="text-xl font-semibold">Bienvenido</h1>
           <p className="text-sm text-muted-foreground">
             Ingresa con tu ID estudiantil y contraseña
           </p>
