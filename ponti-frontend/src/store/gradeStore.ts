@@ -175,45 +175,34 @@ export const useGradeStore = create<GradeState>((set, get) => ({
   },
 }));
 
-// Helper function to convert numerical grade to GPA scale (0-4)
+// Helper: convertir 0-5 a escala GPA 0-4 (simple proporcional)
 function convertToGradePoints(grade: number): number {
-  if (grade >= 97) return 4.0;  // A+
-  if (grade >= 93) return 4.0;  // A
-  if (grade >= 90) return 3.7;  // A-
-  if (grade >= 87) return 3.3;  // B+
-  if (grade >= 83) return 3.0;  // B
-  if (grade >= 80) return 2.7;  // B-
-  if (grade >= 77) return 2.3;  // C+
-  if (grade >= 73) return 2.0;  // C
-  if (grade >= 70) return 1.7;  // C-
-  if (grade >= 67) return 1.3;  // D+
-  if (grade >= 65) return 1.0;  // D
-  return 0.0; // F
+  if (grade < 0) return 0;
+  if (grade > 5) grade = 5;
+  return parseFloat(((grade / 5) * 4).toFixed(2));
 }
 
-// Helper function to convert numerical grade to letter grade
+// Helper: letra (opcional) para escala 0-5 (estilo aproximado)
 export function getLetterGrade(grade: number): string {
-  if (grade >= 97) return "A+";
-  if (grade >= 93) return "A";
-  if (grade >= 90) return "A-";
-  if (grade >= 87) return "B+";
-  if (grade >= 83) return "B";
-  if (grade >= 80) return "B-";
-  if (grade >= 77) return "C+";
-  if (grade >= 73) return "C";
-  if (grade >= 70) return "C-";
-  if (grade >= 67) return "D+";
-  if (grade >= 65) return "D";
+  if (grade >= 4.7) return "A+";
+  if (grade >= 4.5) return "A";
+  if (grade >= 4.3) return "A-";
+  if (grade >= 4.0) return "B+";
+  if (grade >= 3.7) return "B";
+  if (grade >= 3.5) return "B-";
+  if (grade >= 3.3) return "C+";
+  if (grade >= 3.0) return "C";
+  if (grade >= 2.7) return "C-";
+  if (grade >= 2.5) return "D"; // Aprobación mínima en muchas universidades colombianas suele ser 3.0, pero mantenemos referencia
   return "F";
 }
 
-// Helper function to get color class for grade
+// Colores para escala 0-5
 export function getGradeColor(grade: number): string {
-  if (grade >= 90) return "text-green-600";
-  if (grade >= 80) return "text-blue-600";
-  if (grade >= 70) return "text-yellow-600";
-  if (grade >= 60) return "text-orange-600";
-  return "text-red-600";
+  if (grade >= 4) return "text-green-600";
+  if (grade >= 3) return "text-blue-600";
+  if (grade >= 2.5) return "text-yellow-600";
+  return "text-gray-600";
 }
 
 // Helper function to get status color

@@ -12,10 +12,7 @@ export interface OfflineState {
 
 export interface OfflineActions {
   clearCache: () => Promise<void>;
-  forceSync: () => Promise<void>;
   cacheData: (key: string, data: unknown) => Promise<void>;
-  getCacheSize: () => Promise<number>;
-  updateServiceWorker: () => Promise<void>;
 }
 
 interface UseOfflineReturn extends OfflineState, OfflineActions {}
@@ -29,7 +26,7 @@ export function useOffline(): UseOfflineReturn {
     serviceWorkerRegistration: null
   });
 
-  // Registrar Service Worker
+  // Registrar Service Worker (simplificado)
   useEffect(() => {
     if (typeof window === 'undefined' || !('serviceWorker' in navigator)) {
       return;
@@ -38,10 +35,11 @@ export function useOffline(): UseOfflineReturn {
     const registerServiceWorker = async () => {
       try {
         const registration = await navigator.serviceWorker.register('/sw.js', {
-          scope: '/'
+          scope: '/',
+          updateViaCache: 'none' // Evita problemas de caché del SW
         });
 
-        console.log('[Offline] Service Worker registered:', registration);
+        console.log('[Offline] Service Worker registered successfully');
 
         setState(prev => ({
           ...prev,
@@ -49,15 +47,16 @@ export function useOffline(): UseOfflineReturn {
           serviceWorkerRegistration: registration
         }));
 
-        // Escuchar actualizaciones del SW
+        // Auto-actualizar Service Worker sin intervención del usuario
         registration.addEventListener('updatefound', () => {
           const newWorker = registration.installing;
           if (newWorker) {
             newWorker.addEventListener('statechange', () => {
               if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                console.log('[Offline] New Service Worker available');
-                // Notificar al usuario que hay una actualización disponible
-                dispatchEvent(new CustomEvent('sw-update-available'));
+                console.log('[Offline] New Service Worker installed, activating...');
+                // Activar automáticamente el nuevo SW
+                newWorker.postMessage({ type: 'SKIP_WAITING' });
+                window.location.reload();
               }
             });
           }
@@ -65,6 +64,8 @@ export function useOffline(): UseOfflineReturn {
 
       } catch (error) {
         console.error('[Offline] Service Worker registration failed:', error);
+        // No marcar como offline capable si falla
+        setState(prev => ({ ...prev, isOfflineCapable: false }));
       }
     };
 
@@ -72,23 +73,13 @@ export function useOffline(): UseOfflineReturn {
   }, []);
 
 
-  // Monitorear estado de conexión
+  // Monitorear estado de conexión (simplificado)
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
     const handleOnline = () => {
       console.log('[Offline] Connection restored');
       setState(prev => ({ ...prev, isOnline: true, lastSync: new Date() }));
-      
-      // Trigger background sync
-      if ('serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype) {
-        navigator.serviceWorker.ready.then(registration => {
-          const syncManager = (registration as unknown as { sync: { register: (tag: string) => Promise<void> } }).sync;
-          return syncManager.register('background-sync');
-        }).catch(error => {
-          console.error('[Offline] Background sync registration failed:', error);
-        });
-      }
     };
 
     const handleOffline = () => {
@@ -158,24 +149,6 @@ export function useOffline(): UseOfflineReturn {
     }
   }, [sendMessageToSW]);
 
-  // Forzar sincronización
-  const forceSync = useCallback(async () => {
-    if (!('serviceWorker' in navigator) || !('sync' in window.ServiceWorkerRegistration.prototype)) {
-      throw new Error('Background sync not supported');
-    }
-
-    try {
-      const registration = await navigator.serviceWorker.ready;
-      const syncManager = (registration as unknown as { sync: { register: (tag: string) => Promise<void> } }).sync;
-      await syncManager.register('background-sync');
-      setState(prev => ({ ...prev, lastSync: new Date() }));
-      console.log('[Offline] Sync triggered successfully');
-    } catch (error) {
-      console.error('[Offline] Error triggering sync:', error);
-      throw error;
-    }
-  }, []);
-
   // Cachear datos manualmente
   const cacheData = useCallback(async (key: string, data: unknown) => {
     try {
@@ -191,32 +164,6 @@ export function useOffline(): UseOfflineReturn {
     }
   }, [sendMessageToSW, updateCacheSize]);
 
-  // Obtener tamaño del caché
-  const getCacheSize = useCallback(async () => {
-    return await updateCacheSize();
-  }, [updateCacheSize]);
-
-  // Actualizar Service Worker
-  const updateServiceWorker = useCallback(async () => {
-    if (!state.serviceWorkerRegistration) {
-      throw new Error('Service Worker not registered');
-    }
-
-    try {
-      await state.serviceWorkerRegistration.update();
-      
-      // Skip waiting if there's a waiting worker
-      if (state.serviceWorkerRegistration.waiting) {
-        state.serviceWorkerRegistration.waiting.postMessage({ type: 'SKIP_WAITING' });
-      }
-      
-      console.log('[Offline] Service Worker updated');
-    } catch (error) {
-      console.error('[Offline] Error updating Service Worker:', error);
-      throw error;
-    }
-  }, [state.serviceWorkerRegistration]);
-
   return {
     // State
     isOnline: state.isOnline,
@@ -227,10 +174,7 @@ export function useOffline(): UseOfflineReturn {
     
     // Actions
     clearCache,
-    forceSync,
-    cacheData,
-    getCacheSize,
-    updateServiceWorker
+    cacheData
   };
 }
 

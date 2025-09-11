@@ -140,8 +140,8 @@ export interface CourseGrade {
   semester: string; // e.g., "2024-1"
   credits: number;
   assessments: AssessmentItem[];
-  currentAverage: number | null; // Promedio actual (0-100)
-  finalGrade: number | null; // Calificación final (0-100)
+  currentAverage: number | null; // Promedio actual (0-5)
+  finalGrade: number | null; // Calificación final (0-5)
   letterGrade?: string; // A, B, C, D, F
   status: GradeStatus;
   lastUpdated: string; // ISO date
@@ -217,53 +217,7 @@ export interface WellnessMetrics {
   weeklyTrend: 'improving' | 'declining' | 'stable';
 }
 
-// Tipos para el sistema de búsqueda global
-export type SearchCategory = 
-  | 'horarios' 
-  | 'calificaciones' 
-  | 'mapa' 
-  | 'anuncios' 
-  | 'bienestar' 
-  | 'configuracion'
-  | 'todo';
-
-export interface SearchResult {
-  id: string;
-  title: string;
-  description: string;
-  category: SearchCategory;
-  subcategory?: string;
-  route: string;
-  icon?: string;
-  relevanceScore: number;
-  metadata?: {
-    date?: string;
-    time?: string;
-    location?: string;
-    status?: string;
-    tags?: string[];
-    [key: string]: unknown;
-  };
-}
-
-export interface SearchFilters {
-  categories: SearchCategory[];
-  dateRange?: {
-    start: Date;
-    end: Date;
-  };
-  sortBy: 'relevance' | 'date' | 'alphabetical';
-  maxResults: number;
-}
-
-export interface SearchState {
-  query: string;
-  results: SearchResult[];
-  filters: SearchFilters;
-  isSearching: boolean;
-  recentSearches: string[];
-  searchHistory: SearchResult[];
-}
+// (Eliminados tipos de búsqueda global ya que la funcionalidad fue retirada)
 
 
 export type PoiCategory =
