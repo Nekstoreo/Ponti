@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AlertTriangle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import MainLayout from "@/components/MainLayout";
 
 export default function NoticiaDetallePage() {
   const params = useParams();
@@ -29,30 +30,34 @@ export default function NoticiaDetallePage() {
 
   if (announcement === undefined) {
     return (
-      <div className="container mx-auto px-4 py-6">
-        <Card className="max-w-2xl mx-auto">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-destructive">
-              <AlertTriangle className="h-5 w-5" />
-              Anuncio no encontrado
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">
-              El anuncio que buscas no existe o ha sido eliminado.
-            </p>
-            <p className="text-sm text-muted-foreground mt-2">
-              Serás redirigido a la página de noticias en unos segundos...
-            </p>
-          </CardContent>
-        </Card>
-      </div>
+      <MainLayout>
+        <div className="space-y-4">
+          <Card className="max-w-2xl mx-auto">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-destructive">
+                <AlertTriangle className="h-5 w-5" />
+                Anuncio no encontrado
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                El anuncio que buscas no existe o ha sido eliminado.
+              </p>
+              <p className="text-sm text-muted-foreground mt-2">
+                Serás redirigido a la página de noticias en unos segundos...
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </MainLayout>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-6">
-      <AnnouncementDetail announcement={announcement} />
-    </div>
+    <MainLayout>
+      <div className="space-y-4">
+        <AnnouncementDetail announcement={announcement} />
+      </div>
+    </MainLayout>
   );
 }
