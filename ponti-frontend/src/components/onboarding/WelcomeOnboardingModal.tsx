@@ -3,10 +3,15 @@
 import { useAuthStore } from "@/store/authStore";
 
 export default function WelcomeOnboardingModal() {
-  const isFirstLogin = useAuthStore((s) => s.isFirstLogin);
-  const dismiss = useAuthStore((s) => s.dismissFirstLogin);
+  const hasCompletedOnboarding = useAuthStore((s) => s.hasCompletedOnboarding);
+  const completeOnboarding = useAuthStore((s) => s.completeOnboarding);
 
-  if (!isFirstLogin) return null;
+  // Si ya completó el onboarding, no mostrar el modal
+  if (hasCompletedOnboarding()) return null;
+
+  const handleDismiss = () => {
+    completeOnboarding();
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-6">
@@ -22,7 +27,7 @@ export default function WelcomeOnboardingModal() {
           <p className="text-sm">• Accede a tu horario, mapa y más desde la barra inferior.</p>
         </div>
         <button
-          onClick={dismiss}
+          onClick={handleDismiss}
           className="w-full h-10 rounded-md bg-foreground text-background"
         >
           ¡Entendido!
