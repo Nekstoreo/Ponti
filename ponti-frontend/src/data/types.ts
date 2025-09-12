@@ -219,42 +219,6 @@ export interface WellnessMetrics {
 
 // (Eliminados tipos de búsqueda global ya que la funcionalidad fue retirada)
 
-
-export type PoiCategory =
-  | "todo"
-  | "academico"
-  | "comida"
-  | "servicios"
-  | "bienestar"
-  | "cultura";
-
-export interface PoiItem {
-  id: string;
-  title: string;
-  subtitle?: string;
-  category: Exclude<PoiCategory, "todo">;
-  // Posición relativa en el lienzo del mapa (0-100)
-  x: number;
-  y: number;
-  // Datos opcionales
-  isOpenNow?: boolean;
-  hours?: string;
-  description?: string;
-  imageUrl?: string;
-  // Nuevos campos para modal enriquecido
-  image?: string; // Hero image for cultural POIs
-  contact?: {
-    phone?: string;
-    email?: string;
-    website?: string;
-  };
-  // Información adicional por categoría
-  buildingInfo?: {
-    levels: number;
-    facilities: string[];
-  };
-}
-
 export type ServiceCategory = "academico" | "administrativo" | "bienestar" | "tecnologia" | "biblioteca" | "deportes";
 
 export interface UniversityService {

@@ -152,7 +152,6 @@ export function useHaptics() {
     
     // List interactions
     itemSelect: () => triggerHaptic('selection'),
-    pullToRefresh: () => triggerHaptic('light'),
     refreshComplete: () => triggerHaptic('success'),
     
     // Modal interactions
