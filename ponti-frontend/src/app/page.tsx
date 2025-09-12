@@ -6,7 +6,9 @@ import Dashboard from "@/components/dashboard/Dashboard";
 export default function Home() {
   return (
     <MainLayout>
-      <Dashboard />
+      <div className="space-y-6">
+        <Dashboard />
+      </div>
     </MainLayout>
   );
 }

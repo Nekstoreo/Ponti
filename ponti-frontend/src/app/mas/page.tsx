@@ -1,6 +1,7 @@
 "use client";
 
 import MainLayout from "@/components/MainLayout";
+import PageTitle from "@/components/PageTitle";
 import { useAuthStore } from "@/store/authStore";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -72,12 +73,10 @@ export default function MasRoute() {
   return (
     <MainLayout>
       <div className="space-y-6">
-        <div>
-          <h1 className="text-2xl font-bold">Más</h1>
-          <p className="text-muted-foreground">
-            Accede a todas las funcionalidades adicionales de Ponti
-          </p>
-        </div>
+        <PageTitle
+          title="Más"
+          subtitle="Accede a todas las funcionalidades adicionales de Ponti"
+        />
 
         <div className="space-y-3">
           {menuItems.map((item) => {

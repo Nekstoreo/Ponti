@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useSwipeable } from 'react-swipeable';
 import { motion } from 'framer-motion';
 import { useAuthStore } from "@/store/authStore";
-import { BookOpen, Map, Bell, Calendar } from "lucide-react";
+import { BookOpen, Map, Bell, Calendar, Heart } from "lucide-react";
 
 interface OnboardingSlide {
   icon: React.ReactNode;
@@ -28,6 +28,11 @@ const slides: OnboardingSlide[] = [
     icon: <Bell className="w-12 h-12 text-primary" />,
     title: "Mantente al día con anuncios",
     description: "Recibe notificaciones importantes sobre tus clases y eventos del campus."
+  },
+  {
+    icon: <Heart className="w-12 h-12 text-primary" />,
+    title: "Cuida tu bienestar emocional",
+    description: "Accede a recursos de salud mental, herramientas de autorregulación y apoyo psicológico profesional."
   },
   {
     icon: <Map className="w-12 h-12 text-primary" />,
