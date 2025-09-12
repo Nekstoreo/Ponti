@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AlertTriangle, Book, Calendar, Heart, Home, Info, LifeBuoy, Mail, MapPin, Phone, RefreshCw, Smile } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-import PullToRefresh from "@/components/animations/PullToRefresh";
 
 // Tipos simples locales (podrían moverse a types.ts si se escalan)
 interface SupportContact {
@@ -253,7 +252,7 @@ export default function WellnessSupportCenter() {
   );
 
   return (
-    <PullToRefresh onRefresh={async () => setTip(dailyTips[Math.floor(Math.random()*dailyTips.length)])}>
+    <div>
       <div className="space-y-6">
         {/* Header */}
         <div className="flex items-start justify-between">
@@ -376,6 +375,6 @@ export default function WellnessSupportCenter() {
           </div>
         )}
       </div>
-    </PullToRefresh>
+    </div>
   );
 }

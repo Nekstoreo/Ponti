@@ -8,7 +8,6 @@ import { useAnnouncementStore } from "@/store/announcementStore";
 import { useAuthStore } from "@/store/authStore";
 import { NextClassCard } from "@/components/dashboard/NextClassCard";
 import { AnnouncementsList } from "@/components/dashboard/AnnouncementsList";
-import PullToRefresh from "@/components/animations/PullToRefresh";
 import { DashboardSkeleton } from "@/components/animations/LoadingSkeleton";
 import { StaggeredAnimation } from "@/components/animations/PageTransition";
 
@@ -91,11 +90,7 @@ export default function Dashboard() {
   }
 
   return (
-    <PullToRefresh 
-      onRefresh={handleRefresh}
-      disabled={isRefreshing}
-      className="min-h-[70vh]"
-    >
+    <div className="min-h-[70vh]">
       <div className="space-y-6">
         {/* Header with parallax effect */}
         <div 
@@ -139,7 +134,7 @@ export default function Dashboard() {
           </StaggeredAnimation>
         )}
       </div>
-    </PullToRefresh>
+    </div>
   );
 }
 

@@ -10,7 +10,6 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CheckCheck, Eye, Star, FileText } from "lucide-react";
 import { useRouter } from "next/navigation";
-import PullToRefresh from "@/components/animations/PullToRefresh";
 import LoadingSkeleton from "@/components/animations/LoadingSkeleton";
 import { StaggeredAnimation } from "@/components/animations/PageTransition";
 
@@ -167,11 +166,7 @@ export function AnnouncementList() {
         </TabsList>
 
         <TabsContent value={selectedCategory} className="mt-4">
-          <PullToRefresh
-            onRefresh={handleRefresh}
-            disabled={isRefreshing}
-            className="h-[60vh] overflow-auto"
-          >
+          <div className="h-[60vh] overflow-auto">
             <div className="space-y-4 pr-4">
               {filteredAnnouncements.length === 0 ? (
                 <div className="text-center py-8">
@@ -206,7 +201,7 @@ export function AnnouncementList() {
                 </div>
               )}
             </div>
-          </PullToRefresh>
+          </div>
         </TabsContent>
       </Tabs>
     </div>

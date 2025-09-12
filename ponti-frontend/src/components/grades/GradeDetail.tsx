@@ -18,13 +18,11 @@ import {
   CheckCircle,
   AlertCircle,
   TrendingUp,
-  PieChart,
   Calculator,
   MessageSquare,
 } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
-import { StaggeredAnimation } from "@/components/animations/PageTransition";
 
 interface GradeDetailProps {
   course: CourseGrade;
@@ -128,21 +126,6 @@ export default function GradeDetail({ course }: GradeDetailProps) {
     }
   };
 
-  const calculateProjectedGrade = (targetGrade: number): number => {
-    if (remainingWeight === 0) return course.currentAverage || 0;
-
-    const currentPoints = publishedAssessments.reduce((sum, a) => {
-      if (a.earnedScore !== null) {
-        return sum + (a.earnedScore * a.weight / 100);
-      }
-      return sum;
-    }, 0);
-
-    const pointsNeeded = targetGrade - currentPoints;
-    const averageNeededInRemaining = (pointsNeeded / remainingWeight) * 100;
-
-    return Math.max(0, Math.min(100, averageNeededInRemaining));
-  };
 
   const AssessmentCard = ({ assessment, isUpcoming = false }: { assessment: AssessmentItem; isUpcoming?: boolean }) => (
     <Card className={`${isUpcoming ? "border-dashed opacity-70" : ""} mb-4`}>
@@ -260,11 +243,10 @@ export default function GradeDetail({ course }: GradeDetailProps) {
         </div>
         <div className="text-right">
           <div className={`inline-block px-3 py-1 rounded-md ${getGradeBg5(currentGrade5)} ${getGradeColor5(currentGrade5)} text-sm font-semibold min-w-[70px]`}>{currentGrade5.toFixed(2)}</div>
-          <div className="text-[10px] text-muted-foreground mt-1">Acumulado</div>
+          <div className="text-[10px] text-muted-foreground mt-3">Acumulado</div>
         </div>
       </div>
 
-      {/* Progress Overview */}
       {course.status === 'pending' && (
         <Card>
           <CardContent className="px-4">

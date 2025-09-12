@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useGradeStore, getLetterGrade, getGradeColor, getStatusColor } from "@/store/gradeStore";
+import { useGradeStore, getStatusColor } from "@/store/gradeStore";
 import { CourseGrade } from "@/data/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -22,7 +22,6 @@ import {
   ChevronRight
 } from "lucide-react";
 import LoadingSkeleton from "@/components/animations/LoadingSkeleton";
-import PullToRefresh from "@/components/animations/PullToRefresh";
 import { StaggeredAnimation } from "@/components/animations/PageTransition";
 
 interface GradesListProps {
@@ -108,14 +107,14 @@ export default function GradesList({ compact = false, showSummary = true }: Grad
   };
 
   const CourseCard = ({ course }: { course: CourseGrade }) => (
-    <Card 
-      className="cursor-pointer hover:shadow-md transition-all duration-200 hover:scale-[1.02]"
+    <Card
+      className="cursor-pointer mb-4"
       onClick={() => handleCourseClick(course)}
     >
-      <CardContent className="p-4">
+      <CardContent className="px-4 py-3">
         <div className="flex items-start justify-between">
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
+            <div className="flex items-center gap-2 mb-1.5">
               <BookOpen className="w-4 h-4 text-muted-foreground" />
               <span className="text-xs text-muted-foreground font-medium">
                 {course.courseCode}
@@ -129,11 +128,11 @@ export default function GradesList({ compact = false, showSummary = true }: Grad
               </Badge>
             </div>
             
-            <h3 className="font-semibold text-sm leading-tight mb-1">
+            <h3 className="font-semibold text-sm leading-tight mb-1.5">
               {course.courseName}
             </h3>
             
-            <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
+            <div className="flex items-center gap-3 text-xs text-muted-foreground mb-1.5">
               <div className="flex items-center gap-1">
                 <User className="w-3 h-3" />
                 <span>{course.professor}</span>
@@ -163,7 +162,7 @@ export default function GradesList({ compact = false, showSummary = true }: Grad
   );
 
   return (
-    <PullToRefresh onRefresh={handleRefresh} disabled={isLoading}>
+    <div>
       <div className="space-y-6">
         {/* Summary Cards */}
         {showSummary && !compact && (
@@ -183,7 +182,7 @@ export default function GradesList({ compact = false, showSummary = true }: Grad
             </Card>
 
             <Card>
-              <CardContent className="p-4">
+              <CardContent className="px-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-xs text-muted-foreground">GPA Acumulado</p>
@@ -260,7 +259,7 @@ export default function GradesList({ compact = false, showSummary = true }: Grad
                 </CardContent>
               </Card>
             ) : (
-              <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-4 sm:gap-5">
                 <StaggeredAnimation staggerDelay={100}>
                   {currentGrades.map(course => (
                     <CourseCard key={course.id} course={course} />
@@ -282,7 +281,7 @@ export default function GradesList({ compact = false, showSummary = true }: Grad
                 </CardContent>
               </Card>
             ) : (
-              <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-4 sm:gap-5">
                 <StaggeredAnimation staggerDelay={100}>
                   {completedGrades.map(course => (
                     <CourseCard key={course.id} course={course} />
@@ -293,6 +292,6 @@ export default function GradesList({ compact = false, showSummary = true }: Grad
           </TabsContent>
         </Tabs>
       </div>
-    </PullToRefresh>
+    </div>
   );
 }
