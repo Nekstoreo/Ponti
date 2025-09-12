@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
@@ -18,6 +18,11 @@ export default function PageHeader({
   className = ""
 }: PageHeaderProps) {
   const router = useRouter();
+  const pathname = usePathname();
+
+  // Para la vista de calificaciones, no mostrar botón de retroceso y quitar borde
+  const isCalificacionesPage = pathname === "/calificaciones";
+  const shouldShowBackButton = showBackButton && !isCalificacionesPage;
 
   const handleBack = () => {
     if (backTo) {
@@ -28,8 +33,8 @@ export default function PageHeader({
   };
 
   return (
-    <div className={`flex items-center gap-3 px-4 py-3 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 ${className}`}>
-      {showBackButton && (
+    <div className={`flex items-center gap-3 px-4 py-3 ${isCalificacionesPage ? '' : 'border-b'} bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 ${className}`}>
+      {shouldShowBackButton && (
         <Button
           variant="ghost"
           size="sm"
