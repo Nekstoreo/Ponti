@@ -30,10 +30,42 @@ const places = [
 ];
 
 export default function PlacesList() {
+  const renderPlaceName = (name: string) => {
+    if (name.includes(' • ')) {
+      const parts = name.split(' • ');
+      const mainName = parts[0];
+      const subSites = parts.slice(1);
+      
+      return (
+        <div className="space-y-2">
+          <p className="text-sm font-medium text-foreground leading-relaxed">
+            {mainName}
+          </p>
+          <div className="ml-4 space-y-1">
+            {subSites.map((subSite, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 bg-primary rounded-full flex-shrink-0" />
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {subSite}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+    
+    return (
+      <p className="text-sm font-medium text-foreground leading-relaxed">
+        {name}
+      </p>
+    );
+  };
+
   return (
     <div className="mt-4">
       <h3 className="text-lg font-semibold mb-3">Sitios de la Universidad</h3>
-      <div className="space-y-2 max-h-96 overflow-y-auto">
+      <div className="space-y-3 max-h-96 overflow-y-auto">
         {places.map((place) => (
           <div
             key={place.id}
@@ -43,9 +75,7 @@ export default function PlacesList() {
               {place.id}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-foreground leading-relaxed">
-                {place.name}
-              </p>
+              {renderPlaceName(place.name)}
             </div>
           </div>
         ))}
