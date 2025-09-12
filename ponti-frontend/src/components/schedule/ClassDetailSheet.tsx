@@ -18,11 +18,18 @@ export default function ClassDetailSheet({
   const [isDragging, setIsDragging] = useState(false);
   const [startY, setStartY] = useState(0);
   const [translateY, setTranslateY] = useState(0);
+  // Measure sheet height to animate slide-up
+  const [sheetHeight, setSheetHeight] = useState(0);
 
-  // Reset translation when modal opens/closes
+  // Animate sheet from bottom on open
   useEffect(() => {
-    if (open) {
-      setTranslateY(0);
+    if (open && sheetRef.current) {
+      const h = sheetRef.current.getBoundingClientRect().height;
+      setSheetHeight(h);
+      // start off-screen
+      setTranslateY(h);
+      // next frame, slide up
+      requestAnimationFrame(() => setTranslateY(0));
     }
   }, [open]);
 

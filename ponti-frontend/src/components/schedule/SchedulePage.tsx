@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import WeekHeader from "@/components/schedule/WeekHeader";
 import ScheduleTimeline from "@/components/schedule/ScheduleTimeline";
 import { useState } from "react";
-import ClassDetailSheet from "@/components/schedule/ClassDetailSheet";
+import ClassDetailCard from "@/components/schedule/ClassDetailCard";
 import ScheduleExportModal from "@/components/schedule/ScheduleExportModal";
 import { Button } from "@/components/ui/button";
 import { Share2 } from "lucide-react";
@@ -28,7 +28,6 @@ export default function SchedulePage() {
     monday.setDate(now.getDate() + deltaToMonday);
     return monday;
   });
-  const [detailOpen, setDetailOpen] = useState(false);
   const [detailBlock, setDetailBlock] = useState<import("@/data/types").ClassBlock | null>(null);
   const [exportModalOpen, setExportModalOpen] = useState(false);
 
@@ -53,8 +52,8 @@ export default function SchedulePage() {
   }, [selectedDay, searchParams]);
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
+    <div className="flex flex-col h-[calc(100vh-6rem)]">
+      <div className="flex items-center justify-between mb-2">
         <h1 className="text-xl font-semibold">Horario</h1>
         <Button
           variant="outline"
@@ -78,50 +77,55 @@ export default function SchedulePage() {
         }}
       />
 
-      {schedule[selectedDay].length === 0 ? (
-        <div className="rounded-md border p-8 text-center text-sm text-muted-foreground">
-          No tienes clases este día. ¡Tiempo para recargar energías!
-        </div>
-      ) : (
-        <ScheduleTimeline
-          blocks={schedule[selectedDay]}
-          onBlockClick={(b) => {
-            setDetailBlock(b);
-            setDetailOpen(true);
-          }}
-          showNowLine={selectedDay === dayKeyFromToday()}
-          onSwipeDay={(direction) => {
-            // Handle swipe navigation between days
-            const currentDayIndex = Object.keys(schedule).indexOf(selectedDay);
-            let newDayIndex;
-            
-            if (direction === 'left') {
-              // Swipe left - next day
-              newDayIndex = (currentDayIndex + 1) % 6;
-              // If we've reached the end of the week, advance to next week
-              if (newDayIndex === 0) {
-                const nextWeek = new Date(referenceMonday);
-                nextWeek.setDate(nextWeek.getDate() + 7);
-                setReferenceMonday(nextWeek);
+      <div className="flex-grow overflow-auto my-2">
+        {schedule[selectedDay].length === 0 ? (
+          <div className="rounded-md border p-8 text-center text-sm text-muted-foreground">
+            No tienes clases este día. ¡Tiempo para recargar energías!
+          </div>
+        ) : (
+          <ScheduleTimeline
+            blocks={schedule[selectedDay]}
+            onBlockClick={(b) => {
+              setDetailBlock(b);
+            }}
+            showNowLine={selectedDay === dayKeyFromToday()}
+            onSwipeDay={(direction) => {
+              // Handle swipe navigation between days
+              const currentDayIndex = Object.keys(schedule).indexOf(selectedDay);
+              let newDayIndex;
+              
+              if (direction === 'left') {
+                // Swipe left - next day
+                newDayIndex = (currentDayIndex + 1) % 6;
+                // If we've reached the end of the week, advance to next week
+                if (newDayIndex === 0) {
+                  const nextWeek = new Date(referenceMonday);
+                  nextWeek.setDate(nextWeek.getDate() + 7);
+                  setReferenceMonday(nextWeek);
+                }
+              } else {
+                // Swipe right - previous day
+                newDayIndex = currentDayIndex === 0 ? 5 : currentDayIndex - 1;
+                // If we've reached the beginning of the week, go to previous week
+                if (currentDayIndex === 0) {
+                  const prevWeek = new Date(referenceMonday);
+                  prevWeek.setDate(prevWeek.getDate() - 7);
+                  setReferenceMonday(prevWeek);
+                }
               }
-            } else {
-              // Swipe right - previous day
-              newDayIndex = currentDayIndex === 0 ? 5 : currentDayIndex - 1;
-              // If we've reached the beginning of the week, go to previous week
-              if (currentDayIndex === 0) {
-                const prevWeek = new Date(referenceMonday);
-                prevWeek.setDate(prevWeek.getDate() - 7);
-                setReferenceMonday(prevWeek);
-              }
-            }
-            
-            const dayKeys: DayKey[] = ["L", "M", "X", "J", "V", "S"];
-            setSelectedDay(dayKeys[newDayIndex]);
-          }}
-        />
-      )}
+              
+              const dayKeys: DayKey[] = ["L", "M", "X", "J", "V", "S"];
+              setSelectedDay(dayKeys[newDayIndex]);
+            }}
+          />
+        )}
+      </div>
 
-      <ClassDetailSheet open={detailOpen} onOpenChange={setDetailOpen} block={detailBlock} />
+      {/* Tarjeta de detalles fija en la parte inferior */}
+      <div className="mt-auto">
+        <ClassDetailCard block={detailBlock} />
+      </div>
+
       <ScheduleExportModal 
         open={exportModalOpen} 
         onOpenChange={setExportModalOpen} 
