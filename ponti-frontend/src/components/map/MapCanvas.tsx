@@ -1,20 +1,11 @@
 "use client";
 
-import { useMapStore } from "@/store/mapStore";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-export default function MapCanvas({
-  onPoiClick,
-}: {
-  onPoiClick: (poiId: string) => void;
-}) {
-  const pois = useMapStore((s) => s.filteredPois);
-  const selectedPoiId = useMapStore((s) => s.selectedPoiId);
-  const selectPoi = useMapStore((s) => s.selectPoi);
-
+export default function MapCanvas() {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [scale, setScale] = useState(1);
+  const [scale, setScale] = useState(0.2);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [panning, setPanning] = useState(false);
   const [start, setStart] = useState({ x: 0, y: 0 });
@@ -25,6 +16,8 @@ export default function MapCanvas({
     offset: { x: 0, y: 0 },
     center: { x: 0, y: 0 },
   });
+  const scaleRef = useRef(scale);
+  const offsetRef = useRef(offset);
 
   // mouse handlers para panning
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -45,6 +38,14 @@ export default function MapCanvas({
   };
 
   useEffect(() => {
+    scaleRef.current = scale;
+  }, [scale]);
+
+  useEffect(() => {
+    offsetRef.current = offset;
+  }, [offset]);
+
+  useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
 
@@ -60,7 +61,8 @@ export default function MapCanvas({
         // pinch-zoom de trackpad: usar ctrlKey como indicativo
         setScale((prevScale) => {
           const delta = e.deltaY > 0 ? -0.1 : 0.1;
-          const next = Math.max(0.5, Math.min(prevScale + delta, 3));
+          // Limitar el zoom mínimo a -1 y máximo a 4
+          const next = Math.max(-1, Math.min(prevScale + delta, 4));
           // ajustar offset para mantener el punto bajo el cursor en su posición
           setOffset((prevOffset) => {
             const scaleRatio = next / prevScale;
@@ -71,8 +73,12 @@ export default function MapCanvas({
           return next;
         });
       } else {
-        // desplazamiento natural para pan
-        setOffset((prev) => ({ x: prev.x - e.deltaX, y: prev.y - e.deltaY }));
+        // Usar el desplazamiento para hacer pan
+        const scrollSpeed = 1.0;
+        setOffset((prev) => ({ 
+          x: prev.x - e.deltaX * scrollSpeed, 
+          y: prev.y - e.deltaY * scrollSpeed 
+        }));
       }
     };
 
@@ -90,7 +96,7 @@ export default function MapCanvas({
         const dist = Math.hypot(dx, dy);
         const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
         const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;
-        pinchStart.current = { dist, scale, offset: { ...offset }, center: { x: cx, y: cy } };
+        pinchStart.current = { dist, scale: scaleRef.current, offset: { ...offsetRef.current }, center: { x: cx, y: cy } };
       }
     };
 
@@ -103,13 +109,23 @@ export default function MapCanvas({
         const dist = Math.hypot(dx, dy);
         const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
         const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;
-        const next = Math.max(0.5, Math.min((pinchStart.current.scale * dist) / pinchStart.current.dist, 3));
+        const next = Math.max(0.25, Math.min((pinchStart.current.scale * dist) / pinchStart.current.dist, 4));
+
+        // Mantener el centro actual del gesto (cx, cy) fijo durante el zoom
+        const prevScale = scaleRef.current;
+        const prevOffset = offsetRef.current;
+        const scaleRatio = next / prevScale;
+        const dx_offset = (cx - prevOffset.x) * (scaleRatio - 1);
+        const dy_offset = (cy - prevOffset.y) * (scaleRatio - 1);
+        const newOffset = {
+          x: prevOffset.x - dx_offset,
+          y: prevOffset.y - dy_offset,
+        };
+
+        offsetRef.current = newOffset;
+        scaleRef.current = next;
+        setOffset(newOffset);
         setScale(next);
-        const ratio = next / pinchStart.current.scale;
-        setOffset({
-          x: cx - (pinchStart.current.center.x - pinchStart.current.offset.x) * ratio,
-          y: cy - (pinchStart.current.center.y - pinchStart.current.offset.y) * ratio,
-        });
       } else if (panning && e.touches.length === 1) {
         e.preventDefault();
         setOffset({ x: e.touches[0].clientX - start.x, y: e.touches[0].clientY - start.y });
@@ -134,57 +150,52 @@ export default function MapCanvas({
     };
   }, [scale, offset, start.x, start.y, panning, pinching]);
 
+  // Reset para centrar mapa inicialmente
   useEffect(() => {
-    // centrar/zoom a POI seleccionado
-    if (!selectedPoiId || !containerRef.current) return;
-    const poi = pois.find((p) => p.id === selectedPoiId);
-    if (!poi) return;
-    setScale(1.8);
-    const rect = containerRef.current.getBoundingClientRect();
-    const targetX = (poi.x / 100) * rect.width;
-    const targetY = (poi.y / 100) * rect.height;
-    setOffset({ x: rect.width / 2 - targetX, y: rect.height / 2 - targetY });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedPoiId]);
+    if (containerRef.current) {
+      // Centrar mapa inicialmente con un pequeño delay para asegurar que el contenedor está renderizado
+      const timer = setTimeout(() => {
+        setOffset({ x: 0, y: 0 });
+        setScale(0.8);
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   return (
     <div
       ref={containerRef}
-      className="relative h-[420px] border rounded-md overflow-hidden bg-muted touch-none"
+      className="relative h-[60vh] border rounded-md overflow-hidden bg-white touch-none"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
-      <Image
-        src="/map.jpg"
-        alt="Mapa de la universidad"
-        fill
-        className="object-cover"
-        style={{
-          transform: `translate(${offset.x}px, ${offset.y}px) scale(${scale})`,
-          transformOrigin: "center",
-        }}
-      />
+      {/* Capa de imagen del mapa */}
       <div
         className="absolute inset-0"
-        style={{ transform: `translate(${offset.x}px, ${offset.y}px) scale(${scale})` }}
+        style={{
+          transform: `translate(${offset.x}px, ${offset.y}px) scale(${scale})`,
+          willChange: "transform",
+        }}
       >
-        {pois.map((p) => (
-          <button
-            key={p.id}
-            className={`absolute size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border bg-background ${
-              selectedPoiId === p.id ? "ring-2 ring-foreground" : ""
-            }`}
-            style={{ left: `${p.x}%`, top: `${p.y}%` }}
-            title={p.title}
-            onClick={(e) => {
-              e.stopPropagation();
-              selectPoi(p.id);
-              onPoiClick(p.id);
-            }}
-          />
-        ))}
+        <Image
+          src="/map.jpg"
+          alt="Mapa de la universidad"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none select-none"
+          draggable={false}
+          style={{
+            width: "150vh",
+            height: "auto",
+            objectFit: "contain",
+            imageRendering: "auto",
+            filter: "contrast(1.05) saturate(1.1)",
+          }}
+          width={0}
+          height={0}
+          sizes="150vh"
+          priority
+        />
       </div>
     </div>
   );
