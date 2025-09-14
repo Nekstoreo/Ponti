@@ -3,8 +3,8 @@
 import { ClassBlock } from "@/data/types";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-const START_HOUR = 7;
-const END_HOUR = 21; // 9 PM
+const START_HOUR = 6;
+const END_HOUR = 22; // 10 PM
 const HOUR_HEIGHT = 56; // px por hora
 
 function timeToMinutes(t: string): number {
@@ -13,7 +13,8 @@ function timeToMinutes(t: string): number {
 }
 
 function minutesToOffsetPx(minutes: number): number {
-  return (minutes / 60) * HOUR_HEIGHT;
+  // Convertir minutos a píxeles y redondear para alinear con líneas de hora exactas
+  return Math.round((minutes / 60) * HOUR_HEIGHT);
 }
 
 function subjectColor(subject: string): string {
@@ -181,10 +182,9 @@ export default function ScheduleTimeline({
   };
 
   return (
-    <div 
-      className="relative border rounded-md overflow-auto select-none" 
-      ref={containerRef} 
-      style={{ maxHeight: 520 }}
+    <div
+      className="relative border rounded-md select-none"
+      ref={containerRef}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -194,7 +194,7 @@ export default function ScheduleTimeline({
       onMouseLeave={handleMouseLeave}
     >
       {/* columnas */}
-      <div className="relative" style={{ height: (END_HOUR - START_HOUR) * HOUR_HEIGHT }}>
+      <div className="relative" style={{ height: hours.length * HOUR_HEIGHT }}>
         {/* líneas y etiquetas de horas */}
         {hours.map((h, idx) => (
           <div key={h} className="absolute left-0 right-0" style={{ top: idx * HOUR_HEIGHT }}>

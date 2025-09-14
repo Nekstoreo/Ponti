@@ -1,15 +1,19 @@
 "use client";
 
 import { DayKey } from "@/data/types";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 
 function getDayKeyByIndex(index: number): DayKey {
-  const map: DayKey[] = ["L", "M", "X", "J", "V", "S"];
-  return map[index] ?? "L";
+  const map: DayKey[] = ["D", "L", "M", "X", "J", "V", "S"];
+  return map[index] ?? "D";
 }
 
 function getIndexByDayKey(dayKey: DayKey): number {
-  const map: Record<DayKey, number> = { L: 0, M: 1, X: 2, J: 3, V: 4, S: 5 };
+  const map: Record<DayKey, number> = { D: 0, L: 1, M: 2, X: 3, J: 4, V: 5, S: 6 };
   return map[dayKey];
 }
 
@@ -38,9 +42,7 @@ export default function TimeNavigator({
   setReferenceMonday: (d: Date) => void;
   onSwipeDay?: (direction: 'left' | 'right') => void;
 }) {
-  const [showMonthSelector, setShowMonthSelector] = useState(false);
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const [isScrolling, setIsScrolling] = useState(false);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   const monthYear = new Intl.DateTimeFormat("es-ES", {
     month: "long",
@@ -51,19 +53,6 @@ export default function TimeNavigator({
   const todayYMD = today.toDateString();
   const selectedIndex = getIndexByDayKey(selectedDay);
 
-  // Auto-scroll to selected day
-  useEffect(() => {
-    if (carouselRef.current && !isScrolling) {
-      const selectedButton = carouselRef.current.children[selectedIndex] as HTMLElement;
-      if (selectedButton) {
-        selectedButton.scrollIntoView({
-          behavior: 'smooth',
-          inline: 'center',
-          block: 'nearest'
-        });
-      }
-    }
-  }, [selectedIndex, isScrolling]);
 
   const handleDayClick = (dayKey: DayKey) => {
     setSelectedDay(dayKey);
@@ -71,89 +60,90 @@ export default function TimeNavigator({
 
   const navigateWeek = (direction: 'prev' | 'next') => {
     const days = direction === 'prev' ? -7 : 7;
-    setReferenceMonday(addDays(referenceMonday, days));
+    const newMonday = addDays(referenceMonday, days);
+    setReferenceMonday(newMonday);
     onSwipeDay?.(direction === 'prev' ? 'right' : 'left');
   };
 
   const jumpToToday = () => {
-    const todayWeekStart = getWeekStart(new Date());
+    const today = new Date();
+    // Calculate the Sunday of the current week (first day)
+    const todayWeekStart = getWeekStart(today);
     setReferenceMonday(todayWeekStart);
-    
+
     // Set today as selected day
-    const todayDayIndex = today.getDay() === 0 ? 6 : today.getDay() - 1; // Convert Sunday (0) to Saturday (6)
+    const todayDayIndex = today.getDay(); // Sunday = 0, Monday = 1, etc.
     setSelectedDay(getDayKeyByIndex(todayDayIndex));
   };
 
-  const openMonthSelector = () => {
-    setShowMonthSelector(true);
+  const handleDateSelect = (date: Date | undefined) => {
+    if (date) {
+      setReferenceMonday(getWeekStart(date));
+      setIsCalendarOpen(false);
+    }
   };
 
-  const selectMonth = (monthOffset: number) => {
-    const newDate = new Date(referenceMonday);
-    newDate.setMonth(newDate.getMonth() + monthOffset);
-    setReferenceMonday(getWeekStart(newDate));
-    setShowMonthSelector(false);
-  };
-
-  // Handle carousel scroll
-  const handleScroll = () => {
-    setIsScrolling(true);
-    // Reset scrolling flag after scroll ends
-    setTimeout(() => setIsScrolling(false), 150);
-  };
 
   return (
     <div className="space-y-3">
       {/* Month/Year header with selector */}
       <div className="flex items-center justify-between">
-        <button
-          onClick={openMonthSelector}
-          className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <span className="font-medium">
-            {monthYear.charAt(0).toUpperCase() + monthYear.slice(1)}
-          </span>
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
+        <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="ghost"
+              className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground h-auto p-0 font-medium"
+            >
+              <span className="font-medium">
+                {monthYear.charAt(0).toUpperCase() + monthYear.slice(1)}
+              </span>
+              <ChevronDown className="w-4 h-4" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <Calendar
+              mode="single"
+              selected={referenceMonday}
+              onSelect={handleDateSelect}
+              initialFocus
+              className="rounded-md"
+            />
+          </PopoverContent>
+        </Popover>
         
         <div className="flex items-center gap-2">
-          <button
+          <Button
+            variant="outline"
+            size="sm"
             onClick={jumpToToday}
-            className="text-xs px-2 py-1 rounded-md border hover:bg-accent transition-colors"
+            className="text-xs"
           >
             Hoy
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
             aria-label="Semana anterior"
             onClick={() => navigateWeek('prev')}
-            className="h-8 w-8 rounded-md border hover:bg-accent transition-colors flex items-center justify-center"
+            className="h-8 w-8"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button
+            <ChevronLeft className="w-4 h-4" />
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
             aria-label="Semana siguiente"
             onClick={() => navigateWeek('next')}
-            className="h-8 w-8 rounded-md border hover:bg-accent transition-colors flex items-center justify-center"
+            className="h-8 w-8"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+            <ChevronRight className="w-4 h-4" />
+          </Button>
         </div>
       </div>
 
-      {/* Day carousel */}
-      <div 
-        ref={carouselRef}
-        className="flex gap-2 overflow-x-auto scrollbar-hide snap-x snap-mandatory"
-        onScroll={handleScroll}
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-      >
-        {Array.from({ length: 6 }).map((_, idx) => {
+      {/* Day buttons */}
+      <div className="flex gap-1 justify-between">
+        {Array.from({ length: 7 }).map((_, idx) => {
           const date = addDays(referenceMonday, idx);
           const labelDay = new Intl.DateTimeFormat("es-ES", {
             day: "numeric",
@@ -167,16 +157,17 @@ export default function TimeNavigator({
           const dayKey = getDayKeyByIndex(idx);
           
           return (
-            <button
+            <Button
               key={idx}
+              variant="outline"
               onClick={() => handleDayClick(dayKey)}
               className={`
-                flex flex-col items-center justify-center h-16 min-w-[60px] px-3 rounded-lg border text-sm
-                snap-center transition-all duration-200 ease-out
+                flex flex-col items-center justify-center h-14 px-2 py-2 text-xs flex-1
+                transition-all duration-200 ease-out border
                 ${isSelected
-                  ? "bg-primary text-primary-foreground border-primary shadow-md scale-105"
+                  ? "bg-primary text-primary-foreground border-primary shadow-sm hover:bg-primary"
                   : isToday
-                  ? "border-primary/50 bg-primary/5 text-primary"
+                  ? "border-primary/50 bg-primary/5 text-primary hover:bg-primary/10"
                   : "hover:bg-accent hover:border-accent-foreground/20"
                 }
               `}
@@ -184,58 +175,12 @@ export default function TimeNavigator({
               <span className="text-[10px] uppercase font-medium opacity-75">
                 {dayName}
               </span>
-              <span className="text-lg font-bold leading-none">{labelDay}</span>
-            </button>
+              <span className="text-sm font-bold leading-none">{labelDay}</span>
+            </Button>
           );
         })}
       </div>
 
-      {/* Month selector modal */}
-      {showMonthSelector && (
-        <div 
-          className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center"
-          onClick={() => setShowMonthSelector(false)}
-        >
-          <div 
-            className="bg-background rounded-lg border shadow-lg p-4 m-4 max-w-sm w-full"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 className="text-lg font-semibold mb-4">Saltar a mes</h3>
-            <div className="grid grid-cols-3 gap-2">
-              {[-2, -1, 0, 1, 2, 3].map((offset) => {
-                const date = new Date(referenceMonday);
-                date.setMonth(date.getMonth() + offset);
-                const monthLabel = new Intl.DateTimeFormat("es-ES", {
-                  month: "short",
-                  year: offset === 0 ? undefined : "numeric",
-                }).format(date);
-                
-                return (
-                  <button
-                    key={offset}
-                    onClick={() => selectMonth(offset)}
-                    className={`
-                      p-3 rounded-md border text-sm transition-colors
-                      ${offset === 0 
-                        ? "bg-primary text-primary-foreground" 
-                        : "hover:bg-accent"
-                      }
-                    `}
-                  >
-                    {monthLabel}
-                  </button>
-                );
-              })}
-            </div>
-            <button
-              onClick={() => setShowMonthSelector(false)}
-              className="w-full mt-4 p-2 rounded-md border hover:bg-accent transition-colors"
-            >
-              Cancelar
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

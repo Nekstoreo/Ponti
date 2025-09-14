@@ -18,24 +18,24 @@ export default function SchedulePage() {
   const selectedDay = useScheduleStore((s) => s.selectedDay);
   const setSelectedDay = useScheduleStore((s) => s.setSelectedDay);
   const searchParams = useSearchParams();
+  const dayKeys: DayKey[] = ["D", "L", "M", "X", "J", "V", "S"];
   const [referenceMonday, setReferenceMonday] = useState(() => {
-    // Obtener lunes de esta semana (asumiendo semana L-S)
+    // Obtener domingo de esta semana (asumiendo semana D-S)
     const now = new Date();
     const day = now.getDay(); // 0-6 (domingo=0)
-    const deltaToMonday = day === 0 ? -6 : 1 - day; // si es domingo, ir 6 días atrás
-    const monday = new Date(now);
-    monday.setHours(0, 0, 0, 0);
-    monday.setDate(now.getDate() + deltaToMonday);
-    return monday;
+    const deltaToSunday = -day; // días para ir al domingo
+    const sunday = new Date(now);
+    sunday.setHours(0, 0, 0, 0);
+    sunday.setDate(now.getDate() + deltaToSunday);
+    return sunday;
   });
   const [detailBlock, setDetailBlock] = useState<import("@/data/types").ClassBlock | null>(null);
   const [exportModalOpen, setExportModalOpen] = useState(false);
 
-  // Sincroniza el día seleccionado desde la query (?day=L|M|X|J|V|S)
+  // Sincroniza el día seleccionado desde la query (?day=D|L|M|X|J|V|S)
   useEffect(() => {
     const day = searchParams.get("day");
-    const validDays: DayKey[] = ["L", "M", "X", "J", "V", "S"];
-    if (day && validDays.includes(day as DayKey)) {
+    if (day && dayKeys.includes(day as DayKey)) {
       setSelectedDay(day as DayKey);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,8 +52,8 @@ export default function SchedulePage() {
   }, [selectedDay, searchParams]);
 
   return (
-    <div className="flex flex-col h-[calc(100vh-6rem)]">
-      <div className="flex items-center justify-between mb-2">
+    <div className="flex flex-col" style={{ height: '86vh' }}>
+      <div className="flex items-center justify-between mb-4">
         <h1 className="text-xl font-semibold">Horario</h1>
         <Button
           variant="outline"
@@ -77,26 +77,26 @@ export default function SchedulePage() {
         }}
       />
 
-      <div className="flex-grow overflow-auto my-2">
-        {schedule[selectedDay].length === 0 ? (
-          <div className="rounded-md border p-8 text-center text-sm text-muted-foreground">
+      <div className="flex-grow overflow-y-auto overflow-x-hidden my-4">
+        {(!schedule[selectedDay] || schedule[selectedDay]?.length === 0) ? (
+          <div className="rounded-md border p-4 text-center text-sm text-muted-foreground">
             No tienes clases este día. ¡Tiempo para recargar energías!
           </div>
         ) : (
           <ScheduleTimeline
-            blocks={schedule[selectedDay]}
+            blocks={schedule[selectedDay] || []}
             onBlockClick={(b) => {
               setDetailBlock(b);
             }}
-            showNowLine={selectedDay === dayKeyFromToday()}
+            showNowLine={selectedDay === dayKeyFromToday() && !!schedule[selectedDay]?.length}
             onSwipeDay={(direction) => {
               // Handle swipe navigation between days
-              const currentDayIndex = Object.keys(schedule).indexOf(selectedDay);
+              const currentDayIndex = dayKeys.indexOf(selectedDay) ?? 0;
               let newDayIndex;
-              
+
               if (direction === 'left') {
                 // Swipe left - next day
-                newDayIndex = (currentDayIndex + 1) % 6;
+                newDayIndex = (currentDayIndex + 1) % 7;
                 // If we've reached the end of the week, advance to next week
                 if (newDayIndex === 0) {
                   const nextWeek = new Date(referenceMonday);
@@ -105,7 +105,7 @@ export default function SchedulePage() {
                 }
               } else {
                 // Swipe right - previous day
-                newDayIndex = currentDayIndex === 0 ? 5 : currentDayIndex - 1;
+                newDayIndex = currentDayIndex === 0 ? 6 : currentDayIndex - 1;
                 // If we've reached the beginning of the week, go to previous week
                 if (currentDayIndex === 0) {
                   const prevWeek = new Date(referenceMonday);
@@ -113,8 +113,7 @@ export default function SchedulePage() {
                   setReferenceMonday(prevWeek);
                 }
               }
-              
-              const dayKeys: DayKey[] = ["L", "M", "X", "J", "V", "S"];
+
               setSelectedDay(dayKeys[newDayIndex]);
             }}
           />
@@ -126,19 +125,19 @@ export default function SchedulePage() {
         <ClassDetailCard block={detailBlock} />
       </div>
 
-      <ScheduleExportModal 
-        open={exportModalOpen} 
-        onOpenChange={setExportModalOpen} 
-        schedule={schedule} 
+      <ScheduleExportModal
+        open={exportModalOpen}
+        onOpenChange={setExportModalOpen}
+        schedule={schedule}
       />
     </div>
   );
 }
 
 function dayKeyFromToday(): DayKey {
-  const map: Record<number, DayKey> = { 1: "L", 2: "M", 3: "X", 4: "J", 5: "V", 6: "S" };
+  const map: Record<number, DayKey> = { 0: "D", 1: "L", 2: "M", 3: "X", 4: "J", 5: "V", 6: "S" };
   const jsDay = new Date().getDay();
-  return map[jsDay as 1 | 2 | 3 | 4 | 5 | 6] ?? "L";
+  return map[jsDay] ?? "D";
 }
 
 

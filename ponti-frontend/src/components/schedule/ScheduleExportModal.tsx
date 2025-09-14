@@ -2,30 +2,19 @@
 
 import { useState } from "react";
 import { WeeklySchedule } from "@/data/types";
-import { 
-  generateICalendar, 
-  downloadICalFile, 
-  shareSchedule, 
-  createShareableScheduleLink,
-  formatScheduleForDisplay,
+import {
+  generateICalendar,
+  downloadICalFile,
   openInCalendarApp
 } from "@/utils/scheduleExport";
 import { useAuthStore } from "@/store/authStore";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import {
   Download,
-  Share2,
   Calendar,
-  Link2,
-  Copy,
-  CheckCircle,
-  X,
-  Smartphone,
-  Monitor,
-  MessageCircle
+  X
 } from "lucide-react";
 import { useHaptics } from "@/hooks/useHaptics";
 
@@ -43,8 +32,6 @@ export default function ScheduleExportModal({
   const { userProfile } = useAuthStore();
   const { hapticFeedback } = useHaptics();
   const [isGenerating, setIsGenerating] = useState(false);
-  const [linkCopied, setLinkCopied] = useState(false);
-  const [shareableLink, setShareableLink] = useState<string>("");
 
   if (!open) return null;
 
@@ -78,35 +65,6 @@ export default function ScheduleExportModal({
     }
   };
 
-  const handleShareSchedule = async () => {
-    hapticFeedback.buttonPress();
-    
-    try {
-      await shareSchedule(schedule, userProfile?.fullName);
-      hapticFeedback.success();
-    } catch (error) {
-      console.error("Error sharing schedule:", error);
-      hapticFeedback.error();
-    }
-  };
-
-  const handleCopyLink = async () => {
-    hapticFeedback.buttonPress();
-    
-    try {
-      const link = shareableLink || createShareableScheduleLink(schedule);
-      setShareableLink(link);
-      
-      await navigator.clipboard.writeText(link);
-      setLinkCopied(true);
-      hapticFeedback.success();
-      
-      setTimeout(() => setLinkCopied(false), 3000);
-    } catch (error) {
-      console.error("Error copying link:", error);
-      hapticFeedback.error();
-    }
-  };
 
   const totalClasses = Object.values(schedule).reduce((total, dayClasses) => 
     total + dayClasses.length, 0
@@ -124,7 +82,7 @@ export default function ScheduleExportModal({
           <div>
             <h2 className="text-lg font-bold">Exportar Horario</h2>
             <p className="text-sm text-muted-foreground">
-              Comparte o sincroniza tu horario
+              Descarga o sincroniza tu horario
             </p>
           </div>
           <Button
@@ -138,7 +96,7 @@ export default function ScheduleExportModal({
         </div>
 
         {/* Content */}
-        <div className="p-4 space-y-6 max-h-[70vh] overflow-y-auto">
+        <div className="p-4 space-y-6">
           {/* Schedule Summary */}
           <Card>
             <CardHeader className="pb-3">
@@ -164,7 +122,7 @@ export default function ScheduleExportModal({
           {/* Export Options */}
           <div className="space-y-3">
             <h3 className="font-medium text-sm">Descargar y Sincronizar</h3>
-            
+
             <div className="grid gap-3">
               {/* Download iCal */}
               <Button
@@ -178,7 +136,7 @@ export default function ScheduleExportModal({
                     <Download className="w-4 h-4 text-blue-600" />
                   </div>
                   <div className="text-left">
-                    <div className="font-medium text-sm">Descargar iCal</div>
+                    <div className="font-medium text-sm">Descargar</div>
                     <div className="text-xs text-muted-foreground">
                       Archivo .ics para importar
                     </div>
@@ -200,96 +158,16 @@ export default function ScheduleExportModal({
                     <Calendar className="w-4 h-4 text-green-600" />
                   </div>
                   <div className="text-left">
-                    <div className="font-medium text-sm">Abrir en Calendario</div>
+                    <div className="font-medium text-sm">Sincronizar</div>
                     <div className="text-xs text-muted-foreground">
-                      App de calendario predeterminada
+                      Abrir en calendario del dispositivo
                     </div>
                   </div>
                 </div>
-                <Smartphone className="w-4 h-4 text-muted-foreground" />
+                <Calendar className="w-4 h-4 text-muted-foreground" />
               </Button>
             </div>
           </div>
-
-          <Separator />
-
-          {/* Share Options */}
-          <div className="space-y-3">
-            <h3 className="font-medium text-sm">Compartir</h3>
-            
-            <div className="grid gap-3">
-              {/* Native Share */}
-              <Button
-                onClick={handleShareSchedule}
-                className="flex items-center justify-between h-auto p-4"
-                variant="outline"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-purple-50 rounded-lg">
-                    <Share2 className="w-4 h-4 text-purple-600" />
-                  </div>
-                  <div className="text-left">
-                    <div className="font-medium text-sm">Compartir Enlace</div>
-                    <div className="text-xs text-muted-foreground">
-                      Usar apps de mensajería
-                    </div>
-                  </div>
-                </div>
-                <MessageCircle className="w-4 h-4 text-muted-foreground" />
-              </Button>
-
-              {/* Copy Link */}
-              <Button
-                onClick={handleCopyLink}
-                className="flex items-center justify-between h-auto p-4"
-                variant="outline"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-orange-50 rounded-lg">
-                    {linkCopied ? (
-                      <CheckCircle className="w-4 h-4 text-green-600" />
-                    ) : (
-                      <Copy className="w-4 h-4 text-orange-600" />
-                    )}
-                  </div>
-                  <div className="text-left">
-                    <div className="font-medium text-sm">
-                      {linkCopied ? "¡Copiado!" : "Copiar Enlace"}
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      {linkCopied ? "Enlace en portapapeles" : "Link para compartir"}
-                    </div>
-                  </div>
-                </div>
-                <Link2 className="w-4 h-4 text-muted-foreground" />
-              </Button>
-            </div>
-          </div>
-
-          {/* Compatible Apps Info */}
-          <Card className="bg-muted/30">
-            <CardContent className="p-4">
-              <div className="flex items-start gap-3">
-                <Monitor className="w-4 h-4 text-muted-foreground mt-0.5" />
-                <div className="text-xs text-muted-foreground">
-                  <p className="font-medium mb-1">Aplicaciones compatibles:</p>
-                  <p>Google Calendar, Apple Calendar, Outlook, Samsung Calendar y cualquier app que soporte archivos iCal (.ics).</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Schedule Preview */}
-          <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm">Vista Previa</CardTitle>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <div className="text-xs bg-muted/30 p-3 rounded font-mono max-h-32 overflow-y-auto">
-                {formatScheduleForDisplay(schedule)}
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </div>

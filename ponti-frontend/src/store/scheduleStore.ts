@@ -16,6 +16,7 @@ function parseTimeToMinutes(time: string): number {
 
 function getTodayDayKey(): DayKey {
   const map: Record<number, DayKey> = {
+    0: "D",
     1: "L",
     2: "M",
     3: "X",
@@ -24,11 +25,11 @@ function getTodayDayKey(): DayKey {
     6: "S",
   };
   const jsDay = new Date().getDay(); // 0-6 (domingo=0)
-  return map[jsDay as 1 | 2 | 3 | 4 | 5 | 6] ?? "L";
+  return map[jsDay] ?? "D";
 }
 
 export const useScheduleStore = create<ScheduleState>((set, get) => ({
-  schedule: { L: [], M: [], X: [], J: [], V: [], S: [] },
+  schedule: { D: [], L: [], M: [], X: [], J: [], V: [], S: [] },
   selectedDay: getTodayDayKey(),
   setSchedule: (data) => set({ schedule: data }),
   setSelectedDay: (day) => set({ selectedDay: day }),

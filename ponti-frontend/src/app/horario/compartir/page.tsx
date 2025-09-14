@@ -24,6 +24,7 @@ import LoadingSkeleton from "@/components/animations/LoadingSkeleton";
 import { useRouter } from "next/navigation";
 
 const dayNames: Record<DayKey, string> = {
+  D: "Domingo",
   L: "Lunes",
   M: "Martes", 
   X: "Miércoles",
@@ -109,7 +110,7 @@ function SharedScheduleContent() {
 
   if (isLoading) {
     return (
-      <div className="max-w-md mx-auto p-4 space-y-4">
+      <div className="max-w-md mx-auto px-4 pt-4 space-y-4" style={{ paddingBottom: 36 }}>
         <LoadingSkeleton className="h-8 w-48" />
         <LoadingSkeleton className="h-12 w-full" />
         <LoadingSkeleton variant="schedule" />
@@ -119,7 +120,7 @@ function SharedScheduleContent() {
 
   if (error || !schedule) {
     return (
-      <div className="max-w-md mx-auto p-4">
+      <div className="max-w-md mx-auto px-4 pt-4" style={{ paddingBottom: 36 }}>
         <Card className="border-destructive/20 bg-destructive/5">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-destructive">
@@ -163,7 +164,7 @@ function SharedScheduleContent() {
   );
 
   return (
-    <div className="max-w-md mx-auto p-4 space-y-6">
+    <div className="max-w-md mx-auto px-4 pt-4 space-y-6" style={{ paddingBottom: 36 }}>
       {/* Header */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">

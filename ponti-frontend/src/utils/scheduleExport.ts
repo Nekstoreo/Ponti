@@ -253,6 +253,7 @@ export function openInCalendarApp(iCalContent: string): void {
 // Format schedule for display in share preview
 export function formatScheduleForDisplay(schedule: WeeklySchedule): string {
   const dayNames = {
+    D: "Domingo",
     L: "Lunes",
     M: "Martes", 
     X: "Miércoles",
