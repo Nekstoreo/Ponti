@@ -27,12 +27,16 @@ function subjectColor(subject: string): string {
 }
 
 export default function ScheduleTimeline({
+  viewMode = 'day',
   blocks,
+  weeklySchedule,
   onBlockClick,
   showNowLine,
   onSwipeDay,
 }: {
+  viewMode?: 'day' | 'week';
   blocks: ClassBlock[];
+  weeklySchedule?: Record<string, ClassBlock[]>;
   onBlockClick: (block: ClassBlock) => void;
   showNowLine: boolean;
   onSwipeDay?: (direction: 'left' | 'right') => void;
@@ -193,54 +197,101 @@ export default function ScheduleTimeline({
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseLeave}
     >
-      {/* columnas */}
-      <div className="relative" style={{ height: hours.length * HOUR_HEIGHT }}>
-        {/* líneas y etiquetas de horas */}
-        {hours.map((h, idx) => (
-          <div key={h} className="absolute left-0 right-0" style={{ top: idx * HOUR_HEIGHT }}>
-            <div className="flex items-center gap-2 px-2">
-              <div className="w-10 text-xs text-muted-foreground">{h}:00</div>
-              <div className="flex-1 border-t" />
+      {viewMode === 'day' ? (
+        <div className="relative" style={{ height: hours.length * HOUR_HEIGHT }}>
+          {/* líneas y etiquetas de horas */}
+          {hours.map((h, idx) => (
+            <div key={h} className="absolute left-0 right-0" style={{ top: idx * HOUR_HEIGHT }}>
+              <div className="flex items-center gap-2 px-2">
+                <div className="w-10 text-xs text-muted-foreground">{h}:00</div>
+                <div className="flex-1 border-t" />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
 
-        {/* línea de ahora */}
-        {showNowLine && nowOffset != null && (
-          <div
-            ref={nowLineRef}
-            className="absolute left-0 right-0 px-2"
-            style={{ top: nowOffset }}
-          >
-            <div className="flex items-center gap-2">
-              <div className="w-10" />
-              <div className="flex-1 h-[2px] bg-red-500" />
-              <div className="size-2 rounded-full bg-red-500" />
-            </div>
-          </div>
-        )}
-
-        {/* bloques */}
-        {blocks.map((b) => {
-          const start = timeToMinutes(b.startTime) - START_HOUR * 60;
-          const end = timeToMinutes(b.endTime) - START_HOUR * 60;
-          const height = minutesToOffsetPx(end - start);
-          const top = minutesToOffsetPx(start);
-          const bg = subjectColor(b.courseName);
-          return (
-            <button
-              key={b.id}
-              onClick={() => onBlockClick(b)}
-              className="absolute left-[64px] right-2 text-left rounded-md border p-2 hover:bg-accent"
-              style={{ top, height, background: bg }}
+          {/* línea de ahora */}
+          {showNowLine && nowOffset != null && (
+            <div
+              ref={nowLineRef}
+              className="absolute left-0 right-0 px-2"
+              style={{ top: nowOffset }}
             >
-              <p className="text-sm font-medium leading-tight">{b.courseName}</p>
-              <p className="text-xs leading-tight">{b.startTime} - {b.endTime}</p>
-              <p className="text-xs text-muted-foreground leading-tight">{b.professor} • {b.room}</p>
-            </button>
-          );
-        })}
-      </div>
+              <div className="flex items-center gap-2">
+                <div className="w-10" />
+                <div className="flex-1 h-[2px] bg-red-500" />
+                <div className="size-2 rounded-full bg-red-500" />
+              </div>
+            </div>
+          )}
+
+          {/* bloques */}
+          {blocks.map((b) => {
+            const start = timeToMinutes(b.startTime) - START_HOUR * 60;
+            const end = timeToMinutes(b.endTime) - START_HOUR * 60;
+            const height = minutesToOffsetPx(end - start);
+            const top = minutesToOffsetPx(start);
+            const bg = subjectColor(b.courseName);
+            return (
+              <button
+                key={b.id}
+                onClick={() => onBlockClick(b)}
+                className="absolute left-[64px] right-2 text-left rounded-md border p-2 hover:bg-accent"
+                style={{ top, height, background: bg }}
+              >
+                <p className="text-sm font-medium leading-tight">{b.courseName}</p>
+                <p className="text-xs leading-tight">{b.startTime} - {b.endTime}</p>
+                <p className="text-xs text-muted-foreground leading-tight">{b.professor} • {b.room}</p>
+              </button>
+            );
+          })}
+        </div>
+      ) : (
+        // Week view: 7 columns (days) x rows (hours) with absolute-positioned blocks inside each column
+        <div className="w-full overflow-auto">
+          <div className="grid grid-cols-7 gap-2 p-2">
+            {(['D','L','M','X','J','V','S'] as const).map((dKey) => {
+              const dayBlocks = weeklySchedule?.[dKey] ?? [];
+              return (
+                <div key={dKey} className="relative border rounded-md h-[86vh] bg-background overflow-hidden">
+                  <div className="text-xs text-muted-foreground mb-1 text-center font-medium sticky top-0 bg-background py-1">{dKey}</div>
+                  {/* container for hours */}
+                  <div className="relative" style={{ height: hours.length * HOUR_HEIGHT }}>
+                    {/* horizontal hour lines */}
+                    {hours.map((h, idx) => (
+                      <div key={h} className="absolute left-0 right-0" style={{ top: idx * HOUR_HEIGHT }}>
+                        <div className="flex items-center gap-2 px-2">
+                          <div className="w-10 text-xs text-muted-foreground">{h}:00</div>
+                          <div className="flex-1 border-t" />
+                        </div>
+                      </div>
+                    ))}
+
+                    {/* blocks positioned by time */}
+                    {dayBlocks.map((b) => {
+                      const start = timeToMinutes(b.startTime) - START_HOUR * 60;
+                      const end = timeToMinutes(b.endTime) - START_HOUR * 60;
+                      const height = minutesToOffsetPx(end - start);
+                      const top = minutesToOffsetPx(start);
+                      const bg = subjectColor(b.courseName);
+                      return (
+                        <button
+                          key={b.id}
+                          onClick={() => onBlockClick(b)}
+                          className="absolute left-2 right-2 text-left rounded-md border p-2 hover:bg-accent"
+                          style={{ top, height, background: bg }}
+                        >
+                          <p className="text-sm font-medium leading-tight">{b.courseName}</p>
+                          <p className="text-xs leading-tight">{b.startTime} - {b.endTime}</p>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

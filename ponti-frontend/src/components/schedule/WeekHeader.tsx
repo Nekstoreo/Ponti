@@ -1,11 +1,8 @@
 "use client";
 
 import { DayKey } from "@/data/types";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, List } from "lucide-react";
 
 function getDayKeyByIndex(index: number): DayKey {
   const map: DayKey[] = ["D", "L", "M", "X", "J", "V", "S"];
@@ -34,15 +31,19 @@ export default function TimeNavigator({
   setSelectedDay,
   referenceMonday,
   setReferenceMonday,
+  viewMode,
+  setViewMode,
   onSwipeDay,
 }: {
   selectedDay: DayKey;
   setSelectedDay: (d: DayKey) => void;
   referenceMonday: Date;
   setReferenceMonday: (d: Date) => void;
+  viewMode: 'day' | 'week';
+  setViewMode: (v: 'day' | 'week') => void;
   onSwipeDay?: (direction: 'left' | 'right') => void;
 }) {
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  // calendar picker removed; keep placeholder state out
 
   const monthYear = new Intl.DateTimeFormat("es-ES", {
     month: "long",
@@ -76,41 +77,26 @@ export default function TimeNavigator({
     setSelectedDay(getDayKeyByIndex(todayDayIndex));
   };
 
-  const handleDateSelect = (date: Date | undefined) => {
-    if (date) {
-      setReferenceMonday(getWeekStart(date));
-      setIsCalendarOpen(false);
-    }
-  };
+  // date picker removed
 
 
   return (
     <div className="space-y-3">
-      {/* Month/Year header with selector */}
+      {/* Month/Year header with view toggle */}
       <div className="flex items-center justify-between">
-        <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
-          <PopoverTrigger asChild>
-            <Button
-              variant="ghost"
-              className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground h-auto p-0 font-medium"
-            >
-              <span className="font-medium">
-                {monthYear.charAt(0).toUpperCase() + monthYear.slice(1)}
-              </span>
-              <ChevronDown className="w-4 h-4" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
-            <Calendar
-              mode="single"
-              selected={referenceMonday}
-              onSelect={handleDateSelect}
-              initialFocus
-              className="rounded-md"
-            />
-          </PopoverContent>
-        </Popover>
-        
+        <div className="flex items-center gap-1">
+          <span className="font-medium text-sm">
+            {monthYear.charAt(0).toUpperCase() + monthYear.slice(1)}
+          </span>
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Cambiar vista"
+            onClick={() => setViewMode(viewMode === 'day' ? 'week' : 'day')}
+          >
+            <List className="w-4 h-4" />
+          </Button>
+        </div>
         <div className="flex items-center gap-2">
           <Button
             variant="outline"
