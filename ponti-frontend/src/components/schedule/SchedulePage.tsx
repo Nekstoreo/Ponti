@@ -4,13 +4,11 @@ import { useScheduleStore } from "@/store/scheduleStore";
 import { DayKey } from "@/data/types";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import WeekHeader from "@/components/schedule/WeekHeader";
+import { Button } from "@/components/ui/button";
+import { List, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import ScheduleTimeline from "@/components/schedule/ScheduleTimeline";
 import { useState } from "react";
 import ClassDetailCard from "@/components/schedule/ClassDetailCard";
-import ScheduleExportModal from "@/components/schedule/ScheduleExportModal";
-import { Button } from "@/components/ui/button";
-import { Share2 } from "lucide-react";
 
 
 export default function SchedulePage() {
@@ -30,7 +28,6 @@ export default function SchedulePage() {
     return sunday;
   });
   const [detailBlock, setDetailBlock] = useState<import("@/data/types").ClassBlock | null>(null);
-  const [exportModalOpen, setExportModalOpen] = useState(false);
 
   // Sincroniza el día seleccionado desde la query (?day=D|L|M|X|J|V|S)
   useEffect(() => {
@@ -51,31 +48,70 @@ export default function SchedulePage() {
     }
   }, [selectedDay, searchParams]);
 
+  const [viewMode, setViewMode] = useState<'day' | 'week'>('day');
+
+  // helper functions for navigation
+  function addDays(date: Date, days: number) {
+    const copy = new Date(date);
+    copy.setDate(copy.getDate() + days);
+    return copy;
+  }
+
+  function getWeekStart(date: Date) {
+    const day = date.getDay();
+    const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+    return new Date(date.setDate(diff));
+  }
+
+  const navigateWeek = (direction: 'prev' | 'next') => {
+    const days = direction === 'prev' ? -7 : 7;
+    const newMonday = addDays(referenceMonday, days);
+    setReferenceMonday(newMonday);
+  };
+
+  const jumpToToday = () => {
+    const today = new Date();
+    const todayWeekStart = getWeekStart(today);
+    setReferenceMonday(todayWeekStart);
+    const todayDayIndex = today.getDay();
+    const map: Record<number, DayKey> = { 0: "D", 1: "L", 2: "M", 3: "X", 4: "J", 5: "V", 6: "S" };
+    setSelectedDay(map[todayDayIndex] ?? 'D');
+  };
+
   return (
     <div className="flex flex-col" style={{ height: '86vh' }}>
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl font-semibold">Horario</h1>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setExportModalOpen(true)}
-          className="flex items-center gap-2"
-        >
-          <Share2 className="h-4 w-4" />
-          Exportar
-        </Button>
-      </div>
+      {/* Top header: title + mode wrapper + navigation */}
+      <div className="px-0 pt-0">
+        <div className="flex items-center justify-between mb-4 px-4">
+          <h1 className="text-xl font-semibold">Horario</h1>
 
-      <WeekHeader
-        selectedDay={selectedDay}
-        setSelectedDay={setSelectedDay}
-        referenceMonday={referenceMonday}
-        setReferenceMonday={setReferenceMonday}
-        onSwipeDay={(direction) => {
-          // Callback for swipe synchronization with timeline
-          console.log("Week navigation via swipe:", direction);
-        }}
-      />
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 px-3 py-1 border rounded-md">
+              <span className="text-sm text-muted-foreground">Modo:</span>
+              <span className="font-medium text-sm">{viewMode === 'day' ? 'Día' : 'Semana'}</span>
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label="Cambiar vista"
+                onClick={() => setViewMode(viewMode === 'day' ? 'week' : 'day')}
+                className="ml-2"
+              >
+                {viewMode === 'day' ? <List className="w-4 h-4" /> : <Calendar className="w-4 h-4" />}
+              </Button>
+            </div>
+
+            <Button variant="outline" size="sm" onClick={jumpToToday} className="text-xs">
+              Hoy
+            </Button>
+            <Button variant="outline" size="icon" aria-label="Semana anterior" onClick={() => navigateWeek('prev')} className="h-8 w-8">
+              <ChevronLeft className="w-4 h-4" />
+            </Button>
+            <Button variant="outline" size="icon" aria-label="Semana siguiente" onClick={() => navigateWeek('next')} className="h-8 w-8">
+              <ChevronRight className="w-4 h-4" />
+            </Button>
+          </div>
+        </div>
+      </div>
 
       <div className="flex-grow overflow-y-auto overflow-x-hidden my-4">
         {(!schedule[selectedDay] || schedule[selectedDay]?.length === 0) ? (
@@ -84,7 +120,9 @@ export default function SchedulePage() {
           </div>
         ) : (
           <ScheduleTimeline
+            viewMode={viewMode}
             blocks={schedule[selectedDay] || []}
+            weeklySchedule={schedule}
             onBlockClick={(b) => {
               setDetailBlock(b);
             }}
@@ -124,12 +162,6 @@ export default function SchedulePage() {
       <div className="mt-auto">
         <ClassDetailCard block={detailBlock} />
       </div>
-
-      <ScheduleExportModal
-        open={exportModalOpen}
-        onOpenChange={setExportModalOpen}
-        schedule={schedule}
-      />
     </div>
   );
 }
