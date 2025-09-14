@@ -14,7 +14,6 @@ import {
   Globe,
   BookOpen,
   Heart,
-  Shield,
   Zap,
   Users,
   Smartphone

@@ -2,12 +2,8 @@
 
 import MainLayout from "@/components/MainLayout";
 import OfflineSettings from "@/components/offline/OfflineSettings";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 export default function ConfiguracionOfflinePage() {
-  const router = useRouter();
 
   return (
     <MainLayout>

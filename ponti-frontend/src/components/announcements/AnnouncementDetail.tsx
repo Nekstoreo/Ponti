@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
 import { useAnnouncementStore } from "@/store/announcementStore";
 import { AnnouncementItem } from "@/data/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, Calendar, User, Tag, Star, Eye, EyeOff, ImageIcon } from "lucide-react";
+import { ArrowLeft, Calendar, User, Tag, Star, Eye, EyeOff } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { useRouter } from "next/navigation";
@@ -134,11 +135,12 @@ export function AnnouncementDetail({ announcement }: AnnouncementDetailProps) {
               {[1, 2, 3].map((index) => (
                 <CarouselItem key={index} className="w-full h-full">
                   <div className="w-full h-full bg-muted overflow-hidden">
-                    <img
+                    <Image
                       src={`/announcement-placeholder-${index}.svg`}
                       alt={`${announcement.title} - Imagen ${index}`}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
                 </CarouselItem>

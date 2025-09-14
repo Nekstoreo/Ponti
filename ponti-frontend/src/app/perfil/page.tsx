@@ -5,7 +5,7 @@ import { UserProfileComponent } from "@/components/profile/UserProfile";
 import { mockUser, mockAcademicInfo } from "@/data/mockUser";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, BookOpen, Newspaper, Bell, Building2, Heart, Calculator, HelpCircle, Settings } from "lucide-react";
+import { ArrowLeft, BookOpen, Newspaper, Bell, Building2, Heart, Calculator, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function PerfilPage() {

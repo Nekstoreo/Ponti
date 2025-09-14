@@ -2,10 +2,8 @@
 
 import MainLayout from "@/components/MainLayout";
 import { AnnouncementList } from "@/components/announcements/AnnouncementList";
-import { useRouter } from "next/navigation";
 
 export default function NoticiasPage() {
-  const router = useRouter();
 
   return (
     <MainLayout>

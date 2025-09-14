@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import { User, Phone, Mail, MapPin, Calendar, GraduationCap, Award, BookOpen, Edit } from "lucide-react";
+import { User, Phone, Mail, MapPin, Calendar, GraduationCap, Award, BookOpen } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { useRouter } from "next/navigation";
@@ -14,10 +14,9 @@ import { useRouter } from "next/navigation";
 interface UserProfileProps {
   user: UserProfile;
   academicInfo: AcademicInfo;
-  onEdit?: () => void;
 }
 
-export function UserProfileComponent({ user, academicInfo, onEdit }: UserProfileProps) {
+export function UserProfileComponent({ user, academicInfo }: UserProfileProps) {
   const router = useRouter();
 
   const getStatusColor = (status: string) => {

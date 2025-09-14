@@ -6,8 +6,6 @@ import MainLayout from "@/components/MainLayout";
 import PageTitle from "@/components/PageTitle";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import {
   Calculator,
   ArrowLeft,
@@ -411,17 +409,6 @@ function SimuladorNotasContent() {
     }
   };
 
-  const getAssessmentTypeLabel = (type: string) => {
-    switch (type) {
-      case 'exam': return 'Examen';
-      case 'quiz': return 'Quiz';
-      case 'assignment': return 'Tarea';
-      case 'project': return 'Proyecto';
-      case 'participation': return 'Participación';
-      case 'final': return 'Final';
-      default: return 'Evaluación';
-    }
-  };
 
   // Función para truncar texto
   const truncateText = (text: string, maxLength: number = 20) => {

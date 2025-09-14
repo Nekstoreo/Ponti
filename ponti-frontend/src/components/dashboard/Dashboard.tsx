@@ -10,7 +10,6 @@ import { NextClassCard } from "@/components/dashboard/NextClassCard";
 import { AnnouncementsList } from "@/components/dashboard/AnnouncementsList";
 import { MascotCharacter } from "@/components/dashboard/MascotCharacter";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { DashboardSkeleton } from "@/components/animations/LoadingSkeleton";
 // import { StaggeredAnimation } from "@/components/animations/PageTransition";
 
@@ -25,12 +24,9 @@ export default function Dashboard() {
   const profile = useAuthStore((s) => s.userProfile);
 
   const [loading, setLoading] = useState(true);
-  const [isRefreshing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   async function load() {
     setLoading(true);
-    setError(null);
     try {
       const [schedule, announcements] = await Promise.all([
         fetchSchedule(),
@@ -38,10 +34,6 @@ export default function Dashboard() {
       ]);
       setSchedule(schedule);
       setAnnouncements(announcements);
-    } catch {
-      setError(
-        "No se pudo cargar tu información. Parece que hay un problema de conexión."
-      );
     } finally {
       setLoading(false);
     }
