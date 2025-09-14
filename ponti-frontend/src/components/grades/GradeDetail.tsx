@@ -3,9 +3,8 @@
 import { useState, useMemo } from "react";
 import { CourseGrade, AssessmentItem } from "@/data/types";
 import { getStatusColor } from "@/store/gradeStore";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -20,16 +19,20 @@ import {
   TrendingUp,
   Calculator,
   MessageSquare,
+  ArrowRight,
+  Target,
 } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
+import { useRouter } from "next/navigation";
 
 interface GradeDetailProps {
   course: CourseGrade;
 }
 
 export default function GradeDetail({ course }: GradeDetailProps) {
-  const [activeTab, setActiveTab] = useState<"assessments" | "analytics" | "projections">("assessments");
+  const router = useRouter();
+  const [activeTab, setActiveTab] = useState<"assessments" | "analytics">("assessments");
 
   const publishedAssessments = course.assessments.filter(a => a.isPublished);
   const upcomingAssessments = course.assessments.filter(a => !a.isPublished);
@@ -49,7 +52,8 @@ export default function GradeDetail({ course }: GradeDetailProps) {
     return sum;
   }, 0), [publishedAssessments]);
 
-  const currentGrade5 = toFiveScale(currentPointsPercent);
+  // Usar directamente el currentAverage del curso que ya está calculado correctamente
+  const currentGrade5 = course.currentAverage !== null ? course.currentAverage : toFiveScale(currentPointsPercent / 100 * 5);
 
   // Colores personalizados escala 0-5
   const getGradeColor5 = (g: number) => {
@@ -79,28 +83,20 @@ export default function GradeDetail({ course }: GradeDetailProps) {
     return { needed: neededGrade5Remaining, status: 'needed' };
   };
 
-  // --- Simulador de notas futuras ---
-  const [simulatedScores, setSimulatedScores] = useState<Record<string, number>>({}); // valores en escala 0-5
-
-  const handleSimulatedChange = (id: string, value: number) => {
-    if (value < 0) value = 0; if (value > 5) value = 5;
-    setSimulatedScores(prev => ({ ...prev, [id]: value }));
+  const handleOpenSimulator = () => {
+    // Encodear los datos del curso para pasarlos como query params o usar el store
+    const courseData = encodeURIComponent(JSON.stringify({
+      courseId: course.courseId,
+      courseName: course.courseName,
+      currentAverage: course.currentAverage,
+      assessments: course.assessments,
+      currentGrade: currentGrade5,
+      currentPoints: currentPointsPercent,
+      remainingWeight
+    }));
+    
+    router.push(`/simulador-notas?course=${courseData}`);
   };
-
-  const simulatedFinalGrade5 = useMemo(() => {
-    const simulatedPercentAdded = upcomingAssessments.reduce((sum, a) => {
-      const sim = simulatedScores[a.id];
-      if (typeof sim === 'number' && !isNaN(sim)) {
-        const percentEquivalent = fromFiveToPercent(sim); // 0-100
-        return sum + (percentEquivalent * a.weight / 100);
-      }
-      return sum;
-    }, 0);
-    const finalPercent = currentPointsPercent + simulatedPercentAdded;
-    return toFiveScale(finalPercent);
-  }, [simulatedScores, upcomingAssessments, currentPointsPercent]);
-
-  const resetSimulation = () => setSimulatedScores({});
 
   const getAssessmentIcon = (type: string) => {
     switch (type) {
@@ -149,7 +145,7 @@ export default function GradeDetail({ course }: GradeDetailProps) {
             <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
               <Calendar className="w-3 h-3" />
               <span>
-                {format(new Date(assessment.date), "dd 'de' MMMM 'a las' HH:mm", { locale: es })}
+                {format(new Date(assessment.date), "dd 'de' MMMM", { locale: es })}
               </span>
             </div>
 
@@ -186,10 +182,10 @@ export default function GradeDetail({ course }: GradeDetailProps) {
   );
 
   const TargetCard5 = ({ target, label }: { target: number; label: string }) => {
-    const { needed, status } = calculateRequiredRemainingAvg5(target);
+    const { needed } = calculateRequiredRemainingAvg5(target);
     return (
       <Card>
-        <CardContent className="p-4 space-y-2">
+        <CardContent className="px-4 space-y-1">
           <div className="flex items-center justify-between">
             <div>
               <div className="text-xs text-muted-foreground">Meta</div>
@@ -197,13 +193,7 @@ export default function GradeDetail({ course }: GradeDetailProps) {
             </div>
             <div className="text-right">
               <div className="text-[10px] uppercase tracking-wide text-muted-foreground">Necesario</div>
-              {status === 'achieved' ? (
-                <div className="text-sm font-semibold text-green-600">Asegurado</div>
-              ) : status === 'impossible' ? (
-                <div className="text-sm font-semibold text-red-600">No alcanzable</div>
-              ) : (
-                <div className={`text-lg font-semibold ${getGradeColor5(needed)}`}>{needed.toFixed(2)}</div>
-              )}
+              <div className={`text-lg font-semibold ${getGradeColor5(needed)}`}>{needed.toFixed(2)}</div>
             </div>
           </div>
           <Separator />
@@ -270,8 +260,8 @@ export default function GradeDetail({ course }: GradeDetailProps) {
       )}
 
       {/* Tabs */}
-      <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "assessments" | "analytics" | "projections")}>
-        <TabsList className="grid w-full grid-cols-3">
+      <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "assessments" | "analytics")}>
+        <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="assessments">
             <FileText className="w-4 h-4 mr-2" />
             Evaluaciones
@@ -279,10 +269,6 @@ export default function GradeDetail({ course }: GradeDetailProps) {
           <TabsTrigger value="analytics">
             <Calculator className="w-4 h-4 mr-2" />
             Análisis
-          </TabsTrigger>
-          <TabsTrigger value="projections">
-            <Calculator className="w-4 h-4 mr-2" />
-            Proyecciones
           </TabsTrigger>
         </TabsList>
 
@@ -321,17 +307,13 @@ export default function GradeDetail({ course }: GradeDetailProps) {
                 Evaluaciones restantes: {remainingWeight}% del total
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <TargetCard5 target={3.0} label="Para aprobar (≥3.0)" />
-                <TargetCard5 target={3.5} label="Objetivo intermedio (≥3.5)" />
                 <TargetCard5 target={4.0} label="Excelente desempeño (≥4.0)" />
               </div>
 
               <Card>
-                <CardHeader>
-                  <CardTitle className="text-sm">Estrategia Recomendada</CardTitle>
-                </CardHeader>
-                <CardContent className="text-xs space-y-2">
+                <CardContent className="text-sm">
                   {currentGrade5 >= 4 ? (
                     <p className="text-green-700">💪 Excelente progreso. Mantén hábitos consistentes y consolida fortalezas.</p>
                   ) : currentGrade5 >= 3 ? (
@@ -343,6 +325,40 @@ export default function GradeDetail({ course }: GradeDetailProps) {
                   )}
                 </CardContent>
               </Card>
+
+              {/* Tarjeta del Simulador de Notas */}
+              {upcomingAssessments.length > 0 && (
+                <Card 
+                  className="cursor-pointer hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/20 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50"
+                  onClick={handleOpenSimulator}
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="relative">
+                          <div className="p-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl shadow-lg">
+                            <Calculator className="w-8 h-8 text-white" />
+                          </div>
+                          <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-pulse"></div>
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-lg text-gray-900">Simulador de Notas</h3>
+                          <p className="text-sm text-gray-600 mb-2">
+                            Proyecta tu nota final con diferentes escenarios
+                          </p>
+                          <div className="flex items-center gap-2">
+                            <Target className="w-4 h-4 text-blue-600" />
+                            <span className="text-xs font-medium text-blue-700">
+                              {upcomingAssessments.length} evaluaciones pendientes
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <ArrowRight className="w-6 h-6 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
             </>
           ) : (
             <Card>
@@ -359,55 +375,6 @@ export default function GradeDetail({ course }: GradeDetailProps) {
             </Card>
           )}
         </TabsContent>
-
-        <TabsContent value="projections" className="space-y-6 mt-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-sm">Simulador de Notas (0 - 5)</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {upcomingAssessments.length === 0 ? (
-                <div className="text-xs text-muted-foreground">No hay evaluaciones futuras para simular.</div>
-              ) : (
-                <div className="space-y-3">
-                  {upcomingAssessments.map(a => {
-                    const sim = simulatedScores[a.id];
-                    return (
-                      <div key={a.id} className="flex items-center gap-3 text-xs">
-                        <div className="flex-1 min-w-0">
-                          <div className="font-medium text-[11px] truncate">{a.name}</div>
-                          <div className="text-[10px] text-muted-foreground">Peso {a.weight}%</div>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <input
-                            type="number"
-                            min={0}
-                            max={5}
-                            step={0.1}
-                            value={sim ?? ''}
-                            onChange={(e) => handleSimulatedChange(a.id, parseFloat(e.target.value))}
-                            className="w-20 rounded border px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-primary"
-                            placeholder="Nota"
-                          />
-                          <span className="text-[10px] text-muted-foreground">/5</span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-              <Separator />
-              <div className="flex items-center justify-between text-xs">
-                <span className="text-muted-foreground">Final simulado</span>
-                <span className={`font-semibold ${getGradeColor5(simulatedFinalGrade5)}`}>{simulatedFinalGrade5.toFixed(2)}/5</span>
-              </div>
-              <div className="flex gap-2 justify-end">
-                <Button size="sm" variant="outline" onClick={resetSimulation}>Limpiar</Button>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
 
       </Tabs>
     </div>

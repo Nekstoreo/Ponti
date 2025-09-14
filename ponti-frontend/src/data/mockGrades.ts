@@ -1,5 +1,8 @@
 import { CourseGrade, AssessmentItem, GradeSummary, GradeSettings } from "./types";
 
+// NOTA IMPORTANTE: Todas las calificaciones (earnedScore y currentAverage) en estos datos mock
+// ya están en escala de 0-5, NO en porcentaje (0-100)
+
 export const mockAssessments: AssessmentItem[] = [
   // Cálculo I
   {
