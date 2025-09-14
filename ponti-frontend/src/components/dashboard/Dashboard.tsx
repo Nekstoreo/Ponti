@@ -8,8 +8,11 @@ import { useAnnouncementStore } from "@/store/announcementStore";
 import { useAuthStore } from "@/store/authStore";
 import { NextClassCard } from "@/components/dashboard/NextClassCard";
 import { AnnouncementsList } from "@/components/dashboard/AnnouncementsList";
+import { MascotCharacter } from "@/components/dashboard/MascotCharacter";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import { DashboardSkeleton } from "@/components/animations/LoadingSkeleton";
-import { StaggeredAnimation } from "@/components/animations/PageTransition";
+// import { StaggeredAnimation } from "@/components/animations/PageTransition";
 
 function capitalizeFirst(text: string): string {
   if (!text) return text;
@@ -22,7 +25,7 @@ export default function Dashboard() {
   const profile = useAuthStore((s) => s.userProfile);
 
   const [loading, setLoading] = useState(true);
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function load() {
@@ -44,24 +47,7 @@ export default function Dashboard() {
     }
   }
 
-  async function handleRefresh() {
-    setIsRefreshing(true);
-    setError(null);
-    try {
-      const [schedule, announcements] = await Promise.all([
-        fetchSchedule(),
-        fetchAnnouncements(),
-      ]);
-      setSchedule(schedule);
-      setAnnouncements(announcements);
-    } catch {
-      setError(
-        "No se pudo actualizar tu información. Parece que hay un problema de conexión."
-      );
-    } finally {
-      setIsRefreshing(false);
-    }
-  }
+  
 
   useEffect(() => {
     load();
@@ -90,49 +76,50 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-[70vh]">
+    <div className="min-h-[75vh] relative">
+      {/* Background decorative mejorado */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background" />
+        <div className="absolute left-1/2 top-6 -translate-x-1/2 w-[500px] h-[500px] blur-3xl opacity-25 dark:opacity-15 bg-[radial-gradient(circle_at_center,var(--accent)_0%,transparent_70%)]" />
+        {/* Segundo gradiente para mayor profundidad */}
+        <div className="absolute right-1/4 bottom-1/3 w-[300px] h-[300px] blur-3xl opacity-15 dark:opacity-10 bg-[radial-gradient(circle_at_center,var(--primary)_0%,transparent_70%)]" />
+      </div>
+
       <div className="space-y-6">
-        {/* Header with parallax effect */}
-        <div 
-          className="space-y-1 transition-transform duration-300 ease-out"
-          style={{
-            transform: isRefreshing ? 'translateY(5px)' : 'translateY(0)',
-          }}
-        >
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
-            Hola, {firstName}
-          </h1>
-          <p className="text-sm text-muted-foreground">{dateLabel}</p>
+        {/* Hero Section mejorado */}
+        <div className="relative flex flex-col items-center text-center gap-4 pt-1 pb-3">
+          <MascotCharacter />
+          <div className="space-y-1.5">
+            <h1 className="text-2xl font-bold tracking-tight">
+              Hola, <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">{firstName}</span>
+            </h1>
+            <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
+              <span>{dateLabel}</span>
+              <span className="inline-block w-1 h-1 rounded-full bg-muted-foreground/40" />
+              <span className="font-medium">Bienvenid@ de nuevo</span>
+            </p>
+          </div>
         </div>
 
-        {error ? (
-          <div className="rounded-lg border border-destructive/20 bg-destructive/5 p-4 space-y-3">
-            <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-destructive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-              </svg>
-              <p className="font-medium text-destructive">No se pudo cargar tu información</p>
-            </div>
-            <p className="text-sm text-muted-foreground">
-              Parece que hay un problema de conexión. Por favor, inténtalo de nuevo.
-            </p>
-            <button
-              onClick={load}
-              className="h-9 px-4 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
-            >
-              Reintentar
-            </button>
-          </div>
-        ) : (
-          <StaggeredAnimation staggerDelay={150} className="space-y-6">
-            <div className="transform transition-all duration-300 hover:scale-[1.02]">
-              <NextClassCard />
-            </div>
-            <div className="transform transition-all duration-300 hover:scale-[1.01]">
-              <AnnouncementsList />
-            </div>
-          </StaggeredAnimation>
-        )}
+        {/* Content blocks con mejor espaciado */}
+        <div className="space-y-5">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="transform transition-all duration-300 hover:scale-[1.01] hover:shadow-lg"
+          >
+            <NextClassCard />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="transform transition-all duration-300 hover:scale-[1.005] hover:shadow-md"
+          >
+            <AnnouncementsList />
+          </motion.div>
+        </div>
       </div>
     </div>
   );
