@@ -106,7 +106,7 @@ export function AnnouncementList() {
             <ArrowLeft className="w-4 h-4" />
           </Button>
           <div>
-            <h1 className="text-2xl font-bold">Noticias y Anuncios</h1>
+            <h1 className="text-2xl font-bold">Noticias</h1>
             <p className="text-muted-foreground">
               Mantente al día
             </p>

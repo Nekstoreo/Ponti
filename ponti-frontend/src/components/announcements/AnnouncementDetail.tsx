@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import Image from "next/image";
 import { useAnnouncementStore } from "@/store/announcementStore";
 import { AnnouncementItem } from "@/data/types";
 import { Badge } from "@/components/ui/badge";
@@ -135,12 +134,12 @@ export function AnnouncementDetail({ announcement }: AnnouncementDetailProps) {
               {[1, 2, 3].map((index) => (
                 <CarouselItem key={index} className="w-full h-full">
                   <div className="w-full h-full bg-muted overflow-hidden">
-                    <Image
+                    {/* Usar <img> temporalmente para diagnosticar problemas con next/image y SVG */}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
                       src={`/announcement-placeholder-${index}.svg`}
                       alt={`${announcement.title} - Imagen ${index}`}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 </CarouselItem>
