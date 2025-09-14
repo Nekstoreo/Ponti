@@ -126,7 +126,7 @@ export default function GradesList({ compact = false, showSummary = true }: Grad
 
   const CourseCard = ({ course }: { course: CourseGrade }) => (
     <Card
-      className="cursor-pointer mb-4"
+      className="cursor-pointer mb-2"
       onClick={() => handleCourseClick(course)}
     >
       <CardContent className="px-4">
