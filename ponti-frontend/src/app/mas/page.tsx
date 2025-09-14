@@ -2,22 +2,19 @@
 
 import MainLayout from "@/components/MainLayout";
 import PageTitle from "@/components/PageTitle";
-import { useAuthStore } from "@/store/authStore";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { ChevronRight, User, Building2, Bell, Newspaper, HelpCircle, LogOut, BookOpen, Heart, Wifi, Calculator } from "lucide-react";
+import { ChevronRight, User, Building2, Bell, Newspaper, HelpCircle, Heart, Wifi, Calculator } from "lucide-react";
 
 export default function MasRoute() {
-  const logout = useAuthStore((s) => s.logout);
   const router = useRouter();
 
   const menuItems = [
     {
-      id: "calificaciones",
-      label: "Calificaciones",
-      icon: BookOpen,
-      description: "Consulta tus notas y rendimiento académico",
-      action: () => router.push("/calificaciones"),
+      id: "perfil",
+      label: "Perfil de Usuario",
+      icon: User,
+      description: "Gestiona tu información personal",
+      action: () => router.push("/perfil"),
     },
     {
       id: "simulador-notas",
@@ -28,9 +25,9 @@ export default function MasRoute() {
     },
     {
       id: "bienestar",
-  label: "Centro de Apoyo y Bienestar",
+      label: "Centro de Apoyo y Bienestar",
       icon: Heart,
-  description: "Recursos de apoyo, contactos y herramientas emocionales",
+      description: "Recursos de apoyo, contactos y herramientas emocionales",
       action: () => router.push("/bienestar"),
     },
     {
@@ -39,13 +36,6 @@ export default function MasRoute() {
       icon: Newspaper,
       description: "Mantente al día con las últimas novedades",
       action: () => router.push("/noticias"),
-    },
-    {
-      id: "perfil",
-      label: "Perfil de Usuario",
-      icon: User,
-      description: "Gestiona tu información personal",
-      action: () => router.push("/perfil"),
     },
     {
       id: "servicios",
@@ -107,24 +97,6 @@ export default function MasRoute() {
               </div>
             );
           })}
-        </div>
-
-        {/* Sección de cuenta */}
-        <div className="pt-4 border-t">
-          <div className="space-y-3">
-            <h3 className="font-semibold text-muted-foreground">Cuenta</h3>
-            <Button
-              variant="outline"
-              onClick={() => {
-                logout();
-                router.replace("/login");
-              }}
-              className="w-full justify-start"
-            >
-              <LogOut className="h-4 w-4 mr-2" />
-              Cerrar Sesión
-            </Button>
-          </div>
         </div>
       </div>
     </MainLayout>
