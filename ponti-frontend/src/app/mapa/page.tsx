@@ -6,7 +6,10 @@ export default function MapaRoute() {
   return (
     <MainLayout>
       <div className="px-4 pt-4 space-y-3 h-full" style={{ paddingBottom: 36 }}>
-        <PageTitle title="Mapa" />
+        <PageTitle
+          title="Mapa"
+          subtitle="Navega por el campus universitario"
+        />
         <MapPage />
       </div>
     </MainLayout>

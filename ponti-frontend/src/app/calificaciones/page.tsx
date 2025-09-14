@@ -6,7 +6,10 @@ export default function CalificacionesPage() {
   return (
     <MainLayout>
       <div className="px-4 pt-4 space-y-6" style={{ paddingBottom: 36 }}>
-        <PageTitle title="Calificaciones" />
+        <PageTitle
+          title="Calificaciones"
+          subtitle="Monitorea tu rendimiento académico"
+        />
         <GradesList />
       </div>
     </MainLayout>
