@@ -1,4 +1,4 @@
-export type DayKey = "L" | "M" | "X" | "J" | "V" | "S";
+export type DayKey = "D" | "L" | "M" | "X" | "J" | "V" | "S";
 
 export interface UserProfile {
   id: string;

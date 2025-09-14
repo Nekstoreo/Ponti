@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useOffline, formatLastSync } from "@/hooks/useOffline";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -15,7 +16,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Trash2, Wifi, WifiOff, Info, CheckCircle, Clock, Calendar, GraduationCap, MapPin, Heart } from "lucide-react";
+import { Trash2, Wifi, WifiOff, Info, CheckCircle, Clock, Calendar, GraduationCap, MapPin, Heart, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface OfflineSettingsProps {
@@ -51,10 +52,11 @@ const OFFLINE_DATA = [
   }
 ];
 
-export default function OfflineSettings({ 
-  className, 
-  showTitle = true 
+export default function OfflineSettings({
+  className,
+  showTitle = true
 }: OfflineSettingsProps) {
+  const router = useRouter();
   const {
     isOnline,
     isOfflineCapable,
@@ -109,6 +111,14 @@ export default function OfflineSettings({
     <div className={cn("space-y-6", className)}>
       {showTitle && (
         <div className="flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => router.back()}
+            className="p-2"
+          >
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
           <WifiOff className="w-5 h-5" />
           <h2 className="text-lg font-semibold">Uso Sin Conexión</h2>
         </div>

@@ -1,6 +1,16 @@
 import { WeeklySchedule } from "./types";
 
 export const mockSchedule: WeeklySchedule = {
+  D: [
+    {
+      id: "c_0",
+      courseName: "Taller de Liderazgo",
+      professor: "Lic. Martínez",
+      room: "Auditorio Principal",
+      startTime: "10:00",
+      endTime: "12:00",
+    },
+  ],
   L: [
     {
       id: "c_1",

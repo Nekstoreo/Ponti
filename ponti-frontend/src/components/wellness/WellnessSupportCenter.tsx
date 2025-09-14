@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AlertTriangle, Book, Calendar, Heart, Home, Info, LifeBuoy, Mail, MapPin, Phone, RefreshCw, Smile } from "lucide-react";
+import { AlertTriangle, ArrowLeft, Book, Calendar, Heart, Home, Info, LifeBuoy, Mail, MapPin, Phone, RefreshCw, Smile } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 // Tipos simples locales (podrían moverse a types.ts si se escalan)
@@ -188,6 +189,7 @@ const emergencyAdvice = [
 ];
 
 export default function WellnessSupportCenter() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<'recursos' | 'herramientas' | 'emergencia'>('recursos');
   const [showTool, setShowTool] = useState<EmotionTool | null>(null);
   const [tip, setTip] = useState<DailyTip | null>(null);
@@ -256,13 +258,20 @@ export default function WellnessSupportCenter() {
       <div className="space-y-6">
         {/* Header */}
         <div className="flex items-start justify-between">
-          <div>
-            <h1 className="text-2xl font-bold">Centro de Apoyo y Bienestar</h1>
-            <p className="text-sm text-muted-foreground">Recursos, contactos y herramientas para tu salud integral</p>
+          <div className="flex items-center gap-3 flex-1">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => router.back()}
+              className="p-2"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </Button>
+            <div>
+              <h1 className="text-2xl font-bold">Centro de Apoyo y Bienestar</h1>
+              <p className="text-sm text-muted-foreground">Recursos y contactos para tu salud integral</p>
+            </div>
           </div>
-          <Button size="sm" variant="outline" onClick={() => setTip(dailyTips[Math.floor(Math.random()*dailyTips.length)])} className="gap-1">
-            <RefreshCw className="w-3 h-3" /> Tip
-          </Button>
         </div>
 
         {/* Daily Tip */}
@@ -274,11 +283,14 @@ export default function WellnessSupportCenter() {
                 <h3 className="font-medium text-sm">Tip del día • {tip.category}</h3>
                 <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{tip.text}</p>
               </div>
+              <Button size="sm" variant="outline" onClick={() => setTip(dailyTips[Math.floor(Math.random() * dailyTips.length)])} className="gap-1">
+                <RefreshCw className="w-3 h-3" /> Tip
+              </Button>
             </CardContent>
           </Card>
         )}
 
-  <Tabs value={activeTab} onValueChange={(v: string) => setActiveTab(v as 'recursos' | 'herramientas' | 'emergencia')}>
+        <Tabs value={activeTab} onValueChange={(v: string) => setActiveTab(v as 'recursos' | 'herramientas' | 'emergencia')}>
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="recursos" className="text-xs">
               <LifeBuoy className="w-4 h-4 mr-1" /> Recursos
