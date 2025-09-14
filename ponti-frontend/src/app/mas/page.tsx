@@ -5,7 +5,7 @@ import PageTitle from "@/components/PageTitle";
 import { useAuthStore } from "@/store/authStore";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, User, Building2, Bell, Newspaper, HelpCircle, LogOut, BookOpen, Heart, Wifi } from "lucide-react";
+import { ChevronRight, User, Building2, Bell, Newspaper, HelpCircle, LogOut, BookOpen, Heart, Wifi, Calculator } from "lucide-react";
 
 export default function MasRoute() {
   const logout = useAuthStore((s) => s.logout);
@@ -18,6 +18,13 @@ export default function MasRoute() {
       icon: BookOpen,
       description: "Consulta tus notas y rendimiento académico",
       action: () => router.push("/calificaciones"),
+    },
+    {
+      id: "simulador-notas",
+      label: "Simulador de Notas",
+      icon: Calculator,
+      description: "Proyecta tu nota final con diferentes escenarios",
+      action: () => router.push("/simulador-notas"),
     },
     {
       id: "bienestar",
@@ -63,16 +70,16 @@ export default function MasRoute() {
     },
     {
       id: "ayuda",
-      label: "Ayuda y Soporte",
+      label: "Información y Soporte",
       icon: HelpCircle,
-      description: "Centro de ayuda y soporte técnico",
-      action: () => console.log("Ayuda - próximamente"),
+      description: "Información sobre la app y soporte técnico",
+      action: () => router.push("/ayuda"),
     },
   ];
 
   return (
     <MainLayout>
-      <div className="space-y-6">
+      <div className="px-4 pt-4 space-y-6" style={{ paddingBottom: 36 }}>
         <PageTitle
           title="Más"
           subtitle="Accede a todas las funcionalidades adicionales de Ponti"
