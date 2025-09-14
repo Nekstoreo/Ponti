@@ -7,10 +7,11 @@ import { mockServices } from "@/data/services";
 import { ServiceCategory } from "@/data/types";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Eye, MapPin, Settings, ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 const categories: { value: ServiceCategory | "all"; label: string }[] = [
   { value: "all", label: "Todos" },
@@ -104,13 +105,27 @@ export function ServiceDirectory() {
 
       {/* Filtros por categoría */}
       <Tabs value={selectedCategory} onValueChange={(value) => setSelectedCategory(value as ServiceCategory | "all")}>
-        <TabsList className="grid w-full grid-cols-7">
-          {categories.map((category) => (
-            <TabsTrigger key={category.value} value={category.value} className="text-xs">
-              {category.label}
-            </TabsTrigger>
-          ))}
-        </TabsList>
+        <div className="relative">
+          <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2 -mx-4 px-4">
+            {categories.map((category) => (
+              <button
+                key={category.value}
+                onClick={() => setSelectedCategory(category.value as ServiceCategory | "all")}
+                className={cn(
+                  "flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap",
+                  selectedCategory === category.value
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+                )}
+              >
+                {category.label}
+              </button>
+            ))}
+          </div>
+          {/* Indicadores de scroll */}
+          <div className="absolute left-0 top-0 bottom-2 w-6 bg-gradient-to-r from-background to-transparent pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-2 w-6 bg-gradient-to-l from-background to-transparent pointer-events-none" />
+        </div>
 
         <TabsContent value={selectedCategory} className="mt-4">
           <ScrollArea className="h-[70vh]">
