@@ -7,11 +7,9 @@ import { mockServices } from "@/data/services";
 import { ServiceCategory } from "@/data/types";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Eye, MapPin, Settings, ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
 
 const categories: { value: ServiceCategory | "all"; label: string }[] = [
   { value: "all", label: "Todos" },
@@ -51,85 +49,75 @@ export function ServiceDirectory() {
 
   return (
     <div className="space-y-4">
-      {/* Header con estadísticas */}
-      <div className="flex items-center gap-3 mb-4">
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => router.back()}
-          className="p-2"
-        >
-          <ArrowLeft className="w-4 h-4" />
-        </Button>
-        <div>
-          <h1 className="text-2xl font-bold">Directorio de Servicios</h1>
-          <p className="text-muted-foreground">
-            Encuentra todos los servicios disponibles en la universidad
-          </p>
+      {/* Header compacto con estadísticas */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3 flex-1">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => router.back()}
+            className="p-2"
+          >
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
+          <div>
+            <h1 className="text-xl font-semibold">Servicios</h1>
+            <p className="text-muted-foreground text-sm">Directorio de servicios universitarios</p>
+          </div>
+        </div>
+        <div className="hidden sm:flex gap-2">
+          <Badge variant="secondary" className="flex items-center gap-1">
+            <Eye className="h-3 w-3" />
+            {openServicesCount} abiertos
+          </Badge>
+          <Badge variant="secondary" className="flex items-center gap-1">
+            <Settings className="h-3 w-3" />
+            {totalServicesCount} totales
+          </Badge>
         </div>
       </div>
 
       {/* Acciones rápidas */}
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         <Button
           variant={showOnlyOpenNow ? "default" : "outline"}
           size="sm"
           onClick={toggleOpenNowFilter}
-          className="flex items-center gap-2"
+          className="flex-1 min-w-0 flex items-center justify-center gap-2"
         >
           <Eye className="h-4 w-4" />
-          Solo abiertos
+          <span className="truncate">Solo abiertos</span>
         </Button>
         <Button
           variant="outline"
           size="sm"
           onClick={() => router.push("/mapa")}
-          className="flex items-center gap-2"
+          className="flex-1 min-w-0 flex items-center justify-center gap-2"
         >
           <MapPin className="h-4 w-4" />
-          Ver en mapa
+          <span className="truncate">Ver en mapa</span>
         </Button>
       </div>
 
-      {/* Estadísticas rápidas */}
-      <div className="flex gap-4">
-        <Badge variant="secondary" className="flex items-center gap-1">
-          <Eye className="h-3 w-3" />
-          {openServicesCount} abiertos ahora
-        </Badge>
-        <Badge variant="secondary" className="flex items-center gap-1">
-          <Settings className="h-3 w-3" />
-          {totalServicesCount} servicios totales
-        </Badge>
-      </div>
-
-      {/* Filtros por categoría */}
+      {/* Filtros por categoría (Tabs) */}
       <Tabs value={selectedCategory} onValueChange={(value) => setSelectedCategory(value as ServiceCategory | "all")}>
-        <div className="relative">
-          <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2 -mx-4 px-4">
+        <div className="overflow-x-auto scrollbar-hide px-1" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+          <TabsList className="flex w-max h-auto p-1 bg-muted rounded-lg gap-2">
             {categories.map((category) => (
-              <button
+              <TabsTrigger
                 key={category.value}
-                onClick={() => setSelectedCategory(category.value as ServiceCategory | "all")}
-                className={cn(
-                  "flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap",
-                  selectedCategory === category.value
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
-                )}
+                value={category.value}
+                className="h-8 px-3 text-xs font-medium whitespace-nowrap shrink-0"
               >
                 {category.label}
-              </button>
+              </TabsTrigger>
             ))}
-          </div>
-          {/* Indicadores de scroll */}
-          <div className="absolute left-0 top-0 bottom-2 w-6 bg-gradient-to-r from-background to-transparent pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-2 w-6 bg-gradient-to-l from-background to-transparent pointer-events-none" />
+          </TabsList>
         </div>
 
         <TabsContent value={selectedCategory} className="mt-4">
-          <ScrollArea className="h-[70vh]">
-            <div className="space-y-4 pr-4">
+          <div className="h-[60vh] overflow-auto">
+            <div className="space-y-3 pr-4">
               {filteredServices.length === 0 ? (
                 <div className="text-center py-8">
                   <Settings className="mx-auto h-12 w-12 text-muted-foreground" />
@@ -139,19 +127,18 @@ export function ServiceDirectory() {
                   </p>
                 </div>
               ) : (
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <>
                   {filteredServices.map((service) => (
                     <ServiceCard
                       key={service.id}
                       service={service}
                       onClick={() => handleCardClick(service.id)}
-                      showActions={true}
                     />
                   ))}
-                </div>
+                </>
               )}
             </div>
-          </ScrollArea>
+          </div>
         </TabsContent>
       </Tabs>
     </div>

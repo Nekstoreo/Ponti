@@ -71,26 +71,27 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-4xl mx-auto space-y-3 sm:space-y-4 px-2 sm:px-0">
       {/* Header con botón de regreso */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 sm:gap-4">
         <Button
           variant="ghost"
           size="sm"
           onClick={() => router.back()}
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 px-2 sm:px-3"
         >
           <ArrowLeft className="h-4 w-4" />
-          Volver al directorio
+          <span className="hidden sm:inline">Volver al directorio</span>
+          <span className="sm:hidden">Volver</span>
         </Button>
       </div>
 
       {/* Información principal */}
       <Card>
-        <CardHeader>
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-3">
+        <CardHeader className="pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
+            <div className="flex-1 min-w-0">
+              <div className="flex flex-wrap items-center gap-2 mb-3">
                 <Badge
                   variant="secondary"
                   className={categoryColors[service.category]}
@@ -100,7 +101,8 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
                 {service.isOpenNow ? (
                   <Badge variant="secondary" className="bg-green-100 text-green-800">
                     <Eye className="h-3 w-3 mr-1" />
-                    Abierto ahora
+                    <span className="hidden sm:inline">Abierto ahora</span>
+                    <span className="sm:hidden">Abierto</span>
                   </Badge>
                 ) : (
                   <Badge variant="secondary" className="bg-red-100 text-red-800">
@@ -108,22 +110,22 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
                   </Badge>
                 )}
               </div>
-              <CardTitle className="text-3xl leading-tight mb-2">
+              <CardTitle className="text-lg sm:text-xl leading-tight mb-1 break-words">
                 {service.name}
               </CardTitle>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <MapPin className="h-4 w-4" />
-                <span>{service.location}</span>
+              <div className="flex items-center gap-2 text-muted-foreground text-sm">
+                <MapPin className="h-4 w-4 flex-shrink-0" />
+                <span className="break-words text-sm">{service.location}</span>
               </div>
             </div>
           </div>
         </CardHeader>
 
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-3">
           {/* Descripción */}
           <div>
-            <h3 className="font-semibold text-lg mb-2">Descripción</h3>
-            <p className="text-muted-foreground leading-relaxed">
+            <h3 className="font-semibold text-sm mb-2">Descripción</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
               {service.description}
             </p>
           </div>
@@ -132,20 +134,21 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
 
           {/* Información de contacto */}
           <div>
-            <h3 className="font-semibold text-lg mb-4">Información de Contacto</h3>
-            <div className="grid gap-3">
+            <h3 className="font-semibold text-sm mb-2">Información de Contacto</h3>
+            <div className="grid gap-2">
               {service.phone && (
-                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <Phone className="h-5 w-5 text-muted-foreground" />
-                    <div>
-                      <p className="font-medium">Teléfono</p>
-                      <p className="text-sm text-muted-foreground">{service.phone}</p>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-2 bg-muted/50 rounded-lg gap-2">
+                  <div className="flex items-center gap-2 min-w-0 flex-1">
+                    <Phone className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium">Teléfono</p>
+                      <p className="text-xs text-muted-foreground break-all">{service.phone}</p>
                     </div>
                   </div>
                   <Button
                     size="sm"
                     onClick={() => handleContact('phone')}
+                    className="w-full sm:w-auto text-xs px-3 py-1 h-8"
                   >
                     Llamar
                   </Button>
@@ -153,17 +156,18 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
               )}
 
               {service.email && (
-                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <Mail className="h-5 w-5 text-muted-foreground" />
-                    <div>
-                      <p className="font-medium">Correo electrónico</p>
-                      <p className="text-sm text-muted-foreground">{service.email}</p>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-2 bg-muted/50 rounded-lg gap-2">
+                  <div className="flex items-center gap-2 min-w-0 flex-1">
+                    <Mail className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium">Correo electrónico</p>
+                      <p className="text-xs text-muted-foreground break-all">{service.email}</p>
                     </div>
                   </div>
                   <Button
                     size="sm"
                     onClick={() => handleContact('email')}
+                    className="w-full sm:w-auto text-xs px-3 py-1 h-8"
                   >
                     Enviar email
                   </Button>
@@ -171,17 +175,18 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
               )}
 
               {service.website && (
-                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <Globe className="h-5 w-5 text-muted-foreground" />
-                    <div>
-                      <p className="font-medium">Sitio web</p>
-                      <p className="text-sm text-muted-foreground">{service.website}</p>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-2 bg-muted/50 rounded-lg gap-2">
+                  <div className="flex items-center gap-2 min-w-0 flex-1">
+                    <Globe className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium">Sitio web</p>
+                      <p className="text-xs text-muted-foreground break-all">{service.website}</p>
                     </div>
                   </div>
                   <Button
                     size="sm"
                     onClick={() => handleContact('website')}
+                    className="w-full sm:w-auto text-xs px-3 py-1 h-8"
                   >
                     Visitar sitio
                   </Button>
@@ -194,30 +199,30 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
 
           {/* Ubicación detallada */}
           <div>
-            <h3 className="font-semibold text-lg mb-4">Ubicación</h3>
+            <h3 className="font-semibold text-sm mb-2">Ubicación</h3>
             <div className="space-y-2">
               {service.building && (
                 <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm"><strong>Edificio:</strong> {service.building}</span>
+                  <MapPin className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                  <span className="text-sm break-words"><strong>Edificio:</strong> {service.building}</span>
                 </div>
               )}
               {service.floor && (
                 <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm"><strong>Piso:</strong> {service.floor}</span>
+                  <MapPin className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                  <span className="text-sm break-words"><strong>Piso:</strong> {service.floor}</span>
                 </div>
               )}
               <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm"><strong>Ubicación:</strong> {service.location}</span>
+                <MapPin className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                <span className="text-sm break-words"><strong>Ubicación:</strong> {service.location}</span>
               </div>
               {service.mapLocation && (
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => router.push("/mapa")}
-                  className="mt-2"
+                  className="mt-3 w-full sm:w-auto"
                 >
                   <MapPin className="h-4 w-4 mr-2" />
                   Ver en el mapa
@@ -230,20 +235,20 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
 
           {/* Horario de atención */}
           <div>
-            <h3 className="font-semibold text-lg mb-4">Horario de Atención</h3>
-            <div className="bg-muted/50 p-4 rounded-lg mb-4">
+            <h3 className="font-semibold text-sm mb-2">Horario de Atención</h3>
+            <div className="bg-muted/50 p-3 sm:p-3 rounded-lg mb-3 sm:mb-3">
               <div className="flex items-center gap-2 mb-2">
-                <Calendar className="h-4 w-4 text-muted-foreground" />
-                <span className="font-medium">Hoy: {getTodayHours()}</span>
+                <Calendar className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                <span className="font-medium text-sm break-words">Hoy: {getTodayHours()}</span>
               </div>
             </div>
             <div className="grid gap-2">
               {Object.entries(service.hours).map(([day, hours]) => (
-                <div key={day} className="flex justify-between items-center py-1">
-                  <span className="text-sm font-medium">
+                <div key={day} className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-1 gap-1">
+                  <span className="text-sm font-medium break-words">
                     {dayLabels[day as keyof typeof dayLabels]}
                   </span>
-                  <span className="text-sm text-muted-foreground">{hours}</span>
+                  <span className="text-sm text-muted-foreground break-words">{hours}</span>
                 </div>
               ))}
             </div>
@@ -254,12 +259,12 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
             <>
               <Separator />
               <div>
-                <h3 className="font-semibold text-lg mb-4">Etiquetas</h3>
+                <h3 className="font-semibold text-sm mb-2">Etiquetas</h3>
                 <div className="flex flex-wrap gap-2">
                   {service.tags.map((tag) => (
-                    <Badge key={tag} variant="outline" className="flex items-center gap-1">
-                      <Tag className="h-3 w-3" />
-                      {tag}
+                    <Badge key={tag} variant="outline" className="flex items-center gap-1 text-xs break-words">
+                      <Tag className="h-3 w-3 flex-shrink-0" />
+                      <span className="break-words">{tag}</span>
                     </Badge>
                   ))}
                 </div>
@@ -270,11 +275,11 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
       </Card>
 
       {/* Acciones adicionales */}
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <Button
           variant="outline"
           onClick={() => router.push("/servicios")}
-          className="flex items-center gap-2"
+          className="flex items-center justify-center gap-2 w-full sm:w-auto"
         >
           Ver todos los servicios
         </Button>
@@ -293,7 +298,7 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
               navigator.clipboard.writeText(window.location.href);
             }
           }}
-          className="flex items-center gap-2"
+          className="flex items-center justify-center gap-2 w-full sm:w-auto"
         >
           Compartir
         </Button>
