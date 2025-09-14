@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Eye, MapPin, Settings } from "lucide-react";
+import { Eye, MapPin, Settings, ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const categories: { value: ServiceCategory | "all"; label: string }[] = [
@@ -51,11 +51,21 @@ export function ServiceDirectory() {
   return (
     <div className="space-y-4">
       {/* Header con estadísticas */}
-      <div>
-        <h1 className="text-2xl font-bold">Directorio de Servicios</h1>
-        <p className="text-muted-foreground">
-          Encuentra todos los servicios disponibles en la universidad
-        </p>
+      <div className="flex items-center gap-3 mb-4">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => router.back()}
+          className="p-2"
+        >
+          <ArrowLeft className="w-4 h-4" />
+        </Button>
+        <div>
+          <h1 className="text-2xl font-bold">Directorio de Servicios</h1>
+          <p className="text-muted-foreground">
+            Encuentra todos los servicios disponibles en la universidad
+          </p>
+        </div>
       </div>
 
       {/* Acciones rápidas */}

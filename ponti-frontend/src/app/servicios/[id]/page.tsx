@@ -31,7 +31,7 @@ export default function ServicioDetallePage() {
   if (service === undefined) {
     return (
       <MainLayout>
-        <div className="space-y-4">
+        <div className="px-4 pt-4 space-y-4" style={{ paddingBottom: 36 }}>
           <Card className="max-w-2xl mx-auto">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-destructive">
@@ -55,7 +55,7 @@ export default function ServicioDetallePage() {
 
   return (
     <MainLayout>
-      <div className="space-y-4">
+      <div className="px-4 pt-4 space-y-4" style={{ paddingBottom: 36 }}>
         <ServiceDetail service={service} />
       </div>
     </MainLayout>

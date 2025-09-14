@@ -42,31 +42,25 @@ export function UserProfileComponent({ user, academicInfo, onEdit }: UserProfile
 
   return (
     <div className="space-y-6">
-      {/* Header con avatar y acciones */}
-      <Card>
+      {/* Header con avatar y información principal */}
+      <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-0">
         <CardContent className="pt-6">
-          <div className="flex items-start justify-between">
-            <div className="flex items-center gap-4">
-              <Avatar className="h-20 w-20">
-                <AvatarImage src={user.avatar} alt={user.fullName} />
-                <AvatarFallback className="text-lg">
-                  {user.fullName.split(' ').map(n => n[0]).join('').toUpperCase()}
-                </AvatarFallback>
-              </Avatar>
-              <div>
-                <h1 className="text-2xl font-bold">{user.fullName}</h1>
-                <p className="text-muted-foreground">{user.studentId}</p>
-                <Badge className={getStatusColor(academicInfo.academicStatus)}>
+          <div className="text-center">
+            <Avatar className="h-24 w-24 mx-auto mb-4 ring-4 ring-white shadow-lg">
+              <AvatarImage src={user.avatar} alt={user.fullName} />
+              <AvatarFallback className="text-xl bg-gradient-to-br from-blue-500 to-purple-600 text-white">
+                {user.fullName.split(' ').map(n => n[0]).join('').toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+            <div className="space-y-2">
+              <h1 className="text-2xl font-bold text-gray-900">{user.fullName}</h1>
+              <p className="text-gray-600 font-medium">{user.studentId}</p>
+              <div className="flex justify-center">
+                <Badge className={`${getStatusColor(academicInfo.academicStatus)} font-medium px-3 py-1`}>
                   {getStatusLabel(academicInfo.academicStatus)}
                 </Badge>
               </div>
             </div>
-            {onEdit && (
-              <Button onClick={onEdit} className="flex items-center gap-2">
-                <Edit className="h-4 w-4" />
-                Editar Perfil
-              </Button>
-            )}
           </div>
         </CardContent>
       </Card>
@@ -187,16 +181,23 @@ export function UserProfileComponent({ user, academicInfo, onEdit }: UserProfile
           </div>
 
           {/* Barra de progreso de créditos */}
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm">
-              <span>Progreso académico</span>
-              <span>{Math.round((academicInfo.completedCredits / academicInfo.totalCredits) * 100)}%</span>
-            </div>
-            <div className="w-full bg-muted rounded-full h-2">
-              <div
-                className="bg-primary h-2 rounded-full transition-all duration-300"
-                style={{ width: `${(academicInfo.completedCredits / academicInfo.totalCredits) * 100}%` }}
-              />
+          <div className="space-y-3">
+            <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-lg border">
+              <div className="flex justify-between items-center mb-2">
+                <span className="font-medium text-gray-900">Progreso académico</span>
+                <span className="text-sm font-bold text-primary">
+                  {Math.round((academicInfo.completedCredits / academicInfo.totalCredits) * 100)}%
+                </span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                <div
+                  className="bg-gradient-to-r from-green-500 to-blue-600 h-3 rounded-full transition-all duration-500 ease-out"
+                  style={{ width: `${(academicInfo.completedCredits / academicInfo.totalCredits) * 100}%` }}
+                />
+              </div>
+              <p className="text-xs text-gray-600 mt-2">
+                {academicInfo.completedCredits} de {academicInfo.totalCredits} créditos completados
+              </p>
             </div>
           </div>
 
