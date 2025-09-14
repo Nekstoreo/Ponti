@@ -103,13 +103,6 @@ export function NotificationSettings() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Configuración de Notificaciones</h1>
-        <p className="text-muted-foreground">
-          Personaliza qué notificaciones quieres recibir y cuándo
-        </p>
-      </div>
-
       {/* Tipos de notificación */}
       <Card>
         <CardHeader>
