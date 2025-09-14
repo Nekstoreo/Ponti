@@ -41,4 +41,14 @@ Thumbs.db
 *.sln
 *.sw?
 
+# Git
+.git/
+.gitattributes
+
+# Otros
+.cache/
+.temp/
+.tmp/
+temp/
+tmp/
 
