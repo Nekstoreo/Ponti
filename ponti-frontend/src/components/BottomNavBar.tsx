@@ -3,18 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CalendarDays, Home, Map, Menu, BookOpen } from "lucide-react";
-import { NotificationIndicator } from "@/components/notifications/NotificationIndicator";
 
 function Tab({
   href,
   label,
-  icon,
-  showNotificationIndicator = false
+  icon
 }: {
   href: string;
   label: string;
   icon: React.ReactNode;
-  showNotificationIndicator?: boolean;
 }) {
   const pathname = usePathname();
   const isActive = href === "/"
@@ -64,14 +61,6 @@ function Tab({
     </Link>
   );
 
-  if (showNotificationIndicator) {
-    return (
-      <NotificationIndicator className="flex-1">
-        {content}
-      </NotificationIndicator>
-    );
-  }
-
   return content;
 }
 
@@ -87,7 +76,6 @@ export function BottomNavBar() {
           href="/mas"
           label="Más"
           icon={<Menu size={20} />}
-          showNotificationIndicator={true}
         />
       </div>
     </nav>

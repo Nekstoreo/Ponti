@@ -7,10 +7,17 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, Calendar, User, Tag, Star, Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, Calendar, User, Tag, Star, Eye, EyeOff, ImageIcon } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { useRouter } from "next/navigation";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 interface AnnouncementDetailProps {
   announcement: AnnouncementItem;
@@ -119,6 +126,28 @@ export function AnnouncementDetail({ announcement }: AnnouncementDetailProps) {
             </div>
           </div>
         </CardHeader>
+
+        {/* Carrusel de imágenes placeholder 16:9 */}
+        <div className="w-full aspect-video relative">
+          <Carousel className="w-full h-full">
+            <CarouselContent className="w-full h-full">
+              {[1, 2, 3].map((index) => (
+                <CarouselItem key={index} className="w-full h-full">
+                  <div className="w-full h-full bg-muted overflow-hidden">
+                    <img
+                      src={`/announcement-placeholder-${index}.svg`}
+                      alt={`${announcement.title} - Imagen ${index}`}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 z-10" />
+            <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 z-10" />
+          </Carousel>
+        </div>
 
         <CardContent className="space-y-4">
           {/* Resumen */}

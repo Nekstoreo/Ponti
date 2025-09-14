@@ -19,25 +19,33 @@ export function AnnouncementsList() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-base font-medium">Anuncios recientes</h3>
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-gradient-to-r from-orange-500 to-red-500" />
+          <h3 className="text-base font-semibold">Anuncios recientes</h3>
+        </div>
         <Button
           variant="ghost"
           size="sm"
           onClick={() => router.push("/noticias")}
-          className="text-xs flex items-center gap-1"
+          className="text-xs flex items-center gap-1 hover:bg-accent/50 rounded-full px-3"
         >
           Ver todas
           <ChevronRight className="h-3 w-3" />
         </Button>
       </div>
       <div className="space-y-3">
-        {recentItems.map((announcement) => (
-          <AnnouncementCard
+        {recentItems.map((announcement, index) => (
+          <div
             key={announcement.id}
-            announcement={announcement}
-            onClick={() => router.push(`/noticias/${announcement.id}`)}
-            showActions={false}
-          />
+            className="transform transition-all duration-200 hover:scale-[1.01]"
+            style={{ animationDelay: `${index * 50}ms` }}
+          >
+            <AnnouncementCard
+              announcement={announcement}
+              onClick={() => router.push(`/noticias/${announcement.id}`)}
+              showActions={false}
+            />
+          </div>
         ))}
       </div>
     </div>

@@ -8,10 +8,10 @@ import { AnnouncementCategory } from "@/data/types";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CheckCheck, Eye, Star, FileText } from "lucide-react";
+import { CheckCheck, Eye, Star, FileText, ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import LoadingSkeleton from "@/components/animations/LoadingSkeleton";
-import { StaggeredAnimation } from "@/components/animations/PageTransition";
+// import { StaggeredAnimation } from "@/components/animations/PageTransition";
 
 const categories: { value: AnnouncementCategory | "all"; label: string }[] = [
   { value: "all", label: "Todas" },
@@ -37,7 +37,6 @@ export function AnnouncementList() {
   } = useAnnouncementStore();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useState(false);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
 
@@ -54,16 +53,7 @@ export function AnnouncementList() {
     }
   }, [announcements.length, setAnnouncements]);
 
-  const handleRefresh = async () => {
-    setIsRefreshing(true);
-    // Simular refresh - en una app real aquí harías fetch de datos nuevos
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Simular nuevos anuncios (prepend algunos items mock)
-    const newAnnouncements = [...mockAnnouncements];
-    setAnnouncements(newAnnouncements);
-    setIsRefreshing(false);
-  };
+  
 
   const handleCardClick = (announcementId: string) => {
     router.push(`/noticias/${announcementId}`);
@@ -106,11 +96,21 @@ export function AnnouncementList() {
     <div className="space-y-4">
       {/* Header con estadísticas */}
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold">Noticias y Anuncios</h1>
-          <p className="text-muted-foreground">
-            Mantente al día con las últimas novedades de la universidad
-          </p>
+        <div className="flex items-center gap-3 flex-1">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => router.back()}
+            className="p-2"
+          >
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
+          <div>
+            <h1 className="text-2xl font-bold">Noticias y Anuncios</h1>
+            <p className="text-muted-foreground">
+              Mantente al día
+            </p>
+          </div>
         </div>
         <div className="flex gap-2">
           <Badge variant="secondary" className="flex items-center gap-1">
@@ -125,41 +125,47 @@ export function AnnouncementList() {
       </div>
 
       {/* Filtros y acciones rápidas */}
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         <Button
           variant={showOnlyUnread ? "default" : "outline"}
           size="sm"
           onClick={toggleUnreadFilter}
-          className="flex items-center gap-2"
+          className="flex-1 min-w-0 flex items-center justify-center gap-2"
         >
           <Eye className="h-4 w-4" />
-          Solo no leídas
+          <span className="truncate">Solo no leídas</span>
         </Button>
+
         <Button
           variant={showOnlyImportant ? "default" : "outline"}
           size="sm"
           onClick={toggleImportantFilter}
-          className="flex items-center gap-2"
+          className="flex-1 min-w-0 flex items-center justify-center gap-2"
         >
           <Star className="h-4 w-4" />
-          Importantes
+          <span className="truncate">Importantes</span>
         </Button>
+
         <Button
           variant="outline"
           size="sm"
           onClick={markAllAsRead}
-          className="flex items-center gap-2"
+          className="flex-1 min-w-0 flex items-center justify-center gap-2"
         >
           <CheckCheck className="h-4 w-4" />
-          Marcar todas como leídas
+          <span className="truncate">Marcar todas como leídas</span>
         </Button>
       </div>
 
       {/* Filtros por categoría */}
       <Tabs value={selectedCategory} onValueChange={(value) => setSelectedCategory(value as AnnouncementCategory | "all")}>
-        <TabsList className="grid w-full grid-cols-5">
+        <TabsList className="flex w-full h-auto p-1 bg-muted rounded-lg justify-center">
           {categories.map((category) => (
-            <TabsTrigger key={category.value} value={category.value} className="text-xs">
+            <TabsTrigger
+              key={category.value}
+              value={category.value}
+              className="px-1 py-1 text-xs font-medium whitespace-nowrap"
+            >
               {category.label}
             </TabsTrigger>
           ))}
@@ -177,7 +183,7 @@ export function AnnouncementList() {
                   </p>
                 </div>
               ) : (
-                <StaggeredAnimation staggerDelay={100}>
+                <>
                   {filteredAnnouncements.map((announcement) => (
                     <AnnouncementCard
                       key={announcement.id}
@@ -186,7 +192,7 @@ export function AnnouncementList() {
                       showActions={true}
                     />
                   ))}
-                </StaggeredAnimation>
+                </>
               )}
 
               {hasMore && (
