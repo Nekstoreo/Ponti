@@ -22,6 +22,8 @@ export default function SchedulePage() {
 
   // Sincroniza el día seleccionado desde la query (?day=D|L|M|X|J|V|S)
   useEffect(() => {
+    if (!searchParams) return;
+
     const day = searchParams.get("day");
     if (day && dayKeys.includes(day as DayKey)) {
       setSelectedDay(day as DayKey);
@@ -31,6 +33,8 @@ export default function SchedulePage() {
 
   // Desplaza la vista a la clase indicada por query (?class=<id>)
   useEffect(() => {
+    if (!searchParams) return;
+
     const classId = searchParams.get("class");
     if (!classId) return;
     const el = document.getElementById(`class-${classId}`);
@@ -40,11 +44,6 @@ export default function SchedulePage() {
   }, [selectedDay, searchParams]);
 
   // helper functions for navigation
-  function addDays(date: Date, days: number) {
-    const copy = new Date(date);
-    copy.setDate(copy.getDate() + days);
-    return copy;
-  }
 
   function getWeekStart(date: Date) {
     const diff = (date.getDay() + 6) % 7; // convert so that Monday is 0

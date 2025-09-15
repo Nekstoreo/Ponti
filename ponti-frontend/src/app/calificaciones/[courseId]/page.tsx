@@ -14,15 +14,39 @@ import LoadingSkeleton from "@/components/animations/LoadingSkeleton";
 export default function CourseDetailPage() {
   const params = useParams();
   const router = useRouter();
-  const { 
-    courseGrades, 
-    getCourseById, 
-    isLoading, 
-    initializeData 
+  const {
+    courseGrades,
+    getCourseById,
+    isLoading,
+    initializeData
   } = useGradeStore();
 
-  const courseId = params.courseId as string;
-  const course = getCourseById(courseId);
+  // Verificar que params no sea null
+  const hasValidParams = params && params.courseId;
+  const courseId = hasValidParams ? (params.courseId as string) : '';
+  const course = hasValidParams ? getCourseById(courseId) : null;
+
+  // Redirigir si los parámetros son inválidos
+  useEffect(() => {
+    if (!hasValidParams) {
+      const timer = setTimeout(() => {
+        router.push("/calificaciones");
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [hasValidParams, router]);
+
+  // Redirigir si no se encuentra el curso después de cargar los datos
+  useEffect(() => {
+    if (hasValidParams && courseGrades.length > 0 && !course) {
+      const timer = setTimeout(() => {
+        router.push("/calificaciones");
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [hasValidParams, course, courseGrades.length, router]);
 
   useEffect(() => {
     if (courseGrades.length === 0) {
@@ -30,16 +54,31 @@ export default function CourseDetailPage() {
     }
   }, [courseGrades.length, initializeData]);
 
-  useEffect(() => {
-    // Si no se encuentra el curso después de cargar los datos, redirigir
-    if (courseGrades.length > 0 && !course) {
-      const timer = setTimeout(() => {
-        router.push("/calificaciones");
-      }, 3000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [course, courseGrades.length, router]);
+  // Mostrar parámetros inválidos
+  if (!hasValidParams) {
+    return (
+      <MainLayout>
+        <div className="px-4 pt-4 space-y-4" style={{ paddingBottom: 36 }}>
+          <Card className="max-w-2xl mx-auto">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-destructive">
+                <AlertTriangle className="h-5 w-5" />
+                Parámetros inválidos
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Los parámetros de la URL no son válidos.
+              </p>
+              <p className="text-sm text-muted-foreground mt-2">
+                Serás redirigido a la página de calificaciones en unos segundos...
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </MainLayout>
+    );
+  }
 
   if (isLoading) {
     return (
@@ -60,7 +99,7 @@ export default function CourseDetailPage() {
     );
   }
 
-  if (!course) {
+  if (!course && hasValidParams) {
     return (
       <MainLayout>
         <div className="px-4 pt-4 space-y-4" style={{ paddingBottom: 36 }}>
@@ -104,7 +143,7 @@ export default function CourseDetailPage() {
             </p>
           </div>
         </div>
-        <GradeDetail course={course} />
+        <GradeDetail course={course!} />
       </div>
     </MainLayout>
   );

@@ -42,8 +42,14 @@ function SharedScheduleContent() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!searchParams) {
+      setError("Parámetros de búsqueda no disponibles");
+      setIsLoading(false);
+      return;
+    }
+
     const data = searchParams.get("data");
-    
+
     if (!data) {
       setError("No se encontraron datos del horario en el enlace");
       setIsLoading(false);

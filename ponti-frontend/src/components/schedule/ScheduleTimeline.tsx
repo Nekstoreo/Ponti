@@ -26,15 +26,6 @@ function subjectColor(subject: string): string {
   return `hsl(${hue} 70% 90%)`;
 }
 
-const dayNames: { [key: string]: string } = {
-  D: "Domingo",
-  L: "Lunes",
-  M: "Martes",
-  X: "Miércoles",
-  J: "Jueves",
-  V: "Viernes",
-  S: "Sábado",
-};
 
 export default function ScheduleTimeline({
   viewMode = 'day',

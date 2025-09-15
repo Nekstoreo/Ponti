@@ -203,8 +203,10 @@ function SimuladorNotasContent() {
   };
 
   useEffect(() => {
+    if (!searchParams) return;
+
     const courseParam = searchParams.get('course');
-    
+
     if (courseParam) {
       try {
         const data: SimulatorData = JSON.parse(decodeURIComponent(courseParam));
@@ -416,7 +418,7 @@ function SimuladorNotasContent() {
     return text.substring(0, maxLength) + '...';
   };
 
-  if (!simulatorData && searchParams.get('course')) {
+  if (!simulatorData && searchParams && searchParams.get('course')) {
     return (
       <MainLayout>
         <div className="px-4 pt-4 space-y-6" style={{ paddingBottom: 36 }}>

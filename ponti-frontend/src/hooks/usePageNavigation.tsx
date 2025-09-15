@@ -12,6 +12,15 @@ export interface PageNavigationConfig {
 export function usePageNavigation(): PageNavigationConfig {
   const pathname = usePathname();
 
+  // Si pathname es null, mostrar configuración por defecto
+  if (!pathname) {
+    return {
+      showPageHeader: true,
+      title: "Ponti",
+      showBackButton: true,
+    };
+  }
+
   // Páginas principales accesibles desde la barra inferior - NO necesitan PageHeader
   const mainPages = ["/", "/horario", "/mapa", "/mas"];
 

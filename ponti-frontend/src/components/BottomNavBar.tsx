@@ -16,7 +16,7 @@ function Tab({
   const pathname = usePathname();
   const isActive = href === "/"
     ? pathname === "/"
-    : pathname.startsWith(href);
+    : pathname && pathname.startsWith(href);
 
   // Ya no existe pestaña de búsqueda
   const isSearchTab = false;
