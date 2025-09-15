@@ -1,13 +1,7 @@
 {
-  "degreeInfo": {
-    "description": "Ingeniería de Sistemas e Informática",
-    "sniesCode": "101533",
-    "school": "ESCUELA DE INGENIERÍAS",
-    "university": "Universidad Pontificia Bolivariana"
-  },
-  "curriculum": [
+  "academicHistory": [
     {
-      "semester": "I",
+      "period": "2022-01",
       "courses": [
         {
           "description": "Humanismo y Cultura Ciudadana",
@@ -380,7 +374,7 @@
       ]
     },
     {
-      "semester": "II",
+      "period": "2022-02",
       "courses": [
         {
           "description": "Ética general",
@@ -736,7 +730,7 @@
       ]
     },
     {
-      "semester": "III",
+      "period": "2023-01",
       "courses": [
         {
           "description": "Cristologia",
@@ -1094,7 +1088,7 @@
       ]
     },
     {
-      "semester": "IV",
+      "period": "2023-02",
       "courses": [
         {
           "description": "Algebra Lineal",
@@ -1401,7 +1395,7 @@
       ]
     },
     {
-      "semester": "V",
+      "period": "2024-01",
       "courses": [
         {
           "description": "Pensamiento creativo",
@@ -1809,7 +1803,7 @@
       ]
     },
     {
-      "semester": "VI",
+      "period": "2024-02",
       "courses": [
         {
           "description": "Proyecto aplicado en TIC 1",
@@ -2292,7 +2286,7 @@
       ]
     },
     {
-      "semester": "VII",
+      "period": "2025-01",
       "courses": [
         {
           "credits": 2,
@@ -2333,6 +2327,7 @@
             {
               "id": "GP-701-004",
               "type": "proyecto",
+              "score": 4.5,
               "maxScore": 5,
               "weight": 0.2,
               "dateSubmitted": "2025-06-09",
@@ -2342,6 +2337,7 @@
             {
               "id": "GP-701-005",
               "type": "parcial",
+              "score": 4.2,
               "maxScore": 5,
               "weight": 0.1,
               "dateSubmitted": "2025-06-19",
@@ -2379,6 +2375,7 @@
             {
               "id": "LF1-702-003",
               "type": "parcial",
+              "score": 4.3,
               "maxScore": 5,
               "weight": 0.3,
               "dateSubmitted": "2025-05-14",
@@ -2388,6 +2385,7 @@
             {
               "id": "LF1-702-004",
               "type": "presentacion",
+              "score": 4.4,
               "maxScore": 5,
               "weight": 0.25,
               "dateSubmitted": "2025-06-24",
@@ -2437,6 +2435,7 @@
             {
               "id": "MEF-703-004",
               "type": "laboratorio",
+              "score": 4.1,
               "maxScore": 5,
               "weight": 0.2,
               "dateSubmitted": "2025-06-04",
@@ -2446,6 +2445,7 @@
             {
               "id": "MEF-703-005",
               "type": "parcial",
+              "score": 4.2,
               "maxScore": 5,
               "weight": 0.1,
               "dateSubmitted": "2025-06-21",
@@ -2505,6 +2505,7 @@
             {
               "id": "SI-704-005",
               "type": "proyecto",
+              "score": 4.3,
               "maxScore": 5,
               "weight": 0.2,
               "dateSubmitted": "2025-06-27",
@@ -2514,6 +2515,7 @@
             {
               "id": "SI-704-006",
               "type": "parcial",
+              "score": 4.1,
               "maxScore": 5,
               "weight": 0.25,
               "dateSubmitted": "2025-04-04",
@@ -2563,6 +2565,7 @@
             {
               "id": "GCS-705-004",
               "type": "proyecto",
+              "score": 4.4,
               "maxScore": 5,
               "weight": 0.2,
               "dateSubmitted": "2025-04-01",
@@ -2572,6 +2575,7 @@
             {
               "id": "GCS-705-005",
               "type": "parcial",
+              "score": 4.2,
               "maxScore": 5,
               "weight": 0.1,
               "dateSubmitted": "2025-04-11",
@@ -2628,6 +2632,7 @@
             {
               "id": "am-005",
               "type": "proyecto",
+              "score": 4.5,
               "maxScore": 5,
               "weight": 0.2,
               "dateSubmitted": "2025-04-07",
@@ -2636,6 +2641,7 @@
             {
               "id": "am-006",
               "type": "parcial",
+              "score": 4.3,
               "maxScore": 5,
               "weight": 0.25,
               "dateSubmitted": "2025-04-17",
@@ -2681,6 +2687,7 @@
             {
               "id": "inn-004",
               "type": "presentacion",
+              "score": 4.4,
               "maxScore": 5,
               "weight": 0.25,
               "dateSubmitted": "2025-04-19",
@@ -2692,19 +2699,97 @@
       ]
     },
     {
-      "semester": "VIII",
+      "period": "2025-02",
       "courses": [
         {
           "description": "Linea de formación 2",
           "credits": 2,
           "prerequisites": [
             "Linea de formación 1"
-          ]
+          ],
+          "grades": [
+            {
+              "id": "LF2-801-001",
+              "type": "quiz",
+              "title": "Quiz de Conceptos Avanzados",
+              "score": 4.2,
+              "maxScore": 5,
+              "weight": 0.15,
+              "dateSubmitted": "2025-08-14",
+              "feedback": "Evaluación sobre conceptos avanzados de la línea de formación"
+            },
+            {
+              "id": "LF2-801-002",
+              "type": "trabajo",
+              "title": "Proyecto de Investigación Avanzada",
+              "score": 4.5,
+              "maxScore": 5,
+              "weight": 0.3,
+              "dateSubmitted": "2025-10-09",
+              "feedback": "Proyecto de investigación bien desarrollado"
+            },
+            {
+              "id": "LF2-801-003",
+              "type": "parcial",
+              "title": "Primer Parcial - Temas Avanzados",
+              "maxScore": 5,
+              "weight": 0.3,
+              "feedback": "Evaluación sobre temas avanzados"
+            },
+            {
+              "id": "LF2-801-004",
+              "type": "presentacion",
+              "title": "Presentación Final de Proyecto",
+              "maxScore": 5,
+              "weight": 0.25,
+              "feedback": "Presentación excepcional del proyecto final"
+            }
+          ],
+          "professor": "Dr. Elena Rodríguez"
         },
         {
           "description": "Emprendimiento y responsabilidad social",
           "credits": 2,
-          "prerequisites": []
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "ERS-802-001",
+              "type": "quiz",
+              "title": "Quiz de Conceptos Empresariales",
+              "score": 4.3,
+              "maxScore": 5,
+              "weight": 0.15,
+              "dateSubmitted": "2025-08-19",
+              "feedback": "Buena comprensión de conceptos empresariales básicos"
+            },
+            {
+              "id": "ERS-802-002",
+              "type": "trabajo",
+              "title": "Plan de Negocio Social",
+              "score": 4.6,
+              "maxScore": 5,
+              "weight": 0.3,
+              "dateSubmitted": "2025-10-14",
+              "feedback": "Plan de negocio muy bien estructurado con enfoque social"
+            },
+            {
+              "id": "ERS-802-003",
+              "type": "parcial",
+              "title": "Primer Parcial - Emprendimiento",
+              "maxScore": 5,
+              "weight": 0.3,
+              "feedback": "Buena comprensión de principios emprendedores"
+            },
+            {
+              "id": "ERS-802-004",
+              "type": "presentacion",
+              "title": "Presentación de Proyecto Empresarial",
+              "maxScore": 5,
+              "weight": 0.25,
+              "feedback": "Presentación convincente con enfoque en responsabilidad social"
+            }
+          ],
+          "professor": "Dra. Patricia Morales"
         },
         {
           "description": "Analitica de Datos",
@@ -2712,53 +2797,244 @@
           "prerequisites": [
             "Inteligencia Artificial",
             "Modelamiento matemático"
-          ]
+          ],
+          "grades": [
+            {
+              "id": "AD-803-001",
+              "type": "quiz",
+              "title": "Quiz de Estadística Descriptiva",
+              "score": 4.4,
+              "maxScore": 5,
+              "weight": 0.15,
+              "dateSubmitted": "2025-08-24",
+              "feedback": "Excelente comprensión de conceptos estadísticos básicos"
+            },
+            {
+              "id": "AD-803-002",
+              "type": "laboratorio",
+              "title": "Lab 1 - Análisis de Datos con Python",
+              "score": 4.3,
+              "maxScore": 5,
+              "weight": 0.25,
+              "dateSubmitted": "2025-10-19",
+              "feedback": "Implementación correcta de análisis de datos"
+            },
+            {
+              "id": "AD-803-003",
+              "type": "parcial",
+              "title": "Primer Parcial - Machine Learning",
+              "maxScore": 5,
+              "weight": 0.3,
+              "feedback": "Buena aplicación de algoritmos de machine learning"
+            },
+            {
+              "id": "AD-803-004",
+              "type": "proyecto",
+              "title": "Proyecto de Análisis Predictivo",
+              "maxScore": 5,
+              "weight": 0.3,
+              "feedback": "Proyecto excepcional con análisis predictivo completo"
+            }
+          ],
+          "professor": "Dr. Alejandro Torres"
         },
         {
           "description": "Regulación en TI",
           "credits": 2,
           "prerequisites": [
             "Contexto profesional"
-          ]
+          ],
+          "grades": [
+            {
+              "id": "RTI-804-001",
+              "type": "quiz",
+              "title": "Quiz de Normativas Básicas",
+              "score": 4.1,
+              "maxScore": 5,
+              "weight": 0.15,
+              "dateSubmitted": "2025-08-29",
+              "feedback": "Buena comprensión de normativas básicas en TI"
+            },
+            {
+              "id": "RTI-804-002",
+              "type": "trabajo",
+              "title": "Análisis de Marco Legal TI",
+              "score": 4.4,
+              "maxScore": 5,
+              "weight": 0.3,
+              "dateSubmitted": "2025-10-24",
+              "feedback": "Análisis muy completo del marco legal en TI"
+            },
+            {
+              "id": "RTI-804-003",
+              "type": "parcial",
+              "title": "Primer Parcial - Protección de Datos",
+              "maxScore": 5,
+              "weight": 0.3,
+              "feedback": "Buena comprensión de leyes de protección de datos"
+            },
+            {
+              "id": "RTI-804-004",
+              "type": "presentacion",
+              "title": "Presentación de Caso Regulatorio",
+              "maxScore": 5,
+              "weight": 0.25,
+              "feedback": "Presentación clara de caso regulatorio complejo"
+            }
+          ],
+          "professor": "Dr. Luis Martínez"
         },
         {
           "description": "Proyecto aplicado en TIC 2",
           "credits": 2,
           "prerequisites": [
             "Proyecto aplicado en TIC 1"
-          ]
+          ],
+          "grades": [
+            {
+              "id": "PAT2-805-001",
+              "type": "quiz",
+              "title": "Quiz de Metodologías Avanzadas",
+              "score": 4.5,
+              "maxScore": 5,
+              "weight": 0.15,
+              "dateSubmitted": "2025-09-04",
+              "feedback": "Excelente comprensión de metodologías avanzadas de proyecto"
+            },
+            {
+              "id": "PAT2-805-002",
+              "type": "trabajo",
+              "title": "Propuesta de Proyecto Avanzado",
+              "score": 4.4,
+              "maxScore": 5,
+              "weight": 0.25,
+              "dateSubmitted": "2025-10-29",
+              "feedback": "Propuesta muy bien estructurada y viable"
+            },
+            {
+              "id": "PAT2-805-003",
+              "type": "proyecto",
+              "title": "Desarrollo del Proyecto TIC Avanzado",
+              "maxScore": 5,
+              "weight": 0.45,
+              "feedback": "Proyecto excepcional con implementación completa"
+            },
+            {
+              "id": "PAT2-805-004",
+              "type": "presentacion",
+              "title": "Defensa Final del Proyecto",
+              "maxScore": 5,
+              "weight": 0.15,
+              "feedback": "Defensa sólida con respuestas técnicas precisas"
+            }
+          ],
+          "professor": "Ing. Marta Jiménez"
         },
         {
           "description": "Electiva Universitaria",
           "credits": 3,
-          "prerequisites": []
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "EU-806-001",
+              "type": "quiz",
+              "title": "Quiz de Fundamentos de la Materia",
+              "score": 4.2,
+              "maxScore": 5,
+              "weight": 0.1,
+              "dateSubmitted": "2025-09-09",
+              "feedback": "Buena comprensión de conceptos fundamentales"
+            },
+            {
+              "id": "EU-806-002",
+              "type": "laboratorio",
+              "title": "Práctica 1 - Aplicaciones Básicas",
+              "score": 4.4,
+              "maxScore": 5,
+              "weight": 0.15,
+              "dateSubmitted": "2025-11-04",
+              "feedback": "Excelente ejecución de prácticas aplicadas"
+            },
+            {
+              "id": "EU-806-003",
+              "type": "parcial",
+              "title": "Primer Parcial - Conceptos Avanzados",
+              "score": 4.3,
+              "maxScore": 5,
+              "weight": 0.25,
+              "dateSubmitted": "2025-12-04",
+              "feedback": "Buena comprensión de conceptos avanzados"
+            },
+            {
+              "id": "EU-806-004",
+              "type": "trabajo",
+              "title": "Proyecto de Investigación Aplicada",
+              "maxScore": 5,
+              "weight": 0.25,
+              "feedback": "Proyecto muy completo con aplicación práctica"
+            },
+            {
+              "id": "EU-806-005",
+              "type": "parcial",
+              "title": "Segundo Parcial - Integración",
+              "maxScore": 5,
+              "weight": 0.25,
+              "feedback": "Buena integración de conceptos aprendidos"
+            }
+          ],
+          "professor": "Dr. Roberto Vargas"
         },
         {
           "description": "Optativa CP",
           "credits": 3,
-          "prerequisites": []
-        }
-      ]
-    },
-    {
-      "semester": "IX",
-      "courses": [
-        {
-          "description": "Optativa Cl",
-          "credits": 3,
-          "prerequisites": []
-        },
-        {
-          "description": "Práctica Profesional",
-          "credits": 11,
-          "prerequisites": [
-            "Contexto profesional"
-          ]
-        },
-        {
-          "description": "Optativa Cl 2",
-          "credits": 3,
-          "prerequisites": []
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "OCP-807-001",
+              "type": "quiz",
+              "title": "Quiz de Conceptos Optativos",
+              "score": 4.3,
+              "maxScore": 5,
+              "weight": 0.12,
+              "dateSubmitted": "2025-09-14",
+              "feedback": "Excelente comprensión de conceptos optativos"
+            },
+            {
+              "id": "OCP-807-002",
+              "type": "trabajo",
+              "title": "Análisis Crítico de Tema Optativo",
+              "score": 4.6,
+              "maxScore": 5,
+              "weight": 0.2,
+              "dateSubmitted": "2025-11-09",
+              "feedback": "Análisis muy profundo y bien argumentado"
+            },
+            {
+              "id": "OCP-807-003",
+              "type": "parcial",
+              "title": "Primer Parcial - Temas Optativos",
+              "maxScore": 5,
+              "weight": 0.25,
+              "feedback": "Buena comprensión de temas optativos complejos"
+            },
+            {
+              "id": "OCP-807-004",
+              "type": "proyecto",
+              "title": "Proyecto de Aplicación Optativa",
+              "maxScore": 5,
+              "weight": 0.25,
+              "feedback": "Proyecto excepcional con aplicación innovadora"
+            },
+            {
+              "id": "OCP-807-005",
+              "type": "parcial",
+              "title": "Segundo Parcial - Integración Optativa",
+              "maxScore": 5,
+              "weight": 0.18,
+              "feedback": "Buena integración de conceptos optativos"
+            }
+          ],
+          "professor": "Dr. Roberto Vargas"
         }
       ]
     }
