@@ -4,8 +4,6 @@ import { useScheduleStore } from "@/store/scheduleStore";
 import { DayKey } from "@/data/types";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import ScheduleTimeline from "@/components/schedule/ScheduleTimeline";
 import { useState } from "react";
 import ClassDetailCard from "@/components/schedule/ClassDetailCard";
@@ -18,16 +16,9 @@ export default function SchedulePage() {
   const setSelectedDay = useScheduleStore((s) => s.setSelectedDay);
   const searchParams = useSearchParams();
   const dayKeys: DayKey[] = ["D", "L", "M", "X", "J", "V", "S"];
-  const [referenceMonday, setReferenceMonday] = useState(() => {
-    // Obtener lunes de esta semana (primera función getWeekStart del TimeNavigator)
-    const now = new Date();
-    const day = now.getDay();
-    const diff = now.getDate() - day + (day === 0 ? -6 : 1); // Ajustar cuando el día es domingo
-    const monday = new Date(now.setDate(diff));
-    monday.setHours(0, 0, 0, 0);
-    return monday;
-  });
+  const [referenceMonday, setReferenceMonday] = useState(() => getWeekStart(new Date()));
   const [detailBlock, setDetailBlock] = useState<import("@/data/types").ClassBlock | null>(null);
+  const [viewMode, setViewMode] = useState<'day' | 'week'>('day');
 
   // Sincroniza el día seleccionado desde la query (?day=D|L|M|X|J|V|S)
   useEffect(() => {
@@ -48,8 +39,6 @@ export default function SchedulePage() {
     }
   }, [selectedDay, searchParams]);
 
-  const [viewMode, setViewMode] = useState<'day' | 'week'>('day');
-
   // helper functions for navigation
   function addDays(date: Date, days: number) {
     const copy = new Date(date);
@@ -58,9 +47,11 @@ export default function SchedulePage() {
   }
 
   function getWeekStart(date: Date) {
-    const day = date.getDay();
-    const diff = date.getDate() - day + (day === 0 ? -6 : 1);
-    return new Date(date.setDate(diff));
+    const diff = (date.getDay() + 6) % 7; // convert so that Monday is 0
+    const monday = new Date(date);
+    monday.setDate(date.getDate() - diff);
+    monday.setHours(0, 0, 0, 0);
+    return monday;
   }
 
   return (
@@ -78,22 +69,16 @@ export default function SchedulePage() {
       </div>
 
       <div className={`flex-grow my-4 ${viewMode === 'week' ? 'overflow-hidden' : 'overflow-y-auto overflow-x-hidden'}`}>
-        {(!schedule[selectedDay] || schedule[selectedDay]?.length === 0) ? (
-          <div className="rounded-md border p-4 text-center text-sm text-muted-foreground">
-            No tienes clases este día. ¡Tiempo para recargar energías!
-          </div>
-        ) : (
-          <ScheduleTimeline
-            viewMode={viewMode}
-            blocks={schedule[selectedDay] || []}
-            weeklySchedule={schedule}
-            onBlockClick={(b) => {
-              setDetailBlock(b);
-            }}
-            showNowLine={selectedDay === dayKeyFromToday() && !!schedule[selectedDay]?.length}
-            referenceMonday={referenceMonday}
-          />
-        )}
+        <ScheduleTimeline
+          viewMode={viewMode}
+          blocks={schedule[selectedDay] || []}
+          weeklySchedule={schedule}
+          onBlockClick={(b) => {
+            setDetailBlock(b);
+          }}
+          showNowLine={selectedDay === dayKeyFromToday() && !!schedule[selectedDay]?.length}
+          referenceMonday={referenceMonday}
+        />
       </div>
 
       {/* Tarjeta de detalles fija en la parte inferior */}
@@ -105,9 +90,10 @@ export default function SchedulePage() {
 }
 
 function dayKeyFromToday(): DayKey {
-  const map: Record<number, DayKey> = { 0: "D", 1: "L", 2: "M", 3: "X", 4: "J", 5: "V", 6: "S" };
-  const jsDay = new Date().getDay();
-  return map[jsDay] ?? "D";
+  const today = new Date();
+  const index = (today.getDay() + 6) % 7; // Monday as 0, Sunday as 6
+  const map: DayKey[] = ["L", "M", "X", "J", "V", "S", "D"];
+  return map[index];
 }
 
 

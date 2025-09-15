@@ -3,7 +3,7 @@
 import { ClassBlock } from "@/data/types";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-const START_HOUR = 6;
+const START_HOUR = 5;
 const END_HOUR = 22; // 10 PM
 const HOUR_HEIGHT = 56; // px por hora
 
@@ -144,7 +144,7 @@ export default function ScheduleTimeline({
         <div className="overflow-auto" style={{ height: 'calc(86vh - 4rem)' }}>
           <div className="grid" style={{
               gridTemplateColumns: '60px repeat(7, minmax(150px, 1fr))',
-              gridTemplateRows: `auto repeat(${(END_HOUR - START_HOUR) * 2}, 30px) auto`,
+              gridTemplateRows: `auto repeat(${(END_HOUR - START_HOUR) * 2}, 30px)`,
               minWidth: '1200px'
           }}>
               {/* Capa de fondo blanco para la columna de horas */}
@@ -224,26 +224,6 @@ export default function ScheduleTimeline({
                   });
               })}
 
-              {/* Footer de días */}
-              <div className="bg-white z-20 col-start-1 col-end-2 border-r border-t" style={{gridRow: (END_HOUR - START_HOUR) * 2 + 3}} />
-              {/* Capa adicional para cubrir el footer */}
-              <div className="bg-white z-15 col-start-1 col-end-2" style={{ gridRow: (END_HOUR - START_HOUR) * 2 + 3 }} />
-              {(['D', 'L', 'M', 'X', 'J', 'V', 'S'] as const).map((dKey, i) => {
-                  const date = referenceMonday ? new Date(referenceMonday.getTime() + i * 24 * 60 * 60 * 1000) : new Date();
-                  const dayName = new Intl.DateTimeFormat("es-ES", {
-                    weekday: "short",
-                  }).format(date);
-                  const dayNumber = new Intl.DateTimeFormat("es-ES", {
-                    day: "numeric",
-                  }).format(date);
-                  
-                  return (
-                    <div key={dKey} className="sticky bottom-0 bg-background z-20 text-center font-medium text-sm py-2 border-t border-r" style={{gridColumn: i + 2, gridRow: (END_HOUR - START_HOUR) * 2 + 3}}>
-                        <div className="text-xs text-muted-foreground">{dayName}</div>
-                        <div className="text-sm font-bold">{dayNumber}</div>
-                    </div>
-                  );
-              })}
           </div>
       </div>
       )}
