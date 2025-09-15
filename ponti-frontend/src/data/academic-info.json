@@ -1,0 +1,2766 @@
+{
+  "degreeInfo": {
+    "description": "Ingeniería de Sistemas e Informática",
+    "sniesCode": "101533",
+    "school": "ESCUELA DE INGENIERÍAS",
+    "university": "Universidad Pontificia Bolivariana"
+  },
+  "curriculum": [
+    {
+      "semester": "I",
+      "courses": [
+        {
+          "description": "Humanismo y Cultura Ciudadana",
+          "credits": 2,
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "HCC-101-001",
+              "type": "quiz",
+              "title": "Quiz sobre Valores Ciudadanos",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2024-02-15",
+              "feedback": "Excelente comprensión de principios ciudadanos"
+            },
+            {
+              "id": "HCC-101-002",
+              "type": "trabajo",
+              "title": "Ensayo sobre Derechos Humanos",
+              "score": 4.5,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2024-03-10",
+              "feedback": "Análisis crítico muy bien desarrollado"
+            },
+            {
+              "id": "HCC-101-003",
+              "type": "parcial",
+              "title": "Primer Parcial - Fundamentos Éticos",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2024-04-05",
+              "feedback": "Buena comprensión de conceptos éticos"
+            },
+            {
+              "id": "HCC-101-004",
+              "type": "proyecto",
+              "title": "Proyecto de Impacto Social",
+              "score": 4.8,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2024-05-20",
+              "feedback": "Proyecto excepcional con alto impacto social"
+            },
+            {
+              "id": "HCC-101-005",
+              "type": "participacion",
+              "title": "Participación en Clase",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2024-06-15",
+              "feedback": "Participación activa y constructiva"
+            }
+          ],
+          "professor": "Dra. María González"
+        },
+        {
+          "description": "Cálculo Diferencial",
+          "credits": 3,
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "CAL-102-001",
+              "type": "quiz",
+              "title": "Quiz de Límites",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2024-02-20",
+              "feedback": "Buena comprensión de conceptos de límites"
+            },
+            {
+              "id": "CAL-102-002",
+              "type": "taller",
+              "title": "Taller de Derivadas",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2024-03-15",
+              "feedback": "Ejercicios bien resueltos con buena aplicación"
+            },
+            {
+              "id": "CAL-102-003",
+              "type": "parcial",
+              "title": "Primer Parcial - Límites y Continuidad",
+              "score": 3.8,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2024-04-12",
+              "feedback": "Conceptos básicos sólidos, reforzar continuidad"
+            },
+            {
+              "id": "CAL-102-004",
+              "type": "trabajo",
+              "title": "Problemas de Optimización",
+              "score": 4.5,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2024-05-08",
+              "feedback": "Excelente resolución de problemas de optimización"
+            },
+            {
+              "id": "CAL-102-005",
+              "type": "parcial",
+              "title": "Segundo Parcial - Aplicaciones",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2024-06-02",
+              "feedback": "Buena aplicación de conceptos de derivadas"
+            },
+            {
+              "id": "CAL-102-006",
+              "type": "quiz",
+              "title": "Quiz Final de Repaso",
+              "score": 4.6,
+              "maxScore": 5.0,
+              "weight": 0.05,
+              "dateSubmitted": "2024-06-18",
+              "feedback": "Excelente repaso general del curso"
+            }
+          ],
+          "professor": "Dr. Carlos Rodríguez"
+        },
+        {
+          "description": "Geometría analítica",
+          "credits": 3,
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "GEO-103-001",
+              "type": "quiz",
+              "title": "Quiz de Coordenadas",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.12,
+              "dateSubmitted": "2024-02-18",
+              "feedback": "Excelente manejo de sistemas de coordenadas"
+            },
+            {
+              "id": "GEO-103-002",
+              "type": "taller",
+              "title": "Taller de Rectas",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.18,
+              "dateSubmitted": "2024-03-22",
+              "feedback": "Buen desarrollo de ejercicios de rectas"
+            },
+            {
+              "id": "GEO-103-003",
+              "type": "parcial",
+              "title": "Primer Parcial - Rectas y Circunferencias",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2024-04-18",
+              "feedback": "Buena comprensión de ecuaciones geométricas"
+            },
+            {
+              "id": "GEO-103-004",
+              "type": "trabajo",
+              "title": "Proyecto de Cónicas",
+              "score": 4.7,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2024-05-15",
+              "feedback": "Proyecto excepcional con análisis profundo"
+            },
+            {
+              "id": "GEO-103-005",
+              "type": "parcial",
+              "title": "Segundo Parcial - Cónicas y Transformaciones",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2024-06-08",
+              "feedback": "Buena aplicación de transformaciones geométricas"
+            }
+          ],
+          "professor": "Dra. Ana López"
+        },
+        {
+          "description": "Matemáticas Discretas",
+          "credits": 3,
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "MAT-104-001",
+              "type": "quiz",
+              "title": "Quiz de Lógica Proposicional",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2024-02-25",
+              "feedback": "Excelente comprensión de conectivos lógicos"
+            },
+            {
+              "id": "MAT-104-002",
+              "type": "taller",
+              "title": "Taller de Conjuntos",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2024-03-28",
+              "feedback": "Buen manejo de operaciones con conjuntos"
+            },
+            {
+              "id": "MAT-104-003",
+              "type": "parcial",
+              "title": "Primer Parcial - Lógica y Conjuntos",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2024-04-25",
+              "feedback": "Buena comprensión de lógica y teoría de conjuntos"
+            },
+            {
+              "id": "MAT-104-004",
+              "type": "trabajo",
+              "title": "Proyecto de Grafos",
+              "score": 4.6,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2024-05-22",
+              "feedback": "Proyecto excepcional con aplicaciones prácticas"
+            },
+            {
+              "id": "MAT-104-005",
+              "type": "parcial",
+              "title": "Segundo Parcial - Combinatoria",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2024-06-12",
+              "feedback": "Conceptos básicos sólidos en combinatoria"
+            },
+            {
+              "id": "MAT-104-006",
+              "type": "quiz",
+              "title": "Quiz de Repaso Final",
+              "score": 4.5,
+              "maxScore": 5.0,
+              "weight": 0.05,
+              "dateSubmitted": "2024-06-20",
+              "feedback": "Excelente repaso general del curso"
+            }
+          ],
+          "professor": "Dr. Roberto Silva"
+        },
+        {
+          "description": "Introducción a la Ing. de Sistemas e Informática",
+          "credits": 1,
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "ISI-105-001",
+              "type": "quiz",
+              "title": "Quiz de Historia de la Computación",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2024-02-28",
+              "feedback": "Buen conocimiento de la evolución histórica"
+            },
+            {
+              "id": "ISI-105-002",
+              "type": "trabajo",
+              "title": "Ensayo sobre Ética en TI",
+              "score": 4.5,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2024-04-08",
+              "feedback": "Ensayo muy reflexivo sobre ética profesional"
+            },
+            {
+              "id": "ISI-105-003",
+              "type": "parcial",
+              "title": "Parcial Único - Fundamentos",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.4,
+              "dateSubmitted": "2024-05-25",
+              "feedback": "Buena comprensión integral de fundamentos"
+            },
+            {
+              "id": "ISI-105-004",
+              "type": "participacion",
+              "title": "Participación y Asistencia",
+              "score": 4.8,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2024-06-22",
+              "feedback": "Participación excepcional en todas las clases"
+            }
+          ],
+          "professor": "Dr. Luis Martínez"
+        },
+        {
+          "description": "Taller de sistemas operativos",
+          "credits": 2,
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "TSO-106-001",
+              "type": "laboratorio",
+              "title": "Lab 1 - Instalación de SO",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2024-03-05",
+              "feedback": "Instalación correcta, configuración básica adecuada"
+            },
+            {
+              "id": "TSO-106-002",
+              "type": "laboratorio",
+              "title": "Lab 2 - Comandos Básicos",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2024-03-19",
+              "feedback": "Excelente manejo de comandos de línea de comandos"
+            },
+            {
+              "id": "TSO-106-003",
+              "type": "quiz",
+              "title": "Quiz de Procesos",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2024-04-15",
+              "feedback": "Buena comprensión de gestión de procesos"
+            },
+            {
+              "id": "TSO-106-004",
+              "type": "laboratorio",
+              "title": "Lab 3 - Gestión de Archivos",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2024-05-03",
+              "feedback": "Excelente manejo de permisos y sistemas de archivos"
+            },
+            {
+              "id": "TSO-106-005",
+              "type": "proyecto",
+              "title": "Proyecto Final - Scripting",
+              "score": 4.6,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2024-06-10",
+              "feedback": "Scripts muy bien desarrollados y funcionales"
+            },
+            {
+              "id": "TSO-106-006",
+              "type": "parcial",
+              "title": "Parcial Final",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2024-06-25",
+              "feedback": "Buena comprensión general de sistemas operativos"
+            }
+          ],
+          "professor": "Ing. Javier Torres"
+        }
+      ]
+    },
+    {
+      "semester": "II",
+      "courses": [
+        {
+          "description": "Ética general",
+          "credits": 1,
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "ETG-201-001",
+              "type": "quiz",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2024-08-15",
+              "feedback": "Buena comprensión de principios éticos básicos"
+            },
+            {
+              "id": "ETG-201-002",
+              "type": "trabajo",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2024-09-20",
+              "feedback": "Análisis muy bien estructurado y reflexivo"
+            },
+            {
+              "id": "ETG-201-003",
+              "type": "parcial",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.4,
+              "dateSubmitted": "2024-11-10",
+              "feedback": "Buena aplicación de teorías éticas"
+            },
+            {
+              "id": "ETG-201-004",
+              "type": "participacion",
+              "score": 4.6,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2024-12-15",
+              "feedback": "Participación excepcional con reflexiones profundas"
+            }
+          ],
+          "professor": "Dra. Patricia Morales"
+        },
+        {
+          "description": "Lengua y cultura",
+          "credits": 2,
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "LCU-202-001",
+              "type": "quiz",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2024-08-20",
+              "feedback": "Excelente dominio de reglas gramaticales"
+            },
+            {
+              "id": "LCU-202-002",
+              "type": "trabajo",
+              "score": 4.5,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2024-09-25",
+              "feedback": "Ensayo muy bien argumentado culturalmente"
+            },
+            {
+              "id": "LCU-202-003",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2024-10-30",
+              "feedback": "Buenas habilidades de comunicación escrita"
+            },
+            {
+              "id": "LCU-202-004",
+              "type": "proyecto",
+              "score": 4.7,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2024-12-05",
+              "feedback": "Proyecto excepcional con investigación profunda"
+            },
+            {
+              "id": "LCU-202-005",
+              "type": "participacion",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2024-12-20",
+              "feedback": "Participación activa en debates culturales"
+            }
+          ],
+          "professor": "Dra. Carmen Ruiz"
+        },
+        {
+          "description": "Cálculo integral",
+          "credits": 3,
+          "prerequisites": [
+            "Cálculo Diferencial"
+          ],
+          "grades": [
+            {
+              "id": "CIN-203-001",
+              "type": "quiz",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2024-08-25",
+              "feedback": "Buena comprensión de integrales básicas"
+            },
+            {
+              "id": "CIN-203-002",
+              "type": "taller",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2024-09-30",
+              "feedback": "Excelente manejo de técnicas de integración"
+            },
+            {
+              "id": "CIN-203-003",
+              "type": "parcial",
+              "score": 3.9,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2024-11-05",
+              "feedback": "Conceptos sólidos, reforzar algunas técnicas"
+            },
+            {
+              "id": "CIN-203-004",
+              "type": "trabajo",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2024-11-25",
+              "feedback": "Excelente aplicación geométrica de integrales"
+            },
+            {
+              "id": "CIN-203-005",
+              "type": "parcial",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2024-12-18",
+              "feedback": "Buena comprensión de integrales definidas"
+            },
+            {
+              "id": "CIN-203-006",
+              "type": "quiz",
+              "score": 4.5,
+              "maxScore": 5.0,
+              "weight": 0.05,
+              "dateSubmitted": "2024-12-22",
+              "feedback": "Excelente repaso general del cálculo integral"
+            }
+          ],
+          "professor": "Dr. Andrés Vega"
+        },
+        {
+          "description": "Fisica mecánica",
+          "credits": 3,
+          "prerequisites": [
+            "Cálculo Diferencial"
+          ],
+          "grades": [
+            {
+              "id": "FME-204-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2024-08-30",
+              "feedback": "Excelente comprensión de conceptos cinemáticos"
+            },
+            {
+              "id": "FME-204-002",
+              "type": "laboratorio",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2024-09-15",
+              "feedback": "Experimento bien ejecutado con buenos resultados"
+            },
+            {
+              "id": "FME-204-003",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2024-10-25",
+              "feedback": "Buena aplicación de las leyes de Newton"
+            },
+            {
+              "id": "FME-204-004",
+              "type": "laboratorio",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2024-11-15",
+              "feedback": "Excelente verificación experimental de conservación"
+            },
+            {
+              "id": "FME-204-005",
+              "type": "trabajo",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2024-12-01",
+              "feedback": "Problemas resueltos con excelente rigor matemático"
+            },
+            {
+              "id": "FME-204-006",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2024-12-20",
+              "feedback": "Conceptos de energía y momento bien comprendidos"
+            }
+          ],
+          "professor": "Dr. Felipe Castro"
+        },
+        {
+          "description": "Lógica de Programación",
+          "credits": 3,
+          "prerequisites": [
+            "Matemáticas Discretas"
+          ],
+          "grades": [
+            {
+              "id": "LPR-205-001",
+              "type": "quiz",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2024-09-05",
+              "feedback": "Excelente comprensión de conceptos algorítmicos"
+            },
+            {
+              "id": "LPR-205-002",
+              "type": "laboratorio",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2024-09-20",
+              "feedback": "Pseudocódigo bien estructurado y claro"
+            },
+            {
+              "id": "LPR-205-003",
+              "type": "parcial",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2024-10-20",
+              "feedback": "Buena implementación de estructuras de control"
+            },
+            {
+              "id": "LPR-205-004",
+              "type": "laboratorio",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2024-11-10",
+              "feedback": "Excelente modularización con funciones"
+            },
+            {
+              "id": "LPR-205-005",
+              "type": "proyecto",
+              "score": 4.6,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2024-12-08",
+              "feedback": "Proyecto funcional y bien diseñado"
+            },
+            {
+              "id": "LPR-205-006",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2024-12-22",
+              "feedback": "Conceptos de arrays y archivos comprendidos"
+            }
+          ],
+          "professor": "Ing. Laura Mendoza"
+        },
+        {
+          "description": "Redes de datos",
+          "credits": 4,
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "RED-206-001",
+              "type": "quiz",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2024-09-10",
+              "feedback": "Buena comprensión del modelo OSI"
+            },
+            {
+              "id": "RED-206-002",
+              "type": "laboratorio",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2024-09-25",
+              "feedback": "Configuración de red implementada correctamente"
+            },
+            {
+              "id": "RED-206-003",
+              "type": "parcial",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2024-10-30",
+              "feedback": "Excelente dominio de fundamentos de redes"
+            },
+            {
+              "id": "RED-206-004",
+              "type": "laboratorio",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2024-11-20",
+              "feedback": "Buena implementación de protocolos TCP/IP"
+            },
+            {
+              "id": "RED-206-005",
+              "type": "proyecto",
+              "score": 4.5,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2024-12-10",
+              "feedback": "Proyecto de red empresarial muy completo"
+            },
+            {
+              "id": "RED-206-006",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2024-12-23",
+              "feedback": "Buen conocimiento de conceptos de seguridad"
+            }
+          ],
+          "professor": "Ing. Diego Ramírez"
+        }
+      ]
+    },
+    {
+      "semester": "III",
+      "courses": [
+        {
+          "description": "Cristologia",
+          "credits": 2,
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "CRI-301-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2025-02-10",
+              "feedback": "Buena comprensión de fundamentos cristológicos"
+            },
+            {
+              "id": "CRI-301-002",
+              "type": "trabajo",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-03-15",
+              "feedback": "Ensayo teológico muy bien argumentado"
+            },
+            {
+              "id": "CRI-301-003",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2025-04-20",
+              "feedback": "Buen conocimiento del desarrollo histórico"
+            },
+            {
+              "id": "CRI-301-004",
+              "type": "proyecto",
+              "score": 4.6,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2025-05-25",
+              "feedback": "Proyecto de investigación excepcional"
+            },
+            {
+              "id": "CRI-301-005",
+              "type": "participacion",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2025-06-15",
+              "feedback": "Participación activa en debates teológicos"
+            }
+          ],
+          "professor": "Pbro. Gabriel Santos"
+        },
+        {
+          "description": "Optativa CBD",
+          "credits": 3,
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "OCBD-302-001",
+              "type": "quiz",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.12,
+              "dateSubmitted": "2025-02-15",
+              "feedback": "Excelente dominio de conceptos fundamentales"
+            },
+            {
+              "id": "OCBD-302-002",
+              "type": "trabajo",
+              "score": 4.5,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2025-03-20",
+              "feedback": "Análisis crítico muy bien desarrollado"
+            },
+            {
+              "id": "OCBD-302-003",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-04-25",
+              "feedback": "Buen dominio de fundamentos teóricos"
+            },
+            {
+              "id": "OCBD-302-004",
+              "type": "proyecto",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-05-30",
+              "feedback": "Proyecto aplicado muy completo"
+            },
+            {
+              "id": "OCBD-302-005",
+              "type": "parcial",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.18,
+              "dateSubmitted": "2025-06-20",
+              "feedback": "Buena aplicación práctica de conceptos"
+            }
+          ],
+          "professor": "Dr. Roberto Vargas"
+        },
+        {
+          "description": "Programación y diseño orientado a objetos",
+          "credits": 3,
+          "prerequisites": [
+            "Lógica de Programación"
+          ],
+          "grades": [
+            {
+              "id": "PDOO-303-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2025-02-20",
+              "feedback": "Excelente comprensión de conceptos OOP"
+            },
+            {
+              "id": "PDOO-303-002",
+              "type": "laboratorio",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2025-03-05",
+              "feedback": "Implementación correcta de clases y objetos"
+            },
+            {
+              "id": "PDOO-303-003",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-04-10",
+              "feedback": "Buen dominio de principios OOP básicos"
+            },
+            {
+              "id": "PDOO-303-004",
+              "type": "laboratorio",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2025-05-05",
+              "feedback": "Excelente aplicación de herencia y polimorfismo"
+            },
+            {
+              "id": "PDOO-303-005",
+              "type": "proyecto",
+              "score": 4.5,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2025-05-25",
+              "feedback": "Sistema muy bien diseñado con principios OOP"
+            },
+            {
+              "id": "PDOO-303-006",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-06-18",
+              "feedback": "Conceptos de patrones de diseño comprendidos"
+            }
+          ],
+          "professor": "Ing. Marta Jiménez"
+        },
+        {
+          "description": "Teoria de la computación",
+          "credits": 3,
+          "prerequisites": [
+            "Matemáticas Discretas"
+          ],
+          "grades": [
+            {
+              "id": "TC-304-001",
+              "type": "quiz",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.12,
+              "dateSubmitted": "2025-02-25",
+              "feedback": "Buena comprensión de autómatas finitos"
+            },
+            {
+              "id": "TC-304-002",
+              "type": "trabajo",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.18,
+              "dateSubmitted": "2025-03-30",
+              "feedback": "Excelente análisis de complejidad algorítmica"
+            },
+            {
+              "id": "TC-304-003",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-04-15",
+              "feedback": "Conceptos de autómatas comprendidos"
+            },
+            {
+              "id": "TC-304-004",
+              "type": "trabajo",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2025-05-20",
+              "feedback": "Proyecto de máquinas de Turing muy bien desarrollado"
+            },
+            {
+              "id": "TC-304-005",
+              "type": "parcial",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-06-12",
+              "feedback": "Buena comprensión de computabilidad"
+            }
+          ],
+          "professor": "Dr. Alejandro Torres"
+        },
+        {
+          "description": "Procesos Estocásticos",
+          "credits": 3,
+          "prerequisites": [
+            "Cálculo integral"
+          ],
+          "grades": [
+            {
+              "id": "PE-305-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2025-03-05",
+              "feedback": "Excelente comprensión de conceptos de probabilidad"
+            },
+            {
+              "id": "PE-305-002",
+              "type": "taller",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2025-03-25",
+              "feedback": "Ejercicios sobre variables aleatorias discretas y continuas"
+            },
+            {
+              "id": "PE-305-003",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-04-20",
+              "feedback": "Evaluación sobre procesos estocásticos básicos"
+            },
+            {
+              "id": "PE-305-004",
+              "type": "trabajo",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2025-05-15",
+              "feedback": "Análisis y aplicación de cadenas de Markov"
+            },
+            {
+              "id": "PE-305-005",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-06-08",
+              "feedback": "Evaluación sobre aplicaciones de procesos estocásticos"
+            },
+            {
+              "id": "PE-305-006",
+              "type": "quiz",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.05,
+              "dateSubmitted": "2025-06-22",
+              "feedback": "Evaluación de repaso general del curso"
+            }
+          ],
+          "professor": "Dr. Fernando Ruiz"
+        },
+        {
+          "description": "Telematica",
+          "credits": 3,
+          "prerequisites": [
+            "Redes de datos"
+          ],
+          "grades": [
+            {
+              "id": "TEL-306-001",
+              "type": "quiz",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2025-03-10",
+              "feedback": "Evaluación sobre conceptos básicos de telecomunicaciones"
+            },
+            {
+              "id": "TEL-306-002",
+              "type": "laboratorio",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2025-03-30",
+              "feedback": "Configuración básica de equipos de telecomunicaciones"
+            },
+            {
+              "id": "TEL-306-003",
+              "type": "parcial",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-04-25",
+              "feedback": "Evaluación sobre redes de telecomunicaciones y protocolos"
+            },
+            {
+              "id": "TEL-306-004",
+              "type": "laboratorio",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2025-05-20",
+              "feedback": "Análisis y procesamiento de señales de telecomunicaciones"
+            },
+            {
+              "id": "TEL-306-005",
+              "type": "proyecto",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2025-06-05",
+              "feedback": "Diseño e implementación de una red telefónica básica"
+            },
+            {
+              "id": "TEL-306-006",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-06-25",
+              "feedback": "Evaluación sobre tecnologías avanzadas de telecomunicaciones"
+            }
+          ],
+          "professor": "Ing. Diego Ramírez"
+        }
+      ]
+    },
+    {
+      "semester": "IV",
+      "courses": [
+        {
+          "description": "Algebra Lineal",
+          "credits": 3,
+          "prerequisites": [
+            "Geometría analítica"
+          ],
+          "grades": [
+            {
+              "id": "AL-401-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2025-08-15",
+              "feedback": "Evaluación sobre operaciones con vectores y espacios vectoriales"
+            },
+            {
+              "id": "AL-401-002",
+              "type": "taller",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2025-09-10",
+              "feedback": "Ejercicios sobre operaciones con matrices y determinantes"
+            },
+            {
+              "id": "AL-401-003",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-10-15",
+              "feedback": "Evaluación sobre espacios vectoriales y transformaciones lineales"
+            },
+            {
+              "id": "AL-401-004",
+              "type": "trabajo",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2025-11-10",
+              "feedback": "Aplicaciones del álgebra lineal en ingeniería"
+            },
+            {
+              "id": "AL-401-005",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-12-05",
+              "feedback": "Evaluación sobre valores propios y diagonalización"
+            },
+            {
+              "id": "AL-401-006",
+              "type": "quiz",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.05,
+              "dateSubmitted": "2025-12-20",
+              "feedback": "Evaluación de repaso general del curso"
+            }
+          ],
+          "professor": "Dr. Andrés Vega"
+        },
+        {
+          "description": "Bases de datos",
+          "credits": 3,
+          "prerequisites": [
+            "Lógica de Programación"
+          ],
+          "grades": [
+            {
+              "id": "BD-402-001",
+              "type": "quiz",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2025-08-20",
+              "feedback": "Evaluación sobre conceptos del modelo relacional"
+            },
+            {
+              "id": "BD-402-002",
+              "type": "laboratorio",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2025-09-15",
+              "feedback": "Diseño de esquemas de bases de datos"
+            },
+            {
+              "id": "BD-402-003",
+              "type": "parcial",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-10-20",
+              "feedback": "Evaluación sobre consultas SQL básicas"
+            },
+            {
+              "id": "BD-402-004",
+              "type": "laboratorio",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2025-11-15",
+              "feedback": "Implementación de consultas SQL avanzadas"
+            },
+            {
+              "id": "BD-402-005",
+              "type": "proyecto",
+              "score": 4.5,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2025-12-10",
+              "feedback": "Desarrollo completo de un sistema de base de datos"
+            },
+            {
+              "id": "BD-402-006",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-12-22",
+              "feedback": "Evaluación sobre normalización y optimización"
+            }
+          ],
+          "professor": "Ing. Laura Mendoza"
+        },
+        {
+          "description": "Arquitectura de computadores",
+          "credits": 2,
+          "prerequisites": [
+            "Taller de sistemas operativos"
+          ],
+          "grades": [
+            {
+              "id": "AC-403-001",
+              "type": "quiz",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2025-08-25",
+              "feedback": "Evaluación sobre componentes básicos de computadores"
+            },
+            {
+              "id": "AC-403-002",
+              "type": "laboratorio",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2025-09-20",
+              "feedback": "Práctica de ensamblaje de componentes de computador"
+            },
+            {
+              "id": "AC-403-003",
+              "type": "parcial",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2025-10-25",
+              "feedback": "Evaluación sobre arquitectura de procesadores"
+            },
+            {
+              "id": "AC-403-004",
+              "type": "trabajo",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2025-11-20",
+              "feedback": "Análisis de rendimiento de diferentes arquitecturas"
+            },
+            {
+              "id": "AC-403-005",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2025-12-15",
+              "feedback": "Evaluación sobre sistemas de memoria y entrada/salida"
+            }
+          ],
+          "professor": "Ing. Javier Torres"
+        },
+        {
+          "description": "Estructuras de datos y algoritmos",
+          "credits": 3,
+          "prerequisites": [
+            "Programación y diseño orientado a objetos"
+          ],
+          "grades": [
+            {
+              "id": "EDA-404-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2025-08-30",
+              "feedback": "Evaluación sobre análisis de complejidad algorítmica"
+            },
+            {
+              "id": "EDA-404-002",
+              "type": "laboratorio",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2025-09-25",
+              "feedback": "Implementación de listas enlazadas y pilas"
+            },
+            {
+              "id": "EDA-404-003",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-10-30",
+              "feedback": "Evaluación sobre estructuras de datos básicas"
+            },
+            {
+              "id": "EDA-404-004",
+              "type": "laboratorio",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2025-11-25",
+              "feedback": "Implementación de árboles y grafos"
+            },
+            {
+              "id": "EDA-404-005",
+              "type": "proyecto",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2025-12-12",
+              "feedback": "Implementación y análisis de algoritmos de ordenamiento"
+            },
+            {
+              "id": "EDA-404-006",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-12-25",
+              "feedback": "Evaluación sobre algoritmos de búsqueda y grafos"
+            }
+          ],
+          "professor": "Dr. Roberto Silva"
+        },
+        {
+          "description": "Ingenieria de software",
+          "credits": 3,
+          "prerequisites": [
+            "Programación y diseño orientado a objetos"
+          ],
+          "grades": [
+            {
+              "id": "IS-405-001",
+              "type": "quiz",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2025-09-05",
+              "feedback": "Evaluación sobre modelos de ciclo de vida del software"
+            },
+            {
+              "id": "IS-405-002",
+              "type": "trabajo",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2025-10-05",
+              "feedback": "Análisis y documentación de requisitos de software"
+            },
+            {
+              "id": "IS-405-003",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-11-05",
+              "feedback": "Evaluación sobre metodologías de desarrollo"
+            },
+            {
+              "id": "IS-405-004",
+              "type": "proyecto",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2025-12-01",
+              "feedback": "Diseño completo de arquitectura de software"
+            },
+            {
+              "id": "IS-405-005",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2025-12-28",
+              "feedback": "Evaluación sobre calidad de software y testing"
+            }
+          ],
+          "professor": "Ing. Marta Jiménez"
+        }
+      ]
+    },
+    {
+      "semester": "V",
+      "courses": [
+        {
+          "description": "Pensamiento creativo",
+          "credits": 2,
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "PC-501-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-02-10",
+              "feedback": "Evaluación sobre conceptos básicos de creatividad"
+            },
+            {
+              "id": "PC-501-002",
+              "type": "trabajo",
+              "score": 4.5,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2026-03-15",
+              "feedback": "Desarrollo de un proyecto creativo personal"
+            },
+            {
+              "id": "PC-501-003",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2026-04-20",
+              "feedback": "Evaluación sobre técnicas y metodologías creativas"
+            },
+            {
+              "id": "PC-501-004",
+              "type": "participacion",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-06-15",
+              "feedback": "Evaluación de participación en talleres creativos"
+            }
+          ],
+          "professor": "Dra. Patricia Morales"
+        },
+        {
+          "description": "Contexto profesional",
+          "credits": 1,
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "CP-502-001",
+              "type": "quiz",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-02-15",
+              "feedback": "Evaluación sobre ética y responsabilidad profesional"
+            },
+            {
+              "id": "CP-502-002",
+              "type": "trabajo",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.35,
+              "dateSubmitted": "2026-04-10",
+              "feedback": "Análisis de dilemas éticos en el contexto profesional"
+            },
+            {
+              "id": "CP-502-003",
+              "type": "parcial",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2026-06-10",
+              "feedback": "Evaluación sobre contexto laboral y profesional"
+            },
+            {
+              "id": "CP-502-004",
+              "type": "participacion",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2026-06-20",
+              "feedback": "Evaluación de participación activa en clase"
+            }
+          ],
+          "professor": "Dra. Carmen Ruiz"
+        },
+        {
+          "description": "Inteligencia Artificial",
+          "credits": 3,
+          "prerequisites": [
+            "Estructuras de datos y algoritmos"
+          ],
+          "grades": [
+            {
+              "id": "IA-503-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2026-02-20",
+              "feedback": "Evaluación sobre conceptos básicos de IA"
+            },
+            {
+              "id": "IA-503-002",
+              "type": "laboratorio",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-03-10",
+              "feedback": "Implementación de algoritmos de búsqueda en IA"
+            },
+            {
+              "id": "IA-503-003",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-04-15",
+              "feedback": "Evaluación sobre algoritmos fundamentales de IA"
+            },
+            {
+              "id": "IA-503-004",
+              "type": "laboratorio",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-05-10",
+              "feedback": "Implementación de algoritmos de machine learning"
+            },
+            {
+              "id": "IA-503-005",
+              "type": "proyecto",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2026-05-30",
+              "feedback": "Desarrollo de un sistema de IA completo"
+            },
+            {
+              "id": "IA-503-006",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-06-18",
+              "feedback": "Evaluación sobre aplicaciones prácticas de IA"
+            }
+          ],
+          "professor": "Dr. Alejandro Torres"
+        },
+        {
+          "description": "Modelamiento matemático",
+          "credits": 3,
+          "prerequisites": [
+            "Cálculo integral",
+            "Algebra Lineal"
+          ],
+          "grades": [
+            {
+              "id": "MM-504-001",
+              "type": "quiz",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2026-02-25",
+              "feedback": "Evaluación sobre modelos matemáticos básicos"
+            },
+            {
+              "id": "MM-504-002",
+              "type": "taller",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-03-20",
+              "feedback": "Ejercicios de optimización matemática"
+            },
+            {
+              "id": "MM-504-003",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-04-25",
+              "feedback": "Evaluación sobre ecuaciones diferenciales"
+            },
+            {
+              "id": "MM-504-004",
+              "type": "trabajo",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2026-05-20",
+              "feedback": "Desarrollo de un modelo matemático aplicado"
+            },
+            {
+              "id": "MM-504-005",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-06-15",
+              "feedback": "Evaluación sobre simulación y modelado"
+            },
+            {
+              "id": "MM-504-006",
+              "type": "quiz",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.05,
+              "dateSubmitted": "2026-06-25",
+              "feedback": "Evaluación de repaso general del curso"
+            }
+          ],
+          "professor": "Dr. Fernando Ruiz"
+        },
+        {
+          "description": "Sistemas operativos",
+          "credits": 3,
+          "prerequisites": [
+            "Arquitectura de computadores",
+            "Estructuras de datos y algoritmos"
+          ],
+          "grades": [
+            {
+              "id": "SO-505-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2026-03-05",
+              "feedback": "Evaluación sobre conceptos básicos de sistemas operativos"
+            },
+            {
+              "id": "SO-505-002",
+              "type": "laboratorio",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-03-25",
+              "feedback": "Práctica de gestión de procesos en SO"
+            },
+            {
+              "id": "SO-505-003",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-04-30",
+              "feedback": "Evaluación sobre gestión de procesos y memoria"
+            },
+            {
+              "id": "SO-505-004",
+              "type": "laboratorio",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-05-25",
+              "feedback": "Implementación de sistemas de archivos"
+            },
+            {
+              "id": "SO-505-005",
+              "type": "proyecto",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2026-06-12",
+              "feedback": "Desarrollo de un simulador de sistema operativo"
+            },
+            {
+              "id": "SO-505-006",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-06-28",
+              "feedback": "Evaluación sobre concurrencia y sincronización"
+            }
+          ],
+          "professor": "Ing. Javier Torres"
+        },
+        {
+          "description": "Plataformas de programación empresarial",
+          "credits": 3,
+          "prerequisites": [
+            "Bases de datos",
+            "Estructuras de datos y algoritmos"
+          ],
+          "grades": [
+            {
+              "id": "PPE-506-001",
+              "type": "quiz",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2026-03-10",
+              "feedback": "Evaluación sobre frameworks empresariales"
+            },
+            {
+              "id": "PPE-506-002",
+              "type": "laboratorio",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-03-30",
+              "feedback": "Desarrollo de aplicaciones web empresariales"
+            },
+            {
+              "id": "PPE-506-003",
+              "type": "parcial",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-05-05",
+              "feedback": "Evaluación sobre arquitecturas empresariales",
+              "title": "Primer Parcial - Arquitecturas"
+            },
+            {
+              "id": "PPE-506-004",
+              "type": "laboratorio",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-05-30",
+              "feedback": "Desarrollo de APIs y servicios web"
+            },
+            {
+              "id": "PPE-506-005",
+              "type": "proyecto",
+              "score": 4.5,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2026-06-20",
+              "feedback": "Desarrollo de un sistema empresarial completo"
+            },
+            {
+              "id": "PPE-506-006",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-06-30",
+              "feedback": "Evaluación sobre integración de sistemas"
+            }
+          ],
+          "professor": "Ing. Marta Jiménez"
+        },
+        {
+          "description": "Ti en las Organizaciones",
+          "credits": 3,
+          "prerequisites": [
+            "Ingenieria de software"
+          ],
+          "grades": [
+            {
+              "id": "TIO-507-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2026-03-15",
+              "feedback": "Evaluación sobre gestión de TI en organizaciones"
+            },
+            {
+              "id": "TIO-507-002",
+              "type": "trabajo",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2026-04-10",
+              "feedback": "Análisis de casos de implementación de TI"
+            },
+            {
+              "id": "TIO-507-003",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-05-15",
+              "feedback": "Evaluación sobre estrategias de TI empresarial"
+            },
+            {
+              "id": "TIO-507-004",
+              "type": "proyecto",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-06-05",
+              "feedback": "Diseño de estrategia de transformación digital"
+            },
+            {
+              "id": "TIO-507-005",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2026-06-25",
+              "feedback": "Evaluación sobre gobernanza y gestión de TI"
+            }
+          ],
+          "professor": "Dr. Luis Martínez"
+        }
+      ]
+    },
+    {
+      "semester": "VI",
+      "courses": [
+        {
+          "description": "Proyecto aplicado en TIC 1",
+          "credits": 2,
+          "prerequisites": [
+            "Ingenieria de software"
+          ],
+          "grades": [
+            {
+              "id": "PAT1-601-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-08-15",
+              "feedback": "Evaluación sobre metodologías de gestión de proyectos"
+            },
+            {
+              "id": "PAT1-601-002",
+              "type": "trabajo",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-09-20",
+              "feedback": "Desarrollo de propuesta de proyecto TIC"
+            },
+            {
+              "id": "PAT1-601-003",
+              "type": "proyecto",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.45,
+              "dateSubmitted": "2026-12-10",
+              "feedback": "Implementación completa del proyecto TIC"
+            },
+            {
+              "id": "PAT1-601-004",
+              "type": "presentacion",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-12-20",
+              "feedback": "Presentación y defensa del proyecto"
+            }
+          ],
+          "professor": "Ing. Marta Jiménez"
+        },
+        {
+          "description": "Metodologia de la Investigación",
+          "credits": 2,
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "MI-602-001",
+              "type": "quiz",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-08-20",
+              "feedback": "Evaluación sobre fundamentos de investigación"
+            },
+            {
+              "id": "MI-602-002",
+              "type": "trabajo",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2026-10-15",
+              "feedback": "Desarrollo de protocolo de investigación"
+            },
+            {
+              "id": "MI-602-003",
+              "type": "parcial",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.4,
+              "dateSubmitted": "2026-12-05",
+              "feedback": "Evaluación sobre metodologías de investigación"
+            },
+            {
+              "id": "MI-602-004",
+              "type": "participacion",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-12-22",
+              "feedback": "Evaluación de participación en seminarios"
+            }
+          ],
+          "professor": "Dr. Roberto Vargas"
+        },
+        {
+          "description": "Ética profesional",
+          "credits": 1,
+          "prerequisites": [
+            "Ética general"
+          ],
+          "grades": [
+            {
+              "id": "EP-603-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2026-08-25",
+              "feedback": "Evaluación sobre principios de ética profesional"
+            },
+            {
+              "id": "EP-603-002",
+              "type": "trabajo",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2026-10-20",
+              "feedback": "Análisis de dilemas éticos en el ejercicio profesional"
+            },
+            {
+              "id": "EP-603-003",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.4,
+              "dateSubmitted": "2026-12-15",
+              "feedback": "Evaluación sobre responsabilidad profesional"
+            },
+            {
+              "id": "EP-603-004",
+              "type": "participacion",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2026-12-25",
+              "feedback": "Evaluación de participación en debates éticos"
+            }
+          ],
+          "professor": "Dra. Patricia Morales"
+        },
+        {
+          "credits": 3,
+          "prerequisites": [
+            "Cálculo integral",
+            "Fisica mecánica"
+          ],
+          "grades": [
+            {
+              "id": "EM-604-001",
+              "type": "quiz",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2026-08-30",
+              "feedback": "Evaluación sobre conceptos de electrostática",
+              "title": "Quiz de Electrostática"
+            },
+            {
+              "id": "EM-604-002",
+              "type": "laboratorio",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-09-25",
+              "feedback": "Experimentos con campos eléctricos",
+              "title": "Lab 1 - Campos Eléctricos"
+            },
+            {
+              "id": "EM-604-003",
+              "type": "parcial",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-11-10",
+              "feedback": "Evaluación sobre electromagnetismo básico",
+              "title": "Primer Parcial - Electromagnetismo"
+            },
+            {
+              "id": "EM-604-004",
+              "type": "laboratorio",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-11-25",
+              "feedback": "Experimentos con campos magnéticos",
+              "title": "Lab 2 - Campos Magnéticos"
+            },
+            {
+              "id": "EM-604-005",
+              "type": "trabajo",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2026-12-12",
+              "feedback": "Resolución de problemas aplicados de electromagnetismo",
+              "title": "Problemas de Aplicación"
+            },
+            {
+              "id": "EM-604-006",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-12-28",
+              "feedback": "Evaluación sobre ondas electromagnéticas",
+              "title": "Segundo Parcial - Ondas EM"
+            }
+          ],
+          "description": "Electricidad y magnetismo",
+          "professor": "Dr. Carlos Mendoza"
+        },
+        {
+          "credits": 3,
+          "prerequisites": [
+            "Bases de datos"
+          ],
+          "grades": [
+            {
+              "id": "TABD-605-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2026-09-05",
+              "feedback": "Evaluación sobre optimización de consultas",
+              "title": "Quiz de Optimización"
+            },
+            {
+              "id": "TABD-605-002",
+              "type": "laboratorio",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-09-30",
+              "feedback": "Implementación de índices y particionamiento",
+              "title": "Lab 1 - Índices y Particionamiento"
+            },
+            {
+              "id": "TABD-605-003",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-11-15",
+              "feedback": "Evaluación sobre rendimiento de bases de datos",
+              "title": "Primer Parcial - Performance"
+            },
+            {
+              "id": "TABD-605-004",
+              "type": "laboratorio",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-12-01",
+              "feedback": "Configuración de replicación y clustering",
+              "title": "Lab 2 - Replicación y Clustering"
+            },
+            {
+              "id": "TABD-605-005",
+              "type": "proyecto",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2026-12-18",
+              "feedback": "Diseño de base de datos distribuida",
+              "title": "Proyecto de BD Distribuida"
+            },
+            {
+              "id": "TABD-605-006",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-12-30",
+              "feedback": "Evaluación sobre escalabilidad y alta disponibilidad",
+              "title": "Segundo Parcial - Escalabilidad"
+            }
+          ],
+          "description": "Topicos avanzados en bases de datos",
+          "professor": "Dr. Ana García"
+        },
+        {
+          "credits": 3,
+          "prerequisites": [
+            "Sistemas operativos",
+            "Telematica"
+          ],
+          "grades": [
+            {
+              "id": "SD-606-001",
+              "type": "quiz",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2026-09-10",
+              "feedback": "Evaluación sobre arquitecturas de sistemas distribuidos",
+              "title": "Quiz de Arquitecturas Distribuidas"
+            },
+            {
+              "id": "SD-606-002",
+              "type": "laboratorio",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-10-05",
+              "feedback": "Implementación de comunicación entre procesos",
+              "title": "Lab 1 - Comunicación Interprocesos"
+            },
+            {
+              "id": "SD-606-003",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-11-20",
+              "feedback": "Evaluación sobre sincronización en sistemas distribuidos",
+              "title": "Primer Parcial - Sincronización"
+            },
+            {
+              "id": "SD-606-004",
+              "type": "laboratorio",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-12-05",
+              "feedback": "Implementación de mecanismos de tolerancia a fallos",
+              "title": "Lab 2 - Tolerancia a Fallos"
+            },
+            {
+              "id": "SD-606-005",
+              "type": "proyecto",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2026-12-22",
+              "feedback": "Desarrollo de un sistema distribuido completo",
+              "title": "Proyecto de Sistema Distribuido"
+            },
+            {
+              "id": "SD-606-006",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2027-01-05",
+              "feedback": "Evaluación sobre consistencia y coherencia",
+              "title": "Segundo Parcial - Consistencia"
+            }
+          ],
+          "description": "Sistemas distribuidos",
+          "professor": "Dr. Miguel Herrera"
+        },
+        {
+          "credits": 2,
+          "prerequisites": [
+            "Plataformas de programación empresarial"
+          ],
+          "grades": [
+            {
+              "id": "AS-607-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-09-15",
+              "feedback": "Evaluación sobre patrones arquitectónicos",
+              "title": "Quiz de Patrones Arquitectónicos"
+            },
+            {
+              "id": "AS-607-002",
+              "type": "trabajo",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-10-25",
+              "feedback": "Análisis de arquitecturas de software existentes",
+              "title": "Análisis de Arquitecturas"
+            },
+            {
+              "id": "AS-607-003",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2026-12-08",
+              "feedback": "Evaluación sobre diseño arquitectónico",
+              "title": "Primer Parcial - Diseño Arquitectónico"
+            },
+            {
+              "id": "AS-607-004",
+              "type": "proyecto",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2027-01-10",
+              "feedback": "Diseño de arquitectura de software completa",
+              "title": "Proyecto de Arquitectura"
+            },
+            {
+              "id": "AS-607-005",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2027-01-20",
+              "feedback": "Evaluación sobre arquitecturas de microservicios",
+              "title": "Segundo Parcial - Microservicios"
+            }
+          ],
+          "description": "Arquitecturas de software",
+          "professor": "Ing. Carlos López"
+        },
+        {
+          "credits": 3,
+          "prerequisites": [
+            "Ti en las Organizaciones"
+          ],
+          "grades": [
+            {
+              "id": "SE-608-001",
+              "type": "quiz",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2026-09-20",
+              "feedback": "Evaluación sobre sistemas ERP",
+              "title": "Quiz de ERP"
+            },
+            {
+              "id": "SE-608-002",
+              "type": "laboratorio",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2026-10-30",
+              "feedback": "Configuración básica de sistema ERP",
+              "title": "Lab 1 - Configuración ERP"
+            },
+            {
+              "id": "SE-608-003",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2026-12-12",
+              "feedback": "Evaluación sobre integración de sistemas empresariales",
+              "title": "Primer Parcial - Integración"
+            },
+            {
+              "id": "SE-608-004",
+              "type": "laboratorio",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2027-01-08",
+              "feedback": "Implementación de workflows empresariales",
+              "title": "Lab 2 - Workflows"
+            },
+            {
+              "id": "SE-608-005",
+              "type": "proyecto",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2027-01-25",
+              "feedback": "Desarrollo de sistema empresarial completo",
+              "title": "Proyecto de Sistema Empresarial"
+            },
+            {
+              "id": "SE-608-006",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2027-02-05",
+              "feedback": "Evaluación sobre optimización de procesos empresariales",
+              "title": "Segundo Parcial - Optimización"
+            }
+          ],
+          "description": "Sistemas Empresariales",
+          "professor": "Dr. Roberto Silva"
+        }
+      ]
+    },
+    {
+      "semester": "VII",
+      "courses": [
+        {
+          "credits": 2,
+          "prerequisites": [
+            "Ingenieria de software"
+          ],
+          "grades": [
+            {
+              "id": "GP-701-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2027-02-10",
+              "feedback": "Evaluación sobre metodologías PMI",
+              "title": "Quiz de PMI"
+            },
+            {
+              "id": "GP-701-002",
+              "type": "trabajo",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2027-03-15",
+              "feedback": "Desarrollo de plan de proyecto detallado",
+              "title": "Plan de Proyecto"
+            },
+            {
+              "id": "GP-701-003",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2027-04-20",
+              "feedback": "Evaluación sobre planificación de proyectos",
+              "title": "Primer Parcial - Planificación"
+            },
+            {
+              "id": "GP-701-004",
+              "type": "proyecto",
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2027-06-10",
+              "feedback": "Gestión completa de un proyecto real",
+              "title": "Proyecto de Gestión"
+            },
+            {
+              "id": "GP-701-005",
+              "type": "parcial",
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2027-06-20",
+              "feedback": "Evaluación sobre control y seguimiento",
+              "title": "Segundo Parcial - Control"
+            }
+          ],
+          "description": "Gestión de proyectos",
+          "professor": "Ing. María González"
+        },
+        {
+          "credits": 2,
+          "prerequisites": [],
+          "grades": [
+            {
+              "id": "LF1-702-001",
+              "type": "quiz",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2027-02-15",
+              "feedback": "Evaluación sobre fundamentos de la línea de formación",
+              "title": "Quiz de Fundamentos"
+            },
+            {
+              "id": "LF1-702-002",
+              "type": "trabajo",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2027-04-10",
+              "feedback": "Proyecto de investigación en línea de formación",
+              "title": "Proyecto de Investigación"
+            },
+            {
+              "id": "LF1-702-003",
+              "type": "parcial",
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2027-05-15",
+              "feedback": "Evaluación sobre aspectos teóricos",
+              "title": "Primer Parcial - Teoría"
+            },
+            {
+              "id": "LF1-702-004",
+              "type": "presentacion",
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2027-06-25",
+              "feedback": "Presentación de resultados de investigación",
+              "title": "Presentación Final"
+            }
+          ],
+          "description": "Linea de formación 1",
+          "professor": "Dr. Elena Rodríguez"
+        },
+        {
+          "credits": 2,
+          "prerequisites": [
+            "Electricidad y magnetismo"
+          ],
+          "grades": [
+            {
+              "id": "MEF-703-001",
+              "type": "quiz",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2027-02-20",
+              "feedback": "Evaluación sobre metodología experimental",
+              "title": "Quiz de Metodología Experimental"
+            },
+            {
+              "id": "MEF-703-002",
+              "type": "laboratorio",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2027-03-25",
+              "feedback": "Práctica de medición y análisis de datos",
+              "title": "Lab 1 - Medición y Análisis"
+            },
+            {
+              "id": "MEF-703-003",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2027-05-10",
+              "feedback": "Evaluación sobre instrumentación experimental",
+              "title": "Primer Parcial - Instrumentación"
+            },
+            {
+              "id": "MEF-703-004",
+              "type": "laboratorio",
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2027-06-05",
+              "feedback": "Experimentos avanzados de física",
+              "title": "Lab 2 - Experimentos Avanzados"
+            },
+            {
+              "id": "MEF-703-005",
+              "type": "parcial",
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2027-06-22",
+              "feedback": "Evaluación sobre análisis estadístico de datos",
+              "title": "Segundo Parcial - Análisis Estadístico"
+            }
+          ],
+          "description": "Métodos experimentales en fisica",
+          "professor": "Dr. Carlos Mendoza"
+        },
+        {
+          "credits": 3,
+          "prerequisites": [
+            "Sistemas distribuidos"
+          ],
+          "grades": [
+            {
+              "id": "SI-704-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2027-02-25",
+              "feedback": "Evaluación sobre fundamentos de seguridad informática",
+              "title": "Quiz de Fundamentos de Seguridad"
+            },
+            {
+              "id": "SI-704-002",
+              "type": "laboratorio",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2027-03-30",
+              "feedback": "Implementación de algoritmos criptográficos",
+              "title": "Lab 1 - Criptografía"
+            },
+            {
+              "id": "SI-704-003",
+              "type": "parcial",
+              "score": 4.0,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2027-05-15",
+              "feedback": "Evaluación sobre criptografía y protocolos seguros",
+              "title": "Primer Parcial - Criptografía"
+            },
+            {
+              "id": "SI-704-004",
+              "type": "laboratorio",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2027-06-10",
+              "feedback": "Análisis y explotación de vulnerabilidades",
+              "title": "Lab 2 - Análisis de Vulnerabilidades"
+            },
+            {
+              "id": "SI-704-005",
+              "type": "proyecto",
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2027-06-28",
+              "feedback": "Auditoría completa de seguridad de un sistema",
+              "title": "Proyecto de Auditoría de Seguridad"
+            },
+            {
+              "id": "SI-704-006",
+              "type": "parcial",
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2027-07-05",
+              "feedback": "Evaluación sobre gestión de riesgos de seguridad",
+              "title": "Segundo Parcial - Gestión de Riesgos"
+            }
+          ],
+          "description": "Seguridad de la información",
+          "professor": "Dr. Alejandro Torres"
+        },
+        {
+          "credits": 2,
+          "prerequisites": [
+            "Arquitecturas de software"
+          ],
+          "grades": [
+            {
+              "id": "GCS-705-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2027-03-05",
+              "feedback": "Evaluación sobre estándares de calidad de software",
+              "title": "Quiz de Estándares de Calidad"
+            },
+            {
+              "id": "GCS-705-002",
+              "type": "trabajo",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2027-04-20",
+              "feedback": "Análisis de calidad de software existente",
+              "title": "Análisis de Calidad"
+            },
+            {
+              "id": "GCS-705-003",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2027-05-25",
+              "feedback": "Evaluación sobre estrategias de testing",
+              "title": "Primer Parcial - Testing"
+            },
+            {
+              "id": "GCS-705-004",
+              "type": "proyecto",
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2027-07-02",
+              "feedback": "Implementación de proceso de aseguramiento de calidad",
+              "title": "Proyecto de Aseguramiento de Calidad"
+            },
+            {
+              "id": "GCS-705-005",
+              "type": "parcial",
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2027-07-12",
+              "feedback": "Evaluación sobre métricas de calidad",
+              "title": "Segundo Parcial - Métricas"
+            }
+          ],
+          "description": "Gestion de calidad de software",
+          "professor": "Ing. Carlos López"
+        },
+        {
+          "description": "Aplicaciones Móviles",
+          "credits": 3,
+          "prerequisites": [
+            "Arquitecturas de software"
+          ],
+          "grades": [
+            {
+              "id": "am-001",
+              "type": "quiz",
+              "score": 4.3,
+              "maxScore": 5.0,
+              "weight": 0.1,
+              "dateSubmitted": "2027-03-10",
+              "feedback": "Evaluación sobre fundamentos de desarrollo móvil"
+            },
+            {
+              "id": "am-002",
+              "type": "laboratorio",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2027-04-05",
+              "feedback": "Diseño de interfaces móviles"
+            },
+            {
+              "id": "am-003",
+              "type": "parcial",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2027-05-20",
+              "feedback": "Evaluación sobre frameworks de desarrollo móvil"
+            },
+            {
+              "id": "am-004",
+              "type": "laboratorio",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2027-06-15",
+              "feedback": "Integración de APIs en aplicaciones móviles"
+            },
+            {
+              "id": "am-005",
+              "type": "proyecto",
+              "maxScore": 5.0,
+              "weight": 0.2,
+              "dateSubmitted": "2027-07-08",
+              "feedback": "Desarrollo de aplicación móvil completa"
+            },
+            {
+              "id": "am-006",
+              "type": "parcial",
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2027-07-18",
+              "feedback": "Evaluación sobre optimización de apps móviles"
+            }
+          ],
+          "professor": "Ing. Carlos López"
+        },
+        {
+          "description": "Innovación",
+          "credits": 2,
+          "prerequisites": [
+            "Pensamiento creativo"
+          ],
+          "grades": [
+            {
+              "id": "inn-001",
+              "type": "quiz",
+              "score": 4.2,
+              "maxScore": 5.0,
+              "weight": 0.15,
+              "dateSubmitted": "2027-03-15",
+              "feedback": "Evaluación sobre conceptos de innovación tecnológica"
+            },
+            {
+              "id": "inn-002",
+              "type": "trabajo",
+              "score": 4.4,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2027-05-05",
+              "feedback": "Desarrollo de proyecto innovador"
+            },
+            {
+              "id": "inn-003",
+              "type": "parcial",
+              "score": 4.1,
+              "maxScore": 5.0,
+              "weight": 0.3,
+              "dateSubmitted": "2027-06-10",
+              "feedback": "Evaluación sobre metodologías de innovación"
+            },
+            {
+              "id": "inn-004",
+              "type": "presentacion",
+              "maxScore": 5.0,
+              "weight": 0.25,
+              "dateSubmitted": "2027-07-20",
+              "feedback": "Presentación de proyecto de innovación"
+            }
+          ],
+          "professor": "Dra. Patricia Morales"
+        }
+      ]
+    },
+    {
+      "semester": "VIII",
+      "courses": [
+        {
+          "description": "Linea de formación 2",
+          "credits": 2,
+          "prerequisites": [
+            "Linea de formación 1"
+          ]
+        },
+        {
+          "description": "Emprendimiento y responsabilidad social",
+          "credits": 2,
+          "prerequisites": []
+        },
+        {
+          "description": "Analitica de Datos",
+          "credits": 2,
+          "prerequisites": [
+            "Inteligencia Artificial",
+            "Modelamiento matemático"
+          ]
+        },
+        {
+          "description": "Regulación en TI",
+          "credits": 2,
+          "prerequisites": [
+            "Contexto profesional"
+          ]
+        },
+        {
+          "description": "Proyecto aplicado en TIC 2",
+          "credits": 2,
+          "prerequisites": [
+            "Proyecto aplicado en TIC 1"
+          ]
+        },
+        {
+          "description": "Electiva Universitaria",
+          "credits": 3,
+          "prerequisites": []
+        },
+        {
+          "description": "Optativa CP",
+          "credits": 3,
+          "prerequisites": []
+        }
+      ]
+    },
+    {
+      "semester": "IX",
+      "courses": [
+        {
+          "description": "Optativa Cl",
+          "credits": 3,
+          "prerequisites": []
+        },
+        {
+          "description": "Práctica Profesional",
+          "credits": 11,
+          "prerequisites": [
+            "Contexto profesional"
+          ]
+        },
+        {
+          "description": "Optativa Cl 2",
+          "credits": 3,
+          "prerequisites": []
+        }
+      ]
+    }
+  ]
+}

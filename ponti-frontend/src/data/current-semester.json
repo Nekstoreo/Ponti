@@ -1,0 +1,111 @@
+{
+  "weeklySchedule": {
+    "period": "2025-02",
+    "offerings": [
+      {
+        "courseCode": "7571 5437",
+        "courseName": "Gestión de proyectos",
+        "schedule": [
+          {
+            "day": "Lunes",
+            "startTime": "14:00",
+            "endTime": "15:40"
+          }
+        ],
+        "location": "B11-201"
+      },
+      {
+        "courseCode": "1437 5974",
+        "courseName": "Linea de formación 1",
+        "schedule": [
+          {
+            "day": "Viernes",
+            "startTime": "08:00",
+            "endTime": "09:40"
+          },
+          {
+            "day": "Viernes",
+            "startTime": "18:00",
+            "endTime": "19:40"
+          }
+        ],
+        "location": "B10-101"
+      },
+      {
+        "courseCode": "2928 2774",
+        "courseName": "Métodos experimentales en fisica",
+        "schedule": [
+          {
+            "day": "Viernes",
+            "startTime": "06:00",
+            "endTime": "07:40"
+          },
+          {
+            "day": "Miércoles",
+            "startTime": "12:00",
+            "endTime": "13:40"
+          }
+        ],
+        "location": "B09-302"
+      },
+      {
+        "courseCode": "1608 4446",
+        "courseName": "Seguridad de la información",
+        "schedule": [
+          {
+            "day": "Lunes",
+            "startTime": "12:00",
+            "endTime": "13:40"
+          }
+        ],
+        "location": "B11-201"
+      },
+      {
+        "courseCode": "5130 0549",
+        "courseName": "Gestion de calidad de software",
+        "schedule": [
+          {
+            "day": "Viernes",
+            "startTime": "20:00",
+            "endTime": "21:40"
+          }
+        ],
+        "location": "B09-302"
+      },
+      {
+        "courseCode": "2793 4469",
+        "courseName": "Aplicaciones Móviles",
+        "schedule": [
+          {
+            "day": "Martes",
+            "startTime": "18:00",
+            "endTime": "19:40"
+          },
+          {
+            "day": "Miércoles",
+            "startTime": "18:00",
+            "endTime": "19:40"
+          }
+        ],
+        "location": "B10-101"
+      },
+      {
+        "courseCode": "6691 1220",
+        "courseName": "Innovación",
+        "schedule": [
+          {
+            "day": "Lunes",
+            "startTime": "12:00",
+            "endTime": "13:40"
+          },
+          {
+            "day": "Jueves",
+            "startTime": "14:00",
+            "endTime": "15:40"
+          }
+        ],
+        "location": "B11-202"
+      }
+    ]
+  }
+}
