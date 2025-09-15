@@ -33,7 +33,6 @@ export default function TimeNavigator({
   setReferenceMonday,
   viewMode,
   setViewMode,
-  onSwipeDay,
 }: {
   selectedDay: DayKey;
   setSelectedDay: (d: DayKey) => void;
@@ -41,7 +40,6 @@ export default function TimeNavigator({
   setReferenceMonday: (d: Date) => void;
   viewMode: 'day' | 'week';
   setViewMode: (v: 'day' | 'week') => void;
-  onSwipeDay?: (direction: 'left' | 'right') => void;
 }) {
   // calendar picker removed; keep placeholder state out
 
@@ -63,7 +61,6 @@ export default function TimeNavigator({
     const days = direction === 'prev' ? -7 : 7;
     const newMonday = addDays(referenceMonday, days);
     setReferenceMonday(newMonday);
-    onSwipeDay?.(direction === 'prev' ? 'right' : 'left');
   };
 
   const jumpToToday = () => {

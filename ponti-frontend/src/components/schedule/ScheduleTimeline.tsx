@@ -26,30 +26,34 @@ function subjectColor(subject: string): string {
   return `hsl(${hue} 70% 90%)`;
 }
 
+const dayNames: { [key: string]: string } = {
+  D: "Domingo",
+  L: "Lunes",
+  M: "Martes",
+  X: "Miércoles",
+  J: "Jueves",
+  V: "Viernes",
+  S: "Sábado",
+};
+
 export default function ScheduleTimeline({
   viewMode = 'day',
   blocks,
   weeklySchedule,
   onBlockClick,
   showNowLine,
-  onSwipeDay,
+  referenceMonday,
 }: {
   viewMode?: 'day' | 'week';
   blocks: ClassBlock[];
   weeklySchedule?: Record<string, ClassBlock[]>;
   onBlockClick: (block: ClassBlock) => void;
   showNowLine: boolean;
-  onSwipeDay?: (direction: 'left' | 'right') => void;
+  referenceMonday?: Date;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const nowLineRef = useRef<HTMLDivElement | null>(null);
   const [nowOffset, setNowOffset] = useState<number | null>(null);
-  
-  // Swipe gesture state
-  const [touchStartX, setTouchStartX] = useState<number | null>(null);
-  const [touchStartY, setTouchStartY] = useState<number | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [swipeThreshold] = useState(50); // Minimum swipe distance
 
   const hours = useMemo(() => {
     return Array.from({ length: END_HOUR - START_HOUR + 1 }).map((_, i) => START_HOUR + i);
@@ -82,120 +86,11 @@ export default function ScheduleTimeline({
     }
   }, [nowOffset]);
 
-  // Swipe gesture handlers
-  const handleTouchStart = (e: React.TouchEvent) => {
-    const touch = e.touches[0];
-    setTouchStartX(touch.clientX);
-    setTouchStartY(touch.clientY);
-    setIsDragging(true);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging || touchStartX === null || touchStartY === null) return;
-    
-    const touch = e.touches[0];
-    const deltaX = touch.clientX - touchStartX;
-    const deltaY = touch.clientY - touchStartY;
-    
-    // Check if it's more horizontal than vertical swipe
-    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
-      e.preventDefault(); // Prevent scrolling when swiping horizontally
-    }
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (!isDragging || touchStartX === null || touchStartY === null) {
-      setIsDragging(false);
-      setTouchStartX(null);
-      setTouchStartY(null);
-      return;
-    }
-
-    const touch = e.changedTouches[0];
-    const deltaX = touch.clientX - touchStartX;
-    const deltaY = touch.clientY - touchStartY;
-
-    // Check if it's a horizontal swipe (more horizontal than vertical)
-    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
-      if (deltaX > 0) {
-        // Swipe right - go to previous day
-        onSwipeDay?.('right');
-      } else {
-        // Swipe left - go to next day
-        onSwipeDay?.('left');
-      }
-    }
-
-    setIsDragging(false);
-    setTouchStartX(null);
-    setTouchStartY(null);
-  };
-
-  // Mouse events for desktop support
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setTouchStartX(e.clientX);
-    setTouchStartY(e.clientY);
-    setIsDragging(true);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || touchStartX === null || touchStartY === null) return;
-    
-    const deltaX = e.clientX - touchStartX;
-    const deltaY = e.clientY - touchStartY;
-    
-    // Visual feedback could be added here
-    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold / 2) {
-      document.body.style.cursor = deltaX > 0 ? 'w-resize' : 'e-resize';
-    }
-  };
-
-  const handleMouseUp = (e: React.MouseEvent) => {
-    if (!isDragging || touchStartX === null || touchStartY === null) {
-      setIsDragging(false);
-      setTouchStartX(null);
-      setTouchStartY(null);
-      document.body.style.cursor = '';
-      return;
-    }
-
-    const deltaX = e.clientX - touchStartX;
-    const deltaY = e.clientY - touchStartY;
-
-    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
-      if (deltaX > 0) {
-        onSwipeDay?.('right');
-      } else {
-        onSwipeDay?.('left');
-      }
-    }
-
-    setIsDragging(false);
-    setTouchStartX(null);
-    setTouchStartY(null);
-    document.body.style.cursor = '';
-  };
-
-  const handleMouseLeave = () => {
-    if (isDragging) {
-      setIsDragging(false);
-      setTouchStartX(null);
-      setTouchStartY(null);
-      document.body.style.cursor = '';
-    }
-  };
 
   return (
     <div
       className="relative border rounded-md select-none"
       ref={containerRef}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      onMouseDown={handleMouseDown}
-      onMouseMove={isDragging ? handleMouseMove : undefined}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseLeave}
     >
       {viewMode === 'day' ? (
         <div className="relative" style={{ height: hours.length * HOUR_HEIGHT }}>
@@ -240,57 +135,117 @@ export default function ScheduleTimeline({
               >
                 <p className="text-sm font-medium leading-tight">{b.courseName}</p>
                 <p className="text-xs leading-tight">{b.startTime} - {b.endTime}</p>
-                <p className="text-xs text-muted-foreground leading-tight">{b.professor} • {b.room}</p>
+                <p className="text-xs text-muted-foreground leading-tight truncate">{b.room}</p>
               </button>
             );
           })}
         </div>
       ) : (
-        // Week view: 7 columns (days) x rows (hours) with absolute-positioned blocks inside each column
-        <div className="w-full overflow-auto">
-          <div className="grid grid-cols-7 gap-2 p-2">
-            {(['D','L','M','X','J','V','S'] as const).map((dKey) => {
-              const dayBlocks = weeklySchedule?.[dKey] ?? [];
-              return (
-                <div key={dKey} className="relative border rounded-md h-[86vh] bg-background overflow-hidden">
-                  <div className="text-xs text-muted-foreground mb-1 text-center font-medium sticky top-0 bg-background py-1">{dKey}</div>
-                  {/* container for hours */}
-                  <div className="relative" style={{ height: hours.length * HOUR_HEIGHT }}>
-                    {/* horizontal hour lines */}
-                    {hours.map((h, idx) => (
-                      <div key={h} className="absolute left-0 right-0" style={{ top: idx * HOUR_HEIGHT }}>
-                        <div className="flex items-center gap-2 px-2">
-                          <div className="w-10 text-xs text-muted-foreground">{h}:00</div>
-                          <div className="flex-1 border-t" />
-                        </div>
-                      </div>
-                    ))}
+        <div className="overflow-auto" style={{ height: 'calc(86vh - 4rem)' }}>
+          <div className="grid" style={{
+              gridTemplateColumns: '60px repeat(7, minmax(150px, 1fr))',
+              gridTemplateRows: `auto repeat(${(END_HOUR - START_HOUR) * 2}, 30px) auto`,
+              minWidth: '1200px'
+          }}>
+              {/* Capa de fondo blanco para la columna de horas */}
+              <div className="bg-white z-5 col-start-1 col-end-2" style={{ gridRow: '1 / -1' }} />
 
-                    {/* blocks positioned by time */}
-                    {dayBlocks.map((b) => {
-                      const start = timeToMinutes(b.startTime) - START_HOUR * 60;
-                      const end = timeToMinutes(b.endTime) - START_HOUR * 60;
-                      const height = minutesToOffsetPx(end - start);
-                      const top = minutesToOffsetPx(start);
-                      const bg = subjectColor(b.courseName);
-                      return (
-                        <button
-                          key={b.id}
-                          onClick={() => onBlockClick(b)}
-                          className="absolute left-2 right-2 text-left rounded-md border p-2 hover:bg-accent"
-                          style={{ top, height, background: bg }}
-                        >
-                          <p className="text-sm font-medium leading-tight">{b.courseName}</p>
-                          <p className="text-xs leading-tight">{b.startTime} - {b.endTime}</p>
-                        </button>
-                      );
-                    })}
+              {/* Header de días */}
+              <div className="sticky top-0 bg-white z-20 col-start-1 col-end-2 row-start-1 row-end-2 border-r" />
+              {(['D', 'L', 'M', 'X', 'J', 'V', 'S'] as const).map((dKey, i) => {
+                  const date = referenceMonday ? new Date(referenceMonday.getTime() + i * 24 * 60 * 60 * 1000) : new Date();
+                  const dayName = new Intl.DateTimeFormat("es-ES", {
+                    weekday: "short",
+                  }).format(date);
+                  const dayNumber = new Intl.DateTimeFormat("es-ES", {
+                    day: "numeric",
+                  }).format(date);
+                  
+                  return (
+                    <div key={dKey} className="sticky top-0 bg-background z-20 text-center font-medium text-sm py-2 border-b border-r" style={{gridColumn: i + 2}}>
+                        <div className="text-xs text-muted-foreground">{dayName}</div>
+                        <div className="text-sm font-bold">{dayNumber}</div>
+                    </div>
+                  );
+              })}
+
+              {/* Grid de horas y clases */}
+              {hours.map(h => (
+                  <div key={h} className="row-start-auto bg-white z-10 border-r" style={{ gridRow: (h - START_HOUR) * 2 + 2, gridColumn: 1 }}>
+                      <div className="text-right pr-2 text-xs text-muted-foreground -translate-y-2">{h}:00</div>
                   </div>
-                </div>
-              );
-            })}
+              ))}
+
+              {/* Líneas de las horas */}
+              {Array.from({ length: (END_HOUR - START_HOUR) * 2 + 1 }).map((_, i) => (
+                  <div key={i} className="col-start-1 col-end-9 border-b" style={{ gridRow: i + 2, borderBottomWidth: '1.5px' }} />
+              ))}
+
+              {/* Líneas de los días */}
+              {Array.from({ length: 8 }).map((_, i) => (
+                  <div key={i} className="row-start-1 border-r" style={{ gridColumn: i + 1, gridRowEnd: (END_HOUR - START_HOUR) * 2 + 4, borderRightWidth: '1.5px' }} />
+              ))}
+
+              {/* Bloques de clases */}
+              {Object.entries(weeklySchedule || {}).flatMap(([day, dayBlocks]) => {
+                  const dayIndex = ['D', 'L', 'M', 'X', 'J', 'V', 'S'].indexOf(day);
+                  if (dayIndex === -1) return [];
+
+                  return (dayBlocks || []).map(b => {
+                      const start = timeToMinutes(b.startTime);
+                      const end = timeToMinutes(b.endTime);
+                      
+                      const startRow = Math.floor((start - START_HOUR * 60) / 30) + 2;
+                      const endRow = Math.ceil((end - START_HOUR * 60) / 30) + 2;
+
+                      const col = dayIndex + 2;
+                      const bg = subjectColor(b.courseName);
+
+                      return (
+                          <button
+                              key={b.id}
+                              id={`class-${b.id}`}
+                              onClick={() => onBlockClick(b)}
+                              className="text-left rounded-md border p-2 mx-4 flex flex-col justify-between overflow-hidden"
+                              style={{
+                                  gridColumn: col,
+                                  gridRow: `${startRow} / ${endRow}`,
+                                  background: bg,
+                                  zIndex: 5,
+                              }}
+                          >
+                              <div>
+                                  <p className="text-sm font-medium leading-tight">{b.courseName}</p>
+                                  <p className="text-xs leading-tight">{b.startTime} - {b.endTime}</p>
+                              </div>
+                              <p className="text-xs text-muted-foreground leading-tight truncate">{b.room}</p>
+                          </button>
+                      );
+                  });
+              })}
+
+              {/* Footer de días */}
+              <div className="bg-white z-20 col-start-1 col-end-2 border-r border-t" style={{gridRow: (END_HOUR - START_HOUR) * 2 + 3}} />
+              {/* Capa adicional para cubrir el footer */}
+              <div className="bg-white z-15 col-start-1 col-end-2" style={{ gridRow: (END_HOUR - START_HOUR) * 2 + 3 }} />
+              {(['D', 'L', 'M', 'X', 'J', 'V', 'S'] as const).map((dKey, i) => {
+                  const date = referenceMonday ? new Date(referenceMonday.getTime() + i * 24 * 60 * 60 * 1000) : new Date();
+                  const dayName = new Intl.DateTimeFormat("es-ES", {
+                    weekday: "short",
+                  }).format(date);
+                  const dayNumber = new Intl.DateTimeFormat("es-ES", {
+                    day: "numeric",
+                  }).format(date);
+                  
+                  return (
+                    <div key={dKey} className="sticky bottom-0 bg-background z-20 text-center font-medium text-sm py-2 border-t border-r" style={{gridColumn: i + 2, gridRow: (END_HOUR - START_HOUR) * 2 + 3}}>
+                        <div className="text-xs text-muted-foreground">{dayName}</div>
+                        <div className="text-sm font-bold">{dayNumber}</div>
+                    </div>
+                  );
+              })}
           </div>
-        </div>
+      </div>
       )}
     </div>
   );
