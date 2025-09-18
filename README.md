@@ -1,170 +1,166 @@
-# Ponti - Tu Compañero de Carrera Digital
+<h1 align="center">Ponti — Tu Compañero de Carrera Digital 🎓</h1>
 
-Aplicación universitaria que unifica la experiencia estudiantil, proporcionando un ecosistema digital completo para estudiantes de la Universidad Pontificia Bolivariana.
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
+  <a href="https://pnpm.io/"><img src="https://img.shields.io/badge/Package%20Manager-pnpm-%2300A6A6" alt="pnpm"></a>
+  <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Framework-Next.js-black?logo=next.js" alt="nextjs"></a>
+  <img src="https://img.shields.io/badge/Hecho%20con-❤️-ff69b4" alt="Hecho con amor">
+</p>
 
-## 🏗️ Arquitectura del Proyecto
+<p align="center">
+  <b>Una aplicación web moderna pensada para estudiantes:</b> organiza tu vida académica, consulta calificaciones, revisa tu horario, recibe notificaciones y accede a servicios de bienestar desde una interfaz clara y amigable.
+</p>
 
-Este proyecto está dividido en dos servicios principales:
+<p align="center">
+  <a href="#-características">Características</a> •
+  <a href="#-estructura">Estructura</a> •
+  <a href="#-tecnologías">Tecnologías</a> •
+  <a href="#-instalación">Instalación</a> •
+  <a href="#-comandos">Comandos</a> •
+  <a href="#-contacto">Contacto</a>
+</p>
 
-- **ponti-frontend**: Aplicación Web Progresiva (PWA) construida con Next.js 15, TypeScript, Tailwind CSS y shadcn/ui
-- **ponti-api**: API RESTful construida con Node.js, Express, TypeScript y MongoDB
+<details>
+<summary>📸 <b>Ver capturas de pantalla</b> (Click para expandir)</summary>
+<br>
+<table align="center">
+  <tr>
+    <td><img src="./screenshots/screenshot_1.png" alt="Vista Principal" width="160" style="border-radius:8px;" /></td>
+    <td><img src="./screenshots/screenshot_2.png" alt="Calificaciones" width="160" style="border-radius:8px;" /></td>
+    <td><img src="./screenshots/screenshot_3.png" alt="Servicios" width="160" style="border-radius:8px;" /></td>
+    <td><img src="./screenshots/screenshot_4.png" alt="Bienestar" width="160" style="border-radius:8px;" /></td>
+    <td><img src="./screenshots/screenshot_5.png" alt="Horario" width="160" style="border-radius:8px;" /></td>
+  </tr>
+</table>
+</details>
 
-## 🚀 Inicio Rápido
+## ✨ Características
+
+<table>
+  <tr>
+    <td width="50%">
+      <h3 align="center">🎯 Académico</h3>
+      <ul>
+        <li>🗓 <b>Horarios personalizados</b> y recordatorios</li>
+        <li>🧾 <b>Calificaciones en tiempo real</b> y simulador de notas</li>
+        <li>📚 Visualización de <b>plan de estudios</b> y progreso</li>
+      </ul>
+    </td>
+    <td width="50%">
+      <h3 align="center">🔔 Comunicación</h3>
+      <ul>
+        <li>📰 <b>Noticias</b> de interés estudiantil</li>
+        <li>🔔 Sistema de <b>notificaciones</b> en tiempo real</li>
+        <li>📢 <b>Anuncios importantes</b> y eventos</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h3 align="center">🧠 Bienestar</h3>
+      <ul>
+        <li>�‍♀️ <b>Mood tracker</b> y recomendaciones</li>
+        <li>🏥 Acceso a <b>servicios de salud</b> y apoyo</li>
+        <li>🧩 <b>Recursos</b> para balance vida-academia</li>
+      </ul>
+    </td>
+    <td width="50%">
+      <h3 align="center">🛠️ Herramientas</h3>
+      <ul>
+        <li>✨ <b>Onboarding interactivo</b> para nuevos usuarios</li>
+        <li>🧰 Acceso a <b>servicios universitarios</b></li>
+        <li>🗺️ <b>Mapa interactivo</b> del campus</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+## 📁 Estructura
+
+<details open>
+<summary><b>Estructura del proyecto</b></summary>
+<br>
+
+```bash
+ponti-frontend/
+├── src/
+│   ├── app/             # Rutas y páginas (Next.js App Router)
+│   ├── components/      # Componentes UI reutilizables
+│   ├── data/            # Mocks y datos estáticos
+│   ├── hooks/           # Custom hooks
+│   ├── services/        # Interacción con APIs
+│   ├── store/           # Estado global
+│   └── utils/           # Utilidades y helpers
+├── public/              # Assets estáticos
+└── scripts/             # Scripts de ayuda para desarrollo
+```
+
+</details>
+
+## 🚀 Tecnologías
+
+<p align="center">
+  <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js"/></a>
+  <a href="https://reactjs.org/"><img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React"/></a>
+  <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/></a>
+  <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS"/></a>
+  <a href="https://pnpm.io/"><img src="https://img.shields.io/badge/PNPM-F69220?style=for-the-badge&logo=pnpm&logoColor=white" alt="PNPM"/></a>
+</p>
+
+## 🚦 Instalación
 
 ### Prerrequisitos
 
-- Docker y Docker Compose
-- Node.js 18+ (opcional, para desarrollo local)
-- pnpm (opcional, para desarrollo local)
+- Node.js 18.x o superior
+- PNPM instalado globalmente
 
-### Ejecución (Recomendado)
+### Pasos para instalar
 
-1. **Clona el repositorio y navega al directorio:**
-   ```bash
-   cd /home/nekstoreo/Workspace/Ponti
-   ```
+1. **Clonar el repositorio**
 
-2. **Inicia MongoDB con Docker Compose:**
-   ```bash
-   docker-compose up -d
-   ```
-
-3. **Ejecuta la API localmente:**
-   ```bash
-   cd ponti-api
-   pnpm install
-   pnpm dev
-   ```
-
-   Esto iniciará:
-   - **MongoDB**: localhost:27017 (en Docker)
-   - **Ponti API**: http://localhost:3001 (local)
-   - **Mongo Express** (opcional): `docker-compose --profile admin up -d`
-
-
-### Desarrollo Local
-
-#### Frontend (Ponti PWA)
 ```bash
-cd ponti-frontend
+git clone https://github.com/Nekstoreo/Ponti.git
+cd Ponti/ponti-frontend
+```
+
+2. **Instalar dependencias**
+
+```bash
 pnpm install
+```
+
+3. **Iniciar servidor de desarrollo**
+
+```bash
 pnpm dev
 ```
-Accede en: http://localhost:3000
 
-#### Backend (Ponti API)
-```bash
-cd ponti-api
-pnpm install
-pnpm dev
-```
-Accede en: http://localhost:3001
+4. **Visitar la aplicación**
 
-## 📋 Estado del Sprint 1
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador preferido.
 
-### ✅ Completado
-- ✅ Configuración del entorno y proyecto base
-- ✅ Inicialización de proyectos ponti-frontend y ponti-api
-- ✅ Configuración de Next.js con TypeScript, Tailwind CSS y shadcn/ui
-- ✅ Configuración de Node.js con Express, TypeScript, Mongoose y dotenv
-- ✅ Creación de Dockerfile para la API
-- ✅ Creación de docker-compose.yml con servicios de API y MongoDB
+## ⚙️ Comandos
 
-### 🔄 Próximos Pasos
-- 🔄 Implementar autenticación JWT
-- 🔄 Crear modelos de base de datos (Usuario, Horario, etc.)
-- 🔄 Desarrollar endpoints de API
-- 🔄 Crear interfaz de dashboard y horario
-- 🔄 Integrar frontend con backend
+| Comando      | Descripción                                          |
+| ------------ | ---------------------------------------------------- |
+| `pnpm dev`   | Inicia el servidor de desarrollo en `localhost:3000` |
+| `pnpm build` | Genera una versión optimizada para producción        |
+| `pnpm start` | Inicia la aplicación en modo producción              |
+| `pnpm lint`  | Ejecuta el linter para verificar el código           |
 
-## 🛠️ Tecnologías Utilizadas
+## 🤝 Contacto y contribuciones
 
-### Frontend
-- **Next.js 15** - Framework React con App Router
-- **TypeScript** - Tipado estático
-- **Tailwind CSS** - Framework CSS utilitario
-- **shadcn/ui** - Componentes UI de alta calidad
-- **Lucide React** - Iconos
+¿Quieres contribuir al proyecto o tienes alguna duda?
 
-### Backend
-- **Node.js 18** - Runtime JavaScript
-- **Express.js** - Framework web
-- **TypeScript** - Tipado estático
-- **MongoDB** - Base de datos NoSQL
-- **Mongoose** - ODM para MongoDB
-- **JWT** - Autenticación basada en tokens
-- **bcryptjs** - Hashing de contraseñas
+<p align="center">
+  <a href="https://github.com/Nekstoreo/Ponti/issues/new?template=feature_request.md"><img src="https://img.shields.io/badge/Solicitar_Feature-5C5C5C?style=for-the-badge&logo=github&logoColor=white" alt="Solicitar Feature"/></a>
+  <a href="https://github.com/Nekstoreo/Ponti/issues/new?template=bug_report.md"><img src="https://img.shields.io/badge/Reportar_Bug-F05033?style=for-the-badge&logo=github&logoColor=white" alt="Reportar Bug"/></a>
+</p>
 
-### DevOps
-- **Docker** - Contenedorización de MongoDB
-- **Docker Compose** - Orquestación de base de datos
+<hr>
 
-## 📁 Estructura del Proyecto
-
-```
-Ponti/
-├── ponti-frontend/          # Aplicación PWA
-│   ├── src/
-│   │   ├── app/            # Next.js App Router
-│   │   ├── components/     # Componentes React
-│   │   └── lib/           # Utilidades
-│   └── package.json
-├── ponti-api/              # API REST
-│   ├── src/
-│   │   ├── config/        # Configuración BD
-│   │   ├── controllers/   # Controladores API
-│   │   ├── models/        # Modelos Mongoose
-│   │   ├── routes/        # Rutas API
-│   │   └── middleware/    # Middleware Express
-│   ├── Dockerfile
-│   └── package.json
-├── docker-compose.yml      # Orquestación Docker
-└── docs/                   # Documentación del proyecto
-```
-
-## 🔧 Scripts Disponibles
-
-### Docker (MongoDB)
-```bash
-# Iniciar MongoDB
-docker-compose up -d
-
-# Verificar estado
-docker-compose ps
-
-# Ver logs
-docker-compose logs -f
-
-# Detener MongoDB
-docker-compose down
-
-# Limpiar volúmenes (borra datos)
-docker-compose down -v
-
-# Iniciar con Mongo Express (admin interface)
-docker-compose --profile admin up -d
-```
-
-### Desarrollo Local
-```bash
-# Frontend
-cd ponti-frontend && pnpm dev
-
-# Backend
-cd ponti-api && pnpm dev
-```
-
-## 🌐 Endpoints de la API
-
-### Health Check
-- `GET /health` - Verificar estado de la API
-
-### Próximos Endpoints
-- `POST /auth/login` - Autenticación de usuario
-- `GET /auth/me` - Información del usuario autenticado
-- `GET /schedule` - Obtener horario académico
-- `GET /dashboard` - Obtener datos del dashboard
-
----
-
-**Proyecto desarrollado para la Universidad Pontificia Bolivariana**
+<p align="center">
+  <b>¡Gracias por mirar Ponti!</b><br>
+  Esperamos que te sea útil en tu vida universitaria. 🎓🚀<br><br>
+  <a href="#"><img src="https://img.shields.io/badge/Hecho%20en-Colombia-yellow?style=for-the-badge&logo=colombia&logoColor=white" alt="Hecho en Colombia"/></a>
+</p>
