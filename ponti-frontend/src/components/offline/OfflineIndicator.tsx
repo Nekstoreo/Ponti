@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useOffline, formatLastSync } from "@/hooks/useOffline";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Wifi, WifiOff, Clock, CheckCircle } from "lucide-react";
+import { Wifi, WifiOff, Clock } from "lucide-react";
 
 interface OfflineIndicatorProps {
   variant?: 'minimal' | 'detailed' | 'toast';
@@ -125,26 +125,4 @@ export function useOfflineToast() {
   }, [isOnline, isOfflineCapable]);
 
   return showToast;
-}
-
-// Componente para mostrar estado de datos específicos (usado en configuración)
-export function DataCacheStatus({ 
-  label, 
-  lastFetch 
-}: { 
-  cacheKey: string; 
-  label: string; 
-  lastFetch?: Date; 
-}) {
-  return (
-    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-      <div className="flex items-center gap-3">
-        <CheckCircle className="w-4 h-4 text-green-500" />
-        <span className="font-medium">{label}</span>
-      </div>
-      <div className="text-sm text-gray-500">
-        {lastFetch ? formatLastSync(lastFetch) : 'No sincronizado'}
-      </div>
-    </div>
-  );
 }

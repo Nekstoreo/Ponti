@@ -22,7 +22,7 @@ const defaultConfig = {
   baseUrl: 'https://ponti.app', // Cambiar por tu dominio real
 };
 
-export function generateMetadata(config: SEOConfig): Metadata {
+function generateMetadata(config: SEOConfig): Metadata {
   const {
     title = defaultConfig.title,
     description = defaultConfig.description,

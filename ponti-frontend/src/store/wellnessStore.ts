@@ -4,8 +4,7 @@ import {
   WellnessRecommendation, 
   WellnessInsight, 
   WellnessMetrics,
-  MoodLevel,
-  StressLevel 
+  MoodLevel 
 } from "@/data/types";
 import { 
   mockMoodEntries,
@@ -306,31 +305,4 @@ export const getMoodEmoji = (mood: MoodLevel): string => {
 export const getMoodLabel = (mood: MoodLevel): string => {
   const labels = { 1: 'Muy mal', 2: 'Mal', 3: 'Normal', 4: 'Bien', 5: 'Excelente' };
   return labels[mood];
-};
-
-export const getStressColor = (stress: StressLevel): string => {
-  const colors = {
-    'low': 'text-green-600 bg-green-50',
-    'medium': 'text-yellow-600 bg-yellow-50',
-    'high': 'text-red-600 bg-red-50'
-  };
-  return colors[stress];
-};
-
-export const getStressLabel = (stress: StressLevel): string => {
-  const labels = {
-    'low': 'Bajo',
-    'medium': 'Medio',
-    'high': 'Alto'
-  };
-  return labels[stress];
-};
-
-export const getPriorityColor = (priority: 'low' | 'medium' | 'high'): string => {
-  const colors = {
-    'low': 'border-l-gray-400 bg-gray-50',
-    'medium': 'border-l-yellow-400 bg-yellow-50',
-    'high': 'border-l-red-400 bg-red-50'
-  };
-  return colors[priority];
 };

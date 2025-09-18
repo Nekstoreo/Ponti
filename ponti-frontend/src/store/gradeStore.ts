@@ -182,29 +182,6 @@ function convertToGradePoints(grade: number): number {
   return parseFloat(((grade / 5) * 4).toFixed(2));
 }
 
-// Helper: letra (opcional) para escala 0-5 (estilo aproximado)
-export function getLetterGrade(grade: number): string {
-  if (grade >= 4.7) return "A+";
-  if (grade >= 4.5) return "A";
-  if (grade >= 4.3) return "A-";
-  if (grade >= 4.0) return "B+";
-  if (grade >= 3.7) return "B";
-  if (grade >= 3.5) return "B-";
-  if (grade >= 3.3) return "C+";
-  if (grade >= 3.0) return "C";
-  if (grade >= 2.7) return "C-";
-  if (grade >= 2.5) return "D"; // Aprobación mínima en muchas universidades colombianas suele ser 3.0, pero mantenemos referencia
-  return "F";
-}
-
-// Colores para escala 0-5
-export function getGradeColor(grade: number): string {
-  if (grade >= 4) return "text-green-600";
-  if (grade >= 3) return "text-blue-600";
-  if (grade >= 2.5) return "text-yellow-600";
-  return "text-gray-600";
-}
-
 // Helper function to get status color
 export function getStatusColor(status: string): string {
   switch (status) {

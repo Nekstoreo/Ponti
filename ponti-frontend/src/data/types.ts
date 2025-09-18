@@ -40,7 +40,7 @@ export interface UserPreferences {
   };
 }
 
-export type NotificationType = "class_reminder" | "announcement" | "schedule_change" | "service_update" | "general";
+type NotificationType = "class_reminder" | "announcement" | "schedule_change" | "service_update" | "general";
 
 export interface NotificationItem {
   id: string;
@@ -116,8 +116,8 @@ export interface AnnouncementItem {
 }
 
 // Tipos para el sistema de calificaciones
-export type GradeStatus = 'approved' | 'failed' | 'pending' | 'withdrawn';
-export type AssessmentType = 'exam' | 'quiz' | 'assignment' | 'project' | 'participation' | 'final';
+type GradeStatus = 'approved' | 'failed' | 'pending' | 'withdrawn';
+type AssessmentType = 'exam' | 'quiz' | 'assignment' | 'project' | 'participation' | 'final';
 
 export interface AssessmentItem {
   id: string;
@@ -168,7 +168,7 @@ export interface GradeSettings {
 // Tipos para el sistema de bienestar
 export type MoodLevel = 1 | 2 | 3 | 4 | 5; // 1 = muy mal, 5 = excelente
 export type StressLevel = 'low' | 'medium' | 'high';
-export type WellnessCategory = 'mental' | 'physical' | 'academic' | 'social' | 'financial';
+type WellnessCategory = 'mental' | 'physical' | 'academic' | 'social' | 'financial';
 
 export interface MoodEntry {
   id: string;

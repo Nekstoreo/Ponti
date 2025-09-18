@@ -1,4 +1,4 @@
-import { NotificationItem, NotificationSettings } from "./types";
+import { NotificationItem } from "./types";
 
 export const mockNotifications: NotificationItem[] = [
   {
@@ -78,28 +78,3 @@ export const mockNotifications: NotificationItem[] = [
     expiresAt: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
   },
 ];
-
-export const defaultNotificationSettings: NotificationSettings = {
-  classReminders: {
-    enabled: true,
-    minutesBefore: 15,
-  },
-  announcements: {
-    enabled: true,
-    importantOnly: false,
-  },
-  scheduleChanges: {
-    enabled: true,
-  },
-  serviceUpdates: {
-    enabled: true,
-  },
-  general: {
-    enabled: true,
-  },
-  quietHours: {
-    enabled: false,
-    start: "22:00",
-    end: "08:00",
-  },
-};

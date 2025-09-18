@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
-export interface OfflineState {
+interface OfflineState {
   isOnline: boolean;
   isOfflineCapable: boolean;
   cacheSize: number;
@@ -10,7 +10,7 @@ export interface OfflineState {
   serviceWorkerRegistration: ServiceWorkerRegistration | null;
 }
 
-export interface OfflineActions {
+interface OfflineActions {
   clearCache: () => Promise<void>;
   cacheData: (key: string, data: unknown) => Promise<void>;
 }
@@ -176,82 +176,6 @@ export function useOffline(): UseOfflineReturn {
     clearCache,
     cacheData
   };
-}
-
-// Hook para detectar si una petición viene del caché
-export function useOfflineData<T>(
-  fetchFn: () => Promise<T>,
-  cacheKey?: string,
-  options?: {
-    staleTime?: number; // Tiempo en ms antes de considerar datos obsoletos
-    refetchOnReconnect?: boolean;
-  }
-) {
-  const [data, setData] = useState<T | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
-  const [isFromCache, setIsFromCache] = useState(false);
-  const [cacheDate, setCacheDate] = useState<Date | null>(null);
-  const { isOnline, cacheData } = useOffline();
-
-  const fetchData = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const response = await fetchFn();
-      setData(response);
-      setIsFromCache(false);
-      setCacheDate(null);
-
-      // Cachear datos si hay una clave
-      if (cacheKey && 'cacheData' in window) {
-        await cacheData(cacheKey, response);
-      }
-    } catch (fetchError) {
-      console.error('[OfflineData] Fetch error:', fetchError);
-      setError(fetchError as Error);
-      setIsFromCache(true);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [fetchFn, cacheKey, cacheData]);
-
-  // Fetch inicial
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  // Refetch cuando se recupera la conexión
-  useEffect(() => {
-    if (isOnline && options?.refetchOnReconnect && isFromCache) {
-      fetchData();
-    }
-  }, [isOnline, options?.refetchOnReconnect, isFromCache, fetchData]);
-
-  const refetch = useCallback(() => {
-    return fetchData();
-  }, [fetchData]);
-
-  return {
-    data,
-    isLoading,
-    error,
-    isFromCache,
-    cacheDate,
-    refetch
-  };
-}
-
-// Utilidades para formatear
-export function formatCacheSize(bytes: number): string {
-  if (bytes === 0) return '0 B';
-  
-  const sizes = ['B', 'KB', 'MB', 'GB'];
-  const i = Math.floor(Math.log(bytes) / Math.log(1024));
-  const size = bytes / Math.pow(1024, i);
-  
-  return `${size.toFixed(i === 0 ? 0 : 1)} ${sizes[i]}`;
 }
 
 export function formatLastSync(date: Date | null): string {

@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Types for haptic feedback patterns
-export type HapticPattern = 
+type HapticPattern = 
   | 'light'     // Subtle feedback for small interactions
   | 'medium'    // Standard feedback for buttons, toggles
   | 'heavy'     // Strong feedback for important actions
@@ -14,7 +14,7 @@ export type HapticPattern =
   | 'impact';   // Physical impact feedback
 
 // Haptic intensity levels
-export type HapticIntensity = 'off' | 'light' | 'medium' | 'strong';
+type HapticIntensity = 'off' | 'light' | 'medium' | 'strong';
 
 interface HapticSettings {
   enabled: boolean;
@@ -182,27 +182,5 @@ export function useHaptics() {
     isSupported,
     triggerHaptic,
     hapticFeedback,
-  };
-}
-
-// React hook for haptic feedback on component interactions
-export function useHapticFeedback(pattern: HapticPattern, deps: React.DependencyList = []) {
-  const { triggerHaptic } = useHaptics();
-
-  useEffect(() => {
-    triggerHaptic(pattern);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps);
-}
-
-// Note: HOC functionality removed to avoid JSX in .ts file
-// Use the useHaptics hook directly in components instead
-
-// Utility function for manual haptic trigger in event handlers
-// Note: This should be used inside a component that has access to useHaptics
-export function createHapticHandler(triggerHaptic: (pattern: HapticPattern) => void, pattern: HapticPattern, callback?: () => void) {
-  return () => {
-    triggerHaptic(pattern);
-    callback?.();
   };
 }

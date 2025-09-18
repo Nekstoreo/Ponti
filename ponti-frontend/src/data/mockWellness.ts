@@ -1,8 +1,8 @@
 import { MoodEntry, WellnessRecommendation, WellnessInsight, WellnessMetrics } from "./types";
-import { subDays, format } from "date-fns";
+import { subDays } from "date-fns";
 
 // Generar entradas de estado de ánimo para los últimos 30 días
-export const generateMockMoodEntries = (): MoodEntry[] => {
+const generateMockMoodEntries = (): MoodEntry[] => {
   const entries: MoodEntry[] = [];
   
   for (let i = 0; i < 30; i++) {
@@ -205,40 +205,3 @@ export const mockWellnessMetrics: WellnessMetrics = {
 };
 
 // Datos para gráficos de tendencias
-export const getWeeklyMoodData = () => {
-  const last7Days = mockMoodEntries.slice(-7);
-  return last7Days.map(entry => ({
-    date: format(new Date(entry.date), 'dd/MM'),
-    mood: entry.mood,
-    energy: entry.energy || 3,
-    focus: entry.focus || 3,
-    stress: entry.stressLevel === 'low' ? 1 : entry.stressLevel === 'medium' ? 2 : 3
-  }));
-};
-
-export const getMoodDistribution = () => {
-  const distribution = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-  mockMoodEntries.forEach(entry => {
-    distribution[entry.mood]++;
-  });
-  
-  return Object.entries(distribution).map(([mood, count]) => ({
-    mood: `${mood} ${mood === '1' ? '😞' : mood === '2' ? '😔' : mood === '3' ? '😐' : mood === '4' ? '😊' : '😄'}`,
-    count,
-    percentage: Math.round((count / mockMoodEntries.length) * 100)
-  }));
-};
-
-export const getActivityFrequency = () => {
-  const activities: Record<string, number> = {};
-  
-  mockMoodEntries.forEach(entry => {
-    entry.activities?.forEach(activity => {
-      activities[activity] = (activities[activity] || 0) + 1;
-    });
-  });
-  
-  return Object.entries(activities)
-    .map(([activity, count]) => ({ activity, count }))
-    .sort((a, b) => b.count - a.count);
-};

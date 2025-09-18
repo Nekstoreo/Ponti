@@ -97,5 +97,3 @@ export function MascotCharacter() {
     </motion.div>
   );
 }
-
-export default MascotCharacter;

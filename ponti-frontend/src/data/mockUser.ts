@@ -1,4 +1,4 @@
-import { UserProfile, AcademicInfo, UserPreferences } from "./types";
+import { UserProfile, AcademicInfo } from "./types";
 
 export const mockUser: UserProfile = {
   id: "u_1",
@@ -27,16 +27,4 @@ export const mockAcademicInfo: AcademicInfo = {
   completedCredits: 128,
   academicStatus: "active",
 };
-
-export const mockUserPreferences: UserPreferences = {
-  language: "es",
-  theme: "system",
-  notifications: true,
-  privacy: {
-    showProfile: true,
-    showGrades: false,
-    showSchedule: true,
-  },
-};
-
 

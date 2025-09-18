@@ -1,6 +1,5 @@
 "use client";
 
-import { ReactNode } from "react";
 
 interface LoadingSkeletonProps {
   className?: string;
@@ -154,103 +153,6 @@ export function DashboardSkeleton() {
         <LoadingSkeleton className="h-6 w-36" />
         <LoadingSkeleton variant="list" count={3} />
       </div>
-    </div>
-  );
-}
-
-export function ScheduleSkeleton() {
-  return <LoadingSkeleton variant="schedule" />;
-}
-
-export function MapSkeleton() {
-  return <LoadingSkeleton variant="map" />;
-}
-
-export function NotificationsSkeleton() {
-  return <LoadingSkeleton variant="notification" count={5} />;
-}
-
-// Loading spinner component
-export function LoadingSpinner({
-  size = 'md',
-  className = "",
-  label = "Cargando..."
-}: {
-  size?: 'sm' | 'md' | 'lg';
-  className?: string;
-  label?: string;
-}) {
-  const sizeClasses = {
-    sm: 'h-4 w-4',
-    md: 'h-6 w-6',
-    lg: 'h-8 w-8'
-  };
-
-  return (
-    <div className={`flex items-center justify-center gap-2 ${className}`}>
-      <div className={`
-        ${sizeClasses[size]} 
-        animate-spin rounded-full 
-        border-2 border-muted 
-        border-t-primary
-      `} />
-      {label && (
-        <span className="text-sm text-muted-foreground">{label}</span>
-      )}
-    </div>
-  );
-}
-
-// Shimmering effect for enhanced loading states
-export function ShimmerEffect({
-  children,
-  isLoading = false,
-  className = ""
-}: {
-  children: ReactNode;
-  isLoading?: boolean;
-  className?: string;
-}) {
-  if (!isLoading) {
-    return <>{children}</>;
-  }
-
-  return (
-    <div className={`relative overflow-hidden ${className}`}>
-      {children}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
-    </div>
-  );
-}
-
-// Progressive loading for images and content
-export function ProgressiveLoad({
-  children,
-  isLoaded = false,
-  skeleton,
-  className = ""
-}: {
-  children: ReactNode;
-  isLoaded?: boolean;
-  skeleton?: ReactNode;
-  className?: string;
-}) {
-  return (
-    <div className={`relative ${className}`}>
-      <div
-        className={`
-          transition-opacity duration-300 ease-out
-          ${isLoaded ? 'opacity-100' : 'opacity-0'}
-        `}
-      >
-        {children}
-      </div>
-      
-      {!isLoaded && (
-        <div className="absolute inset-0">
-          {skeleton || <LoadingSkeleton className="h-full w-full" />}
-        </div>
-      )}
     </div>
   );
 }

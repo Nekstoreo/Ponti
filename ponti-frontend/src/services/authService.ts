@@ -1,7 +1,7 @@
 import { mockUser } from "@/data/mockUser";
 import { UserProfile } from "@/data/types";
 
-export interface LoginInput {
+interface LoginInput {
   studentId: string;
   password: string;
 }
