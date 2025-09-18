@@ -12,37 +12,31 @@
         {
           "description": "Humanismo y Cultura Ciudadana",
           "credits": 2,
-          "prerequisites": [],
           "professor": "Dra. María González"
         },
         {
           "description": "Cálculo Diferencial",
           "credits": 3,
-          "prerequisites": [],
           "professor": "Dr. Carlos Rodríguez"
         },
         {
           "description": "Geometría analítica",
           "credits": 3,
-          "prerequisites": [],
           "professor": "Dra. Ana López"
         },
         {
           "description": "Matemáticas Discretas",
           "credits": 3,
-          "prerequisites": [],
           "professor": "Dr. Roberto Silva"
         },
         {
           "description": "Introducción a la Ing. de Sistemas e Informática",
           "credits": 1,
-          "prerequisites": [],
           "professor": "Dr. Luis Martínez"
         },
         {
           "description": "Taller de sistemas operativos",
           "credits": 2,
-          "prerequisites": [],
           "professor": "Ing. Javier Torres"
         }
       ]
@@ -53,43 +47,31 @@
         {
           "description": "Ética general",
           "credits": 1,
-          "prerequisites": [],
           "professor": "Dra. Patricia Morales"
         },
         {
           "description": "Lengua y cultura",
           "credits": 2,
-          "prerequisites": [],
           "professor": "Dra. Carmen Ruiz"
         },
         {
           "description": "Cálculo integral",
           "credits": 3,
-          "prerequisites": [
-            "Cálculo Diferencial"
-          ],
           "professor": "Dr. Andrés Vega"
         },
         {
           "description": "Fisica mecánica",
           "credits": 3,
-          "prerequisites": [
-            "Cálculo Diferencial"
-          ],
           "professor": "Dr. Felipe Castro"
         },
         {
           "description": "Lógica de Programación",
           "credits": 3,
-          "prerequisites": [
-            "Matemáticas Discretas"
-          ],
           "professor": "Ing. Laura Mendoza"
         },
         {
           "description": "Redes de datos",
           "credits": 4,
-          "prerequisites": [],
           "professor": "Ing. Diego Ramírez"
         }
       ]
@@ -100,45 +82,31 @@
         {
           "description": "Cristologia",
           "credits": 2,
-          "prerequisites": [],
           "professor": "Pbro. Gabriel Santos"
         },
         {
           "description": "Optativa CBD",
           "credits": 3,
-          "prerequisites": [],
           "professor": "Dr. Roberto Vargas"
         },
         {
           "description": "Programación y diseño orientado a objetos",
           "credits": 3,
-          "prerequisites": [
-            "Lógica de Programación"
-          ],
           "professor": "Ing. Marta Jiménez"
         },
         {
           "description": "Teoria de la computación",
           "credits": 3,
-          "prerequisites": [
-            "Matemáticas Discretas"
-          ],
           "professor": "Dr. Alejandro Torres"
         },
         {
           "description": "Procesos Estocásticos",
           "credits": 3,
-          "prerequisites": [
-            "Cálculo integral"
-          ],
           "professor": "Dr. Fernando Ruiz"
         },
         {
           "description": "Telematica",
           "credits": 3,
-          "prerequisites": [
-            "Redes de datos"
-          ],
           "professor": "Ing. Diego Ramírez"
         }
       ]
@@ -149,41 +117,26 @@
         {
           "description": "Algebra Lineal",
           "credits": 3,
-          "prerequisites": [
-            "Geometría analítica"
-          ],
           "professor": "Dr. Andrés Vega"
         },
         {
           "description": "Bases de datos",
           "credits": 3,
-          "prerequisites": [
-            "Lógica de Programación"
-          ],
           "professor": "Ing. Laura Mendoza"
         },
         {
           "description": "Arquitectura de computadores",
           "credits": 2,
-          "prerequisites": [
-            "Taller de sistemas operativos"
-          ],
           "professor": "Ing. Javier Torres"
         },
         {
           "description": "Estructuras de datos y algoritmos",
           "credits": 3,
-          "prerequisites": [
-            "Programación y diseño orientado a objetos"
-          ],
           "professor": "Dr. Roberto Silva"
         },
         {
           "description": "Ingenieria de software",
           "credits": 3,
-          "prerequisites": [
-            "Programación y diseño orientado a objetos"
-          ],
           "professor": "Ing. Marta Jiménez"
         }
       ]
@@ -194,56 +147,36 @@
         {
           "description": "Pensamiento creativo",
           "credits": 2,
-          "prerequisites": [],
           "professor": "Dra. Patricia Morales"
         },
         {
           "description": "Contexto profesional",
           "credits": 1,
-          "prerequisites": [],
           "professor": "Dra. Carmen Ruiz"
         },
         {
           "description": "Inteligencia Artificial",
           "credits": 3,
-          "prerequisites": [
-            "Estructuras de datos y algoritmos"
-          ],
           "professor": "Dr. Alejandro Torres"
         },
         {
           "description": "Modelamiento matemático",
           "credits": 3,
-          "prerequisites": [
-            "Cálculo integral",
-            "Algebra Lineal"
-          ],
           "professor": "Dr. Fernando Ruiz"
         },
         {
           "description": "Sistemas operativos",
           "credits": 3,
-          "prerequisites": [
-            "Arquitectura de computadores",
-            "Estructuras de datos y algoritmos"
-          ],
           "professor": "Ing. Javier Torres"
         },
         {
           "description": "Plataformas de programación empresarial",
           "credits": 3,
-          "prerequisites": [
-            "Bases de datos",
-            "Estructuras de datos y algoritmos"
-          ],
           "professor": "Ing. Marta Jiménez"
         },
         {
           "description": "Ti en las Organizaciones",
           "credits": 3,
-          "prerequisites": [
-            "Ingenieria de software"
-          ],
           "professor": "Dr. Luis Martínez"
         }
       ]
@@ -254,65 +187,41 @@
         {
           "description": "Proyecto aplicado en TIC 1",
           "credits": 2,
-          "prerequisites": [
-            "Ingenieria de software"
-          ],
           "professor": "Ing. Marta Jiménez"
         },
         {
           "description": "Metodologia de la Investigación",
           "credits": 2,
-          "prerequisites": [],
           "professor": "Dr. Roberto Vargas"
         },
         {
           "description": "Ética profesional",
           "credits": 1,
-          "prerequisites": [
-            "Ética general"
-          ],
           "professor": "Dra. Patricia Morales"
         },
         {
           "description": "Electricidad y magnetismo",
           "credits": 3,
-          "prerequisites": [
-            "Cálculo integral",
-            "Fisica mecánica"
-          ],
           "professor": "Dr. Carlos Mendoza"
         },
         {
           "description": "Topicos avanzados en bases de datos",
           "credits": 3,
-          "prerequisites": [
-            "Bases de datos"
-          ],
           "professor": "Dr. Ana García"
         },
         {
           "description": "Sistemas distribuidos",
           "credits": 3,
-          "prerequisites": [
-            "Sistemas operativos",
-            "Telematica"
-          ],
           "professor": "Dr. Miguel Herrera"
         },
         {
           "description": "Arquitecturas de software",
           "credits": 2,
-          "prerequisites": [
-            "Plataformas de programación empresarial"
-          ],
           "professor": "Ing. Carlos López"
         },
         {
           "description": "Sistemas Empresariales",
           "credits": 3,
-          "prerequisites": [
-            "Ti en las Organizaciones"
-          ],
           "professor": "Dr. Roberto Silva"
         }
       ]
@@ -323,55 +232,36 @@
         {
           "description": "Gestión de proyectos",
           "credits": 2,
-          "prerequisites": [
-            "Ingenieria de software"
-          ],
           "professor": "Ing. María González"
         },
         {
           "description": "Linea de formación 1",
           "credits": 2,
-          "prerequisites": [],
           "professor": "Dr. Elena Rodríguez"
         },
         {
           "description": "Métodos experimentales en fisica",
           "credits": 2,
-          "prerequisites": [
-            "Electricidad y magnetismo"
-          ],
           "professor": "Dr. Carlos Mendoza"
         },
         {
           "description": "Seguridad de la información",
           "credits": 3,
-          "prerequisites": [
-            "Sistemas distribuidos"
-          ],
           "professor": "Dr. Alejandro Torres"
         },
         {
           "description": "Gestion de calidad de software",
           "credits": 2,
-          "prerequisites": [
-            "Arquitecturas de software"
-          ],
           "professor": "Ing. Carlos López"
         },
         {
           "description": "Aplicaciones Móviles",
           "credits": 3,
-          "prerequisites": [
-            "Arquitecturas de software"
-          ],
           "professor": "Ing. Carlos López"
         },
         {
           "description": "Innovación",
           "credits": 2,
-          "prerequisites": [
-            "Pensamiento creativo"
-          ],
           "professor": "Dra. Patricia Morales"
         }
       ]
@@ -381,47 +271,35 @@
       "courses": [
         {
           "description": "Linea de formación 2",
-          "credits": 2,
-          "prerequisites": [
-            "Linea de formación 1"
-          ]
+          "credits": 2
         },
         {
           "description": "Emprendimiento y responsabilidad social",
           "credits": 2,
-          "prerequisites": []
+          "professor": "Dra. Carmen Ruiz"
         },
         {
           "description": "Analitica de Datos",
           "credits": 2,
-          "prerequisites": [
-            "Inteligencia Artificial",
-            "Modelamiento matemático"
-          ]
+          "professor": "Dr. Roberto Vargas"
         },
         {
           "description": "Regulación en TI",
           "credits": 2,
-          "prerequisites": [
-            "Contexto profesional"
-          ]
+          "professor": "Dra. Carmen Ruiz"
         },
         {
           "description": "Proyecto aplicado en TIC 2",
           "credits": 2,
-          "prerequisites": [
-            "Proyecto aplicado en TIC 1"
-          ]
+          "professor": "Ing. Marta Jiménez"
         },
         {
           "description": "Electiva Universitaria",
-          "credits": 3,
-          "prerequisites": []
+          "credits": 3
         },
         {
           "description": "Optativa CP",
-          "credits": 3,
-          "prerequisites": []
+          "credits": 3
         }
       ]
     },
@@ -430,20 +308,15 @@
       "courses": [
         {
           "description": "Optativa Cl",
-          "credits": 3,
-          "prerequisites": []
+          "credits": 3
         },
         {
           "description": "Práctica Profesional",
-          "credits": 11,
-          "prerequisites": [
-            "Contexto profesional"
-          ]
+          "credits": 11
         },
         {
           "description": "Optativa Cl 2",
-          "credits": 3,
-          "prerequisites": []
+          "credits": 3
         }
       ]
     }
