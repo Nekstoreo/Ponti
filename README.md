@@ -149,5 +149,5 @@ Abre [http://localhost:3000](http://localhost:3000) en tu navegador preferido.
 <p align="center">
   <b>¡Gracias por mirar Ponti!</b><br>
   Esperamos que te sea útil en tu vida universitaria. 🎓🚀<br><br>
-  <a href="#"><img src="https://img.shields.io/badge/Hecho%20en-Colombia-yellow?style=for-the-badge&logo=colombia&logoColor=white" alt="Hecho en Colombia"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Hecho%20en-UPB-red?style=for-the-badge" alt="Hecho en Colombia"/></a>
 </p>
