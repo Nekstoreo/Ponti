@@ -1,7 +1,6 @@
 <h1 align="center">Ponti — Tu Compañero de Carrera Digital 🎓</h1>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
   <a href="https://pnpm.io/"><img src="https://img.shields.io/badge/Package%20Manager-pnpm-%2300A6A6" alt="pnpm"></a>
   <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Framework-Next.js-black?logo=next.js" alt="nextjs"></a>
   <img src="https://img.shields.io/badge/Hecho%20con-❤️-ff69b4" alt="Hecho con amor">
@@ -11,28 +10,16 @@
   <b>Una aplicación web moderna pensada para estudiantes:</b> organiza tu vida académica, consulta calificaciones, revisa tu horario, recibe notificaciones y accede a servicios de bienestar desde una interfaz clara y amigable.
 </p>
 
-<p align="center">
-  <a href="#-características">Características</a> •
-  <a href="#-estructura">Estructura</a> •
-  <a href="#-tecnologías">Tecnologías</a> •
-  <a href="#-instalación">Instalación</a> •
-  <a href="#-comandos">Comandos</a> •
-  <a href="#-contacto">Contacto</a>
-</p>
-
-<details>
-<summary>📸 <b>Ver capturas de pantalla</b> (Click para expandir)</summary>
 <br>
 <table align="center">
   <tr>
-    <td><img src="./screenshots/screenshot_1.png" alt="Vista Principal" width="160" style="border-radius:8px;" /></td>
-    <td><img src="./screenshots/screenshot_2.png" alt="Calificaciones" width="160" style="border-radius:8px;" /></td>
-    <td><img src="./screenshots/screenshot_3.png" alt="Servicios" width="160" style="border-radius:8px;" /></td>
-    <td><img src="./screenshots/screenshot_4.png" alt="Bienestar" width="160" style="border-radius:8px;" /></td>
-    <td><img src="./screenshots/screenshot_5.png" alt="Horario" width="160" style="border-radius:8px;" /></td>
+    <td><img src="./screenshots/screenshot-1.png" alt="Vista Principal" width="160" style="border-radius:8px;" /></td>
+    <td><img src="./screenshots/screenshot-2.png" alt="Horario" width="160" style="border-radius:8px;" /></td>
+    <td><img src="./screenshots/screenshot-3.png" alt="Calificaciones" width="160" style="border-radius:8px;" /></td>
+    <td><img src="./screenshots/screenshot-4.png" alt="Mapa" width="160" style="border-radius:8px;" /></td>
   </tr>
 </table>
-</details>
+
 
 ## ✨ Características
 
